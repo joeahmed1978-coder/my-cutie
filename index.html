@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday! 🎉</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffe5ec, #ffc2d1); /* Soft pink background */
+      font-family: sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Speech Bubble */
+    .speech-bubble {
+      background: white;
+      padding: 18px 25px;
+      border-radius: 25px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #4a4a4a;
+      max-width: 250px;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      margin-bottom: 30px;
+      transition: transform 0.2s ease;
+    }
+
+    /* Little triangle under the bubble */
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 10px 10px 0;
+      border-style: solid;
+      border-color: white transparent;
+    }
+
+    /* Character styling and idle float animation */
+    .character {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      animation: 
+        slideUp 1s ease-out forwards, 
+        float 3s ease-in-out infinite 1s; 
+    }
+
+    /* Movement 1: Slide up entrance */
+    @keyframes slideUp {
+      0% { transform: translateY(300px) scale(0.5); opacity: 0; }
+      100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    /* Movement 2: Continuous gentle floating */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* Movement 3: Jump when clicked */
+    @keyframes hop {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-40px); }
+      100% { transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="speech-bubble" id="bubble" onclick="nextMessage()">
+      Hey there! Happy Birthday! 🎉 (Click me)
+    </div>
+
+    <!-- Right now, this is a placeholder image. We can change it later! -->
+    <img 
+      src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400" 
+      alt="Me" 
+      class="character" 
+      id="myCharacter"
+    >
+  </div>
+
+  <script>
+    // These are the lines your character will say one by one when clicked!
+    const messages = [
+      "I set up a few surprises for you today...",
+      "Your first clue is hiding where we keep the coffee mugs ☕",
+      "Go check it out, then come back and click me again for Clue #2!",
+      "Ready? Clue #2: Look inside your favorite jacket pocket... 🧥",
+      "Final step: Check your email. I sent you the tickets! ✈️ ❤️"
+    ];
+
+    let currentIndex = 0;
+
+    function nextMessage() {
+      const bubble = document.getElementById("bubble");
+      const character = document.getElementById("myCharacter");
+
+      if (currentIndex < messages.length) {
+        bubble.innerText = messages[currentIndex];
+        currentIndex++;
+
+        // Trigger the jump animation
+        character.style.animation = "hop 0.4s ease-out";
+        
+        // Go back to floating after the jump finishes
+        setTimeout(() => {
+          character.style.animation = "float 3s ease-in-out infinite";
+        }, 400);
+
+      } else {
+        bubble.innerText = "That's all the clues! I love you, hope you have the best day! 🥰";
+      }
+    }
+  </script>
+</body>
+</html>
