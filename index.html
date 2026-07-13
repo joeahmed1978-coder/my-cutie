@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday! 🎉</title>
+  <title>Happy Birthday, Cutie! 🎉</title>
   <style>
+    /* Final Styling for the Cartoon Character Webpage */
     body {
       margin: 0;
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #ffe5ec, #ffc2d1); /* Soft pink background */
-      font-family: sans-serif;
+      background: linear-gradient(135deg, #ffe5ec, #ffc2d1); /* Warm, celebratory gradient */
+      font-family: 'Poppins', sans-serif; /* Friendly font */
       overflow: hidden;
     }
 
@@ -20,88 +21,113 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
     }
 
-    /* Speech Bubble */
+    /* 1. Speech Bubble Style (Pointing Up) */
     .speech-bubble {
       background: white;
       padding: 18px 25px;
       border-radius: 25px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-      font-size: 1.1rem;
-      font-weight: bold;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      font-size: 1.15rem;
+      font-weight: 600;
       color: #4a4a4a;
-      max-width: 250px;
+      max-width: 280px;
       text-align: center;
       cursor: pointer;
       position: relative;
-      margin-bottom: 30px;
-      transition: transform 0.2s ease;
+      margin-bottom: 20px; /* Space above character */
+      transition: all 0.2s ease;
+      z-index: 10;
     }
 
-    /* Little triangle under the bubble */
+    /* Bubble triangle */
     .speech-bubble::after {
       content: '';
       position: absolute;
-      bottom: -10px;
+      bottom: -12px;
       left: 50%;
       transform: translateX(-50%);
-      border-width: 10px 10px 0;
+      border-width: 12px 12px 0;
       border-style: solid;
       border-color: white transparent;
     }
 
-    /* Character styling and idle float animation */
-    .character {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 50%;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      animation: 
-        slideUp 1s ease-out forwards, 
-        float 3s ease-in-out infinite 1s; 
+    .speech-bubble:hover {
+      transform: scale(1.05);
+      background: #fdfdfd;
     }
 
-    /* Movement 1: Slide up entrance */
-    @keyframes slideUp {
-      0% { transform: translateY(300px) scale(0.5); opacity: 0; }
+    /* 2. Character Image Styling (No Border) */
+    .character {
+      width: 250px; /* Perfect size for the full body cartoon */
+      height: auto; /* Mantains original aspect ratio */
+      object-fit: contain;
+      user-select: none; /* Prevents selecting the image */
+      
+      /* Applying the entrance and idle animations */
+      animation: 
+        slideUpFade 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, 
+        floatingAction 3.5s ease-in-out infinite 1.2s; 
+    }
+
+    /* 3. Animations */
+    
+    /* Smooth Entrance */
+    @keyframes slideUpFade {
+      0% { transform: translateY(150px) scale(0.8); opacity: 0; }
       100% { transform: translateY(0) scale(1); opacity: 1; }
     }
 
-    /* Movement 2: Continuous gentle floating */
-    @keyframes float {
+    /* Continuous Gentle Floating/Hopping */
+    @keyframes floatingAction {
       0% { transform: translateY(0px); }
-      50% { transform: translateY(-15px); }
+      50% { transform: translateY(-18px) rotate(1deg); } /* Extra rotation adds dynamic feel */
       100% { transform: translateY(0px); }
     }
 
-    /* Movement 3: Jump when clicked */
+    /* Quick jump animation triggered by JS on click */
     @keyframes hop {
       0% { transform: translateY(0); }
-      50% { transform: translateY(-40px); }
+      50% { transform: translateY(-50px) scale(1.05); }
       100% { transform: translateY(0); }
     }
+    
+    /* Background accents (optional hearts/stars) */
+    .bg-accent {
+      position: absolute;
+      opacity: 0.2;
+      animation: drift 10s linear infinite;
+    }
+
+    @keyframes drift {
+      from { transform: translateY(0) rotate(0deg); }
+      to { transform: translateY(-200px) rotate(360deg); }
+    }
+
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <div class="container">
+    <!-- The Text Bubble (She clicks this) -->
     <div class="speech-bubble" id="bubble" onclick="nextMessage()">
-      Hey there! Happy Birthday! 🎉 (Click me)
+      Hey dummy! Happy Birthday! 🎉 (Click me)
     </div>
 
-    <!-- Right now, this is a placeholder image. We can change it later! -->
+    <!-- Your Cartoon Character (Dynamic full body image) -->
     <img 
-      src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400" 
-      alt="Me" 
+      src="https://raw.githubusercontent.com/joeahmed1780-coder/my-cutie/main/cartoon-you.png" 
+      alt="Cartoon Me" 
       class="character" 
       id="myCharacter"
     >
   </div>
 
   <script>
-    // These are the lines your character will say one by one when clicked!
+    // This is where you customize your story/clues!
     const messages = [
       "I set up a few surprises for you today...",
       "Your first clue is hiding where we keep the coffee mugs ☕",
@@ -117,19 +143,24 @@
       const character = document.getElementById("myCharacter");
 
       if (currentIndex < messages.length) {
+        // Change text
         bubble.innerText = messages[currentIndex];
         currentIndex++;
 
-        // Trigger the jump animation
-        character.style.animation = "hop 0.4s ease-out";
+        // Make the character visually REACT with a big excited jump
+        character.style.animation = "hop 0.5s cubic-bezier(0.3, 0, 0.2, 1)";
         
-        // Go back to floating after the jump finishes
+        // Reset back to idle floating animation when the jump finishes
         setTimeout(() => {
-          character.style.animation = "float 3s ease-in-out infinite";
-        }, 400);
+          character.style.animation = "floatingAction 3.5s ease-in-out infinite";
+        }, 500);
 
       } else {
+        // The final surprise complete message
         bubble.innerText = "That's all the clues! I love you, hope you have the best day! 🥰";
+        
+        // Final pose (gentle fade in place)
+        character.style.animation = "floatingAction 6s ease-in-out infinite";
       }
     }
   </script>
