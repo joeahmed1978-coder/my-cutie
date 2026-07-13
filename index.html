@@ -105,14 +105,49 @@
       from { transform: translateY(0) rotate(0deg); }
       to { transform: translateY(-200px) rotate(360deg); }
     }
+.button-container {
+    margin-top: 50px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+  }
 
+  .btn {
+    padding: 12px 28px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .yes-btn {
+    background-color: #ff6b81;
+    color: white;
+  }
+
+  .yes-btn:hover {
+    background-color: #ff4757;
+    transform: scale(1.1);
+  }
+
+  .no-btn {
+    background-color: #f1f2f6;
+    color: #57606f;
+    position: relative;
+  }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <!-- Container for Character & Bubble -->
-<div class="character-container">
+<div class="container">
   <!-- Speech Bubble -->
   <div class="speech-bubble" id="speechBubble">
     Hey dummy! Happy Birthday! 🎉<br>(Click me)
@@ -135,42 +170,40 @@
 </div>
 
   <script>
-    // This is where you customize your story/clues!
-    const messages = [
-      "I set up a few surprises for you today...",
-      "Your first clue is hiding where we keep the coffee mugs ☕",
-      "Go check it out, then come back and click me again for Clue #2!",
-      "Ready? Clue #2: Look inside your favorite jacket pocket... 🧥",
-      "Final step: Check your email. I sent you the tickets! ✈️ ❤️"
-    ];
+  // This runs when they click your cartoon character
+  function startQuestion() {
+    const bubble = document.getElementById('speechBubble');
+    const btnContainer = document.getElementById('buttonContainer');
+    
+    // Changes the text to ask the big question!
+    bubble.innerHTML = "Are you ready for your birthday clues? 🎁";
+    
+    // Makes the buttons appear
+    btnContainer.style.display = 'flex';
+  }
 
-    let currentIndex = 0;
+  // This makes the "No" button jump away when they hover over it or click it
+  function dodgeNo() {
+    const noBtn = document.getElementById('noBtn');
+    
+    // Random directions to jump
+    const randomX = Math.random() * 150 - 75;
+    const randomY = Math.random() * 80 - 40;
+    
+    noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+  }
 
-    function nextMessage() {
-      const bubble = document.getElementById("bubble");
-      const character = document.getElementById("myCharacter");
-
-      if (currentIndex < messages.length) {
-        // Change text
-        bubble.innerText = messages[currentIndex];
-        currentIndex++;
-
-        // Make the character visually REACT with a big excited jump
-        character.style.animation = "hop 0.5s cubic-bezier(0.3, 0, 0.2, 1)";
-        
-        // Reset back to idle floating animation when the jump finishes
-        setTimeout(() => {
-          character.style.animation = "floatingAction 3.5s ease-in-out infinite";
-        }, 500);
-
-      } else {
-        // The final surprise complete message
-        bubble.innerText = "That's all the clues! I love you, hope you have the best day! 🥰";
-        
-        // Final pose (gentle fade in place)
-        character.style.animation = "floatingAction 6s ease-in-out infinite";
-      }
-    }
-  </script>
+  // This runs when they finally click "Yes"
+  function handleYes() {
+    const bubble = document.getElementById('speechBubble');
+    const btnContainer = document.getElementById('buttonContainer');
+    
+    // Hides the buttons
+    btnContainer.style.display = 'none';
+    
+    // Starts the first clue!
+    bubble.innerHTML = "Yay! Perfect. Your first clue is hidden where you keep things cold... ❄️ Go check it, then click me again!";
+  }
+</script>
 </body>
 </html>
