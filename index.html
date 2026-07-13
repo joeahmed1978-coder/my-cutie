@@ -111,20 +111,28 @@
 </head>
 <body>
 
-  <div class="container">
-    <!-- The Text Bubble (She clicks this) -->
-    <div class="speech-bubble" id="bubble" onclick="nextMessage()">
-      Hey dummy! Happy Birthday! 🎉 (Click me)
-    </div>
-
-    <!-- Your Cartoon Character (Dynamic full body image) -->
-    <img 
-      src="cartoon-you.png" 
-      alt="Cartoon Me" 
-      class="character" 
-      id="myCharacter"
-    >
+  <!-- Container for Character & Bubble -->
+<div class="character-container">
+  <!-- Speech Bubble -->
+  <div class="speech-bubble" id="speechBubble">
+    Hey dummy! Happy Birthday! 🎉<br>(Click me)
   </div>
+
+  <!-- Your Cartoon Character -->
+  <img 
+    src="cartoon-you.png" 
+    alt="Cartoon Me" 
+    class="character" 
+    id="myCharacter"
+    onclick="startQuestion()"
+  >
+
+  <!-- Yes/No Buttons (Hidden by default) -->
+  <div class="button-container" id="buttonContainer" style="display: none;">
+    <button class="btn yes-btn" onclick="handleYes()">Yes</button>
+    <button class="btn no-btn" id="noBtn" onmouseover="dodgeNo()" onclick="dodgeNo()">No</button>
+  </div>
+</div>
 
   <script>
     // This is where you customize your story/clues!
