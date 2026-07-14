@@ -145,7 +145,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-
+<audio id="bgMusic" src="birthday-song.mp3" loop></audio>
   <!-- Container for Character & Bubble -->
 <div class="container">
   <!-- Speech Bubble -->
@@ -170,11 +170,16 @@
 </div>
 
   <script>
-  // This runs when they click your cartoon character
-  function startQuestion() {
-    const bubble = document.getElementById('speechBubble');
-    const btnContainer = document.getElementById('buttonContainer');
-    
+ // This runs when they click your cartoon character
+function startQuestion() {
+  const bubble = document.getElementById('speechBubble');
+  const btnContainer = document.getElementById('buttonContainer');
+  const music = document.getElementById('bgMusic'); // <-- 1. Find the music player
+  
+  // Try to play the music
+  music.play().catch(error => {
+    console.log("Audio play was prevented by browser, waiting for next interaction.", error);
+  });
     // Changes the text to ask the big question!
     bubble.innerHTML = "Are you ready for your birthday clues? 🎁";
     
