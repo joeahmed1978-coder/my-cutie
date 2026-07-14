@@ -169,45 +169,70 @@
   </div>
 </div>
 
-  <script>
- // This runs when they click your cartoon character
-function startQuestion() {
-  const bubble = document.getElementById('speechBubble');
-  const btnContainer = document.getElementById('buttonContainer');
-  const music = document.getElementById('bgMusic'); // <-- 1. Find the music player
-  
-  // Try to play the music
-  music.play().catch(error => {
-    console.log("Audio play was prevented by browser, waiting for next interaction.", error);
-  });
-    // Changes the text to ask the big question!
-    bubble.innerHTML = "Are you ready for your birthday clues? 🎁";
+ <script>
+  // 1. Define your list of questions here! You can add as many as you want.
+  const questions = [
+    "Are you ready for your birthday clues? 🎁",
+    "Are you sure? There is no turning back! 😈",
+    "Did you eat cake today? 🎂",
+    "Okay, last question... are you absolutely, 100% ready? 🔥"
+  ];
+
+  let currentQuestionIndex = 0; // Tracks which question we are on
+
+  // This runs when they click your cartoon character
+  function startQuestion() {
+    const bubble = document.getElementById('speechBubble');
+    const btnContainer = document.getElementById('buttonContainer');
+    const music = document.getElementById('bgMusic');
     
-    // Makes the buttons appear
+    // Play music if you added it
+    if (music) {
+      music.play().catch(error => {
+        console.log("Audio play was prevented by browser.", error);
+      });
+    }
+
+    // Reset back to the first question
+    currentQuestionIndex = 0;
+    bubble.innerHTML = questions[currentQuestionIndex];
+    
+    // Show the buttons
     btnContainer.style.display = 'flex';
+    
+    // Reset No button position in case it was moved
+    document.getElementById('noBtn').style.transform = 'translate(0px, 0px)';
   }
 
-  // This makes the "No" button jump away when they hover over it or click it
+  // This makes the "No" button jump away
   function dodgeNo() {
     const noBtn = document.getElementById('noBtn');
-    
-    // Random directions to jump
     const randomX = Math.random() * 150 - 75;
     const randomY = Math.random() * 80 - 40;
-    
     noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
   }
 
-  // This runs when they finally click "Yes"
+  // This runs when they click "Yes"
   function handleYes() {
     const bubble = document.getElementById('speechBubble');
     const btnContainer = document.getElementById('buttonContainer');
+    const noBtn = document.getElementById('noBtn');
     
-    // Hides the buttons
-    btnContainer.style.display = 'none';
+    // Go to the next question index
+    currentQuestionIndex++;
     
-    // Starts the first clue!
-    bubble.innerHTML = "Yay! Perfect. Your first clue is hidden where you keep things cold... ❄️ Go check it, then click me again!";
+    // Check if we still have questions left
+    if (currentQuestionIndex < questions.length) {
+      // Show the next question
+      bubble.innerHTML = questions[currentQuestionIndex];
+      
+      // Reset the "No" button back to the center so they can try (and fail) to click it again!
+      noBtn.style.transform = 'translate(0px, 0px)';
+    } else {
+      // No more questions! Hide the buttons and show the clue
+      btnContainer.style.display = 'none';
+      bubble.innerHTML = "Yay! Perfect. Your first clue is hidden where you keep things cold... ❄️ Go check it, then click me again!";
+    }
   }
 </script>
 </body>
