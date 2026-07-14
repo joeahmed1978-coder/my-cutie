@@ -140,11 +140,79 @@
     background-color: #f1f2f6;
     color: #57606f;
     position: relative;
+  }/* --- HEART BALLOONS STYLING --- */
+.balloon-container {
+  position: fixed;
+  bottom: -10px;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* This makes sure you can still click your character and buttons! */
+  z-index: 1; /* Keeps them in the background */
+}
+
+.balloon {
+  position: absolute;
+  width: 100px;
+  height: auto;
+  animation: floatBalloon 6s ease-in-out infinite;
+}
+
+/* Individual balloon positions and custom speeds */
+.balloon-left-1 { left: 5%; bottom: 15%; animation-duration: 5s; }
+.balloon-left-2 { left: 12%; bottom: 35%; animation-duration: 7s; animation-delay: 1s; }
+.balloon-right-1 { right: 5%; bottom: 20%; animation-duration: 5.5s; }
+.balloon-right-2 { right: 15%; bottom: 40%; animation-duration: 6.5s; animation-delay: 1.5s; }
+
+/* The gentle floating up and down animation */
+@keyframes floatBalloon {
+  0% {
+    transform: translateY(0) rotate(-3deg);
   }
-  </style>
+  50% {
+    transform: translateY(-20px) rotate(3deg);
+  }
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+}.balloon-right-2 { right: 15%; bottom: 40%; animation-duration: 6.5s; animation-delay: 1.5s; }
+
+/* The gentle floating up and down animation */
+@keyframes floatBalloon {
+  0% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(3deg);
+  }
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  } </style>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="balloon-container">
+  
+  <svg class="balloon balloon-left-1" viewBox="0 0 100 200">
+    <path d="M50,30 C50,10 20,10 20,35 C20,60 50,85 50,95 C50,85 80,60 80,35 C80,10 50,10 50,30 Z" fill="#ff6b81" />
+    <path d="M50,95 L50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" />
+  </svg>
+
+  <svg class="balloon balloon-left-2" viewBox="0 0 100 200">
+    <path d="M50,30 C50,10 20,10 20,35 C20,60 50,85 50,95 C50,85 80,60 80,35 C80,10 50,10 50,30 Z" fill="#ffb3bc" />
+    <path d="M50,95 L50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" />
+  </svg>
+
+  <svg class="balloon balloon-right-1" viewBox="0 0 100 200">
+    <path d="M50,30 C50,10 20,10 20,35 C20,60 50,85 50,95 C50,85 80,60 80,35 C80,10 50,10 50,30 Z" fill="#ff4757" />
+    <path d="M50,95 L50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" />
+  </svg>
+
+  <svg class="balloon balloon-right-2" viewBox="0 0 100 200">
+    <path d="M50,30 C50,10 20,10 20,35 C20,60 50,85 50,95 C50,85 80,60 80,35 C80,10 50,10 50,30 Z" fill="#fff0f2" />
+    <path d="M50,95 L50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" />
+  </svg>
+
+</div>
 <audio id="bgMusic" src="birthday-song.mp3" loop></audio>
   <!-- Container for Character & Bubble -->
 <div class="container">
