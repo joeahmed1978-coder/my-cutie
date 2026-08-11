@@ -259,100 +259,164 @@
   >
 
   <!-- Yes/No Buttons (Hidden by default) -->
-  <div class="button-container" id="buttonContainer" style="display: none;">
+  <div class="button-container" id="buttonContainer" style="display: none; flex-direction: column; align-items: center; gap: 15px;">
+  
+  <!-- Yes / No Controls -->
+  <div id="yesNoBox" style="display: flex; gap: 20px; align-items: center;">
     <button class="btn yes-btn" onclick="handleYes()">Yes</button>
     <button class="btn no-btn" id="noBtn" onclick="dodgeNo()">No</button>
   </div>
+
+  <!-- Text Input Controls (Hidden initially) -->
+  <div id="textInputBox" style="display: none; flex-direction: column; align-items: center; gap: 10px;">
+    <input 
+      type="text" 
+      id="answerInput" 
+      placeholder="Type your answer..." 
+      style="padding: 10px 15px; font-size: 16px; border-radius: 20px; border: 2px solid #ff6b81; outline: none; text-align: center; width: 220px;"
+    >
+    <button class="btn yes-btn" onclick="checkAnswer()">Submit</button>
+    <p id="errorMsg" style="color: #ff4757; font-weight: bold; margin: 5px 0 0 0; font-size: 14px; display: none;"></p>
+  </div>
+
 </div>
 
  <script>
-  // 1. Your list of questions
-  const questions = [
-    "Are you really Malak?",
-    "Are you ready to put that to the test?",
-    "Did you eat cake today? 🎂",
-    "Okay, last question... are you absolutely, 100% ready? 🔥"
+  // --- STAGE 1: YES/NO QUESTIONS ---
+  const yesNoQuestions = [
+    "Are you ready for your birthday clues? 🎁",
+    "Are you sure? There is no turning back! 😈"
   ];
-
-  let currentQuestionIndex = 0;
-  
-  // Track button scale sizes
+  let yesNoIndex = 0;
   let yesScale = 1.0;
   let noScale = 1.0;
 
-  // This runs when they click your cartoon character
+  // --- STAGE 2: TEXT TRIVIA QUESTIONS ---
+  const textTrivia = [
+    {
+      question: "What is my absolute favorite food? 🍕",
+      answer: "pizza"
+    },
+    {
+      question: "What is the secret passcode to unlock Clue #1? 🔑",
+      answer: "birthday"
+    }
+  ];
+  let triviaIndex = 0;
+
+  // 1. Starts the whole game when clicking the character
   function startQuestion() {
     const bubble = document.getElementById('speechBubble');
-    const btnContainer = document.getElementById('buttonContainer');
+    const container = document.getElementById('buttonContainer');
+    const yesNoBox = document.getElementById('yesNoBox');
+    const textInputBox = document.getElementById('textInputBox');
     const music = document.getElementById('bgMusic');
-    
+
     if (music) {
-      music.play().catch(error => {
-        console.log("Audio play was prevented by browser.", error);
-      });
+      music.play().catch(e => console.log("Audio waiting for user click.", e));
     }
 
-    // Reset questions and button sizes
-    currentQuestionIndex = 0;
+    // Reset game state
+    yesNoIndex = 0;
+    triviaIndex = 0;
     yesScale = 1.0;
     noScale = 1.0;
     updateButtonScales();
 
-    bubble.innerHTML = questions[currentQuestionIndex];
-    btnContainer.style.display = 'flex';
+    // Show Yes/No, hide Text Input
+    yesNoBox.style.display = 'flex';
+    textInputBox.style.display = 'none';
+    container.style.display = 'flex';
+
+    bubble.innerHTML = yesNoQuestions[yesNoIndex];
   }
 
-  // Helper function to update the size of both buttons smoothly
+  // Updates Yes/No button sizes
   function updateButtonScales() {
     const yesBtn = document.querySelector('.yes-btn');
     const noBtn = document.getElementById('noBtn');
-    
     yesBtn.style.transform = `scale(${yesScale})`;
     noBtn.style.transform = `scale(${noScale})`;
   }
 
-  // When they click "No": shrink "No" and grow "Yes"!
+  // Clicking "No" grows "Yes" and shrinks "No"
   function dodgeNo() {
     const bubble = document.getElementById('speechBubble');
-    
-    // Grow YES by 25% and shrink NO by 20%
     yesScale += 0.25;
-    noScale = Math.max(0.2, noScale - 0.2); // Prevents NO from completely disappearing immediately
-    
+    noScale = Math.max(0.2, noScale - 0.2);
     updateButtonScales();
-    
-    // Fun playful responses when they keep clicking No
+
     const funnyResponses = [
-      "Hey! That's the wrong button! 😜",
-      "Nice try, but 'Yes' is looking pretty big now! 👀",
-      "You really thought 'No' was an option? 😂",
-      "Just click Yes already! 💖"
+      "Hey! Wrong button! 😜",
+      "Look how big 'Yes' is getting! 👀",
+      "Nice try, but 'No' won't work! 😂"
     ];
-    
-    const randomReply = funnyResponses[Math.floor(Math.random() * funnyResponses.length)];
-    bubble.innerHTML = randomReply;
+    bubble.innerHTML = funnyResponses[Math.floor(Math.random() * funnyResponses.length)];
   }
 
-  // When they click "Yes": move to the next question and reset button sizes
+  // Clicking "Yes" handles progression
   function handleYes() {
     const bubble = document.getElementById('speechBubble');
-    const btnContainer = document.getElementById('buttonContainer');
-    
-    currentQuestionIndex++;
-    
-    // Reset scales for the next question
+    yesNoIndex++;
     yesScale = 1.0;
     noScale = 1.0;
     updateButtonScales();
-    
-    if (currentQuestionIndex < questions.length) {
-      bubble.innerHTML = questions[currentQuestionIndex];
+
+    if (yesNoIndex < yesNoQuestions.length) {
+      bubble.innerHTML = yesNoQuestions[yesNoIndex];
     } else {
-      // Finished all questions!
-      btnContainer.style.display = 'none';
-      bubble.innerHTML = "Yay! Perfect. Your first clue is hidden where you keep things cold... ❄️ Go check it, then click me again!";
+      // Transition to Stage 2: Text Questions!
+      switchToTextQuestions();
     }
   }
+
+  // 2. Switch from Yes/No to Text Questions
+  function switchToTextQuestions() {
+    document.getElementById('yesNoBox').style.display = 'none';
+    document.getElementById('textInputBox').style.display = 'flex';
+    showTriviaQuestion();
+  }
+
+  function showTriviaQuestion() {
+    const bubble = document.getElementById('speechBubble');
+    const input = document.getElementById('answerInput');
+    const errorMsg = document.getElementById('errorMsg');
+
+    bubble.innerHTML = textTrivia[triviaIndex].question;
+    input.value = "";
+    errorMsg.style.display = "none";
+  }
+
+  // Checks typed answer
+  function checkAnswer() {
+    const userTyped = document.getElementById('answerInput').value.trim().toLowerCase();
+    const correctAnswer = textTrivia[triviaIndex].answer.toLowerCase();
+    const errorMsg = document.getElementById('errorMsg');
+
+    if (userTyped === correctAnswer) {
+      triviaIndex++;
+      if (triviaIndex < textTrivia.length) {
+        showTriviaQuestion();
+      } else {
+        // Finished everything! Show the Clue
+        document.getElementById('buttonContainer').style.display = 'none';
+        document.getElementById('speechBubble').innerHTML = "Bingo! 🥳 You passed all the tests! Your first clue is hidden where you keep things cold... ❄️";
+      }
+    } else {
+      errorMsg.innerHTML = "Wrong answer! Try again 😜";
+      errorMsg.style.display = "block";
+    }
+  }
+
+  // Pressing Enter submits the answer
+  document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById('answerInput');
+    if (input) {
+      input.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") checkAnswer();
+      });
+    }
+  });
 </script>
 </body>
 </html>
