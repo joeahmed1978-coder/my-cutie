@@ -266,7 +266,7 @@
 </div>
 
  <script>
-  // 1. Define your list of questions here! You can add as many as you want.
+  // 1. Your list of questions
   const questions = [
     "Are you ready for your birthday clues? 🎁",
     "Are you sure? There is no turning back! 😈",
@@ -274,7 +274,11 @@
     "Okay, last question... are you absolutely, 100% ready? 🔥"
   ];
 
-  let currentQuestionIndex = 0; // Tracks which question we are on
+  let currentQuestionIndex = 0;
+  
+  // Track button scale sizes
+  let yesScale = 1.0;
+  let noScale = 1.0;
 
   // This runs when they click your cartoon character
   function startQuestion() {
@@ -282,50 +286,69 @@
     const btnContainer = document.getElementById('buttonContainer');
     const music = document.getElementById('bgMusic');
     
-    // Play music if you added it
     if (music) {
       music.play().catch(error => {
         console.log("Audio play was prevented by browser.", error);
       });
     }
 
-    // Reset back to the first question
+    // Reset questions and button sizes
     currentQuestionIndex = 0;
+    yesScale = 1.0;
+    noScale = 1.0;
+    updateButtonScales();
+
     bubble.innerHTML = questions[currentQuestionIndex];
-    
-    // Show the buttons
     btnContainer.style.display = 'flex';
-    
-    // Reset No button position in case it was moved
-    document.getElementById('noBtn').style.transform = 'translate(0px, 0px)';
   }
 
-  // This makes the "No" button jump away
-  function dodgeNo() {
+  // Helper function to update the size of both buttons smoothly
+  function updateButtonScales() {
+    const yesBtn = document.querySelector('.yes-btn');
     const noBtn = document.getElementById('noBtn');
-    const randomX = Math.random() * 150 - 75;
-    const randomY = Math.random() * 80 - 40;
-    noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    
+    yesBtn.style.transform = `scale(${yesScale})`;
+    noBtn.style.transform = `scale(${noScale})`;
   }
 
-  // This runs when they click "Yes"
+  // When they click "No": shrink "No" and grow "Yes"!
+  function dodgeNo() {
+    const bubble = document.getElementById('speechBubble');
+    
+    // Grow YES by 25% and shrink NO by 20%
+    yesScale += 0.25;
+    noScale = Math.max(0.2, noScale - 0.2); // Prevents NO from completely disappearing immediately
+    
+    updateButtonScales();
+    
+    // Fun playful responses when they keep clicking No
+    const funnyResponses = [
+      "Hey! That's the wrong button! 😜",
+      "Nice try, but 'Yes' is looking pretty big now! 👀",
+      "You really thought 'No' was an option? 😂",
+      "Just click Yes already! 💖"
+    ];
+    
+    const randomReply = funnyResponses[Math.floor(Math.random() * funnyResponses.length)];
+    bubble.innerHTML = randomReply;
+  }
+
+  // When they click "Yes": move to the next question and reset button sizes
   function handleYes() {
     const bubble = document.getElementById('speechBubble');
     const btnContainer = document.getElementById('buttonContainer');
-    const noBtn = document.getElementById('noBtn');
     
-    // Go to the next question index
     currentQuestionIndex++;
     
-    // Check if we still have questions left
+    // Reset scales for the next question
+    yesScale = 1.0;
+    noScale = 1.0;
+    updateButtonScales();
+    
     if (currentQuestionIndex < questions.length) {
-      // Show the next question
       bubble.innerHTML = questions[currentQuestionIndex];
-      
-      // Reset the "No" button back to the center so they can try (and fail) to click it again!
-      noBtn.style.transform = 'translate(0px, 0px)';
     } else {
-      // No more questions! Hide the buttons and show the clue
+      // Finished all questions!
       btnContainer.style.display = 'none';
       bubble.innerHTML = "Yay! Perfect. Your first clue is hidden where you keep things cold... ❄️ Go check it, then click me again!";
     }
