@@ -146,41 +146,66 @@
   bottom: -10px;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* This makes sure you can still click your character and buttons! */
-  z-index: 1; /* Keeps them in the background */
+  pointer-events: none;
+  z-index: 1;
 }
 
 .balloon {
   position: absolute;
-  width: 100px;
+  width: 65px; /* Slightly smaller so 40 fit nicely! */
   height: auto;
   animation: floatBalloon 6s ease-in-out infinite;
 }
 
-/* Individual balloon positions and custom speeds */
-.balloon-left-1 { left: 5%; bottom: 15%; animation-duration: 5s; }
-.balloon-left-2 { left: 12%; bottom: 35%; animation-duration: 7s; animation-delay: 1s; }
-/* --- NEW LEFT BALLOONS --- */
-.balloon-left-3 { left: 2%; bottom: 45%; animation-duration: 6s; animation-delay: 0.5s; }
-.balloon-left-4 { left: 18%; bottom: 20%; animation-duration: 8s; animation-delay: 2s; }
+/* Left Side (20 Balloons) */
+.l-1  { left: 1%;  bottom: 5%;  animation-duration: 5.0s; animation-delay: 0.1s; }
+.l-2  { left: 3%;  bottom: 25%; animation-duration: 7.2s; animation-delay: 1.2s; }
+.l-3  { left: 5%;  bottom: 45%; animation-duration: 6.1s; animation-delay: 0.4s; }
+.l-4  { left: 7%;  bottom: 65%; animation-duration: 8.0s; animation-delay: 2.1s; }
+.l-5  { left: 9%;  bottom: 12%; animation-duration: 5.5s; animation-delay: 0.8s; }
+.l-6  { left: 11%; bottom: 35%; animation-duration: 6.8s; animation-delay: 1.5s; }
+.l-7  { left: 13%; bottom: 55%; animation-duration: 7.5s; animation-delay: 0.3s; }
+.l-8  { left: 15%; bottom: 75%; animation-duration: 5.8s; animation-delay: 1.9s; }
+.l-9  { left: 17%; bottom: 8%;  animation-duration: 6.3s; animation-delay: 0.6s; }
+.l-10 { left: 19%; bottom: 28%; animation-duration: 7.0s; animation-delay: 1.1s; }
+.l-11 { left: 21%; bottom: 48%; animation-duration: 5.2s; animation-delay: 2.3s; }
+.l-12 { left: 23%; bottom: 68%; animation-duration: 6.6s; animation-delay: 0.2s; }
+.l-13 { left: 25%; bottom: 18%; animation-duration: 7.8s; animation-delay: 1.7s; }
+.l-14 { left: 27%; bottom: 38%; animation-duration: 5.9s; animation-delay: 0.9s; }
+.l-15 { left: 29%; bottom: 58%; animation-duration: 6.4s; animation-delay: 2.0s; }
+.l-16 { left: 31%; bottom: 78%; animation-duration: 7.1s; animation-delay: 0.5s; }
+.l-17 { left: 33%; bottom: 22%; animation-duration: 5.6s; animation-delay: 1.4s; }
+.l-18 { left: 35%; bottom: 42%; animation-duration: 6.9s; animation-delay: 0.7s; }
+.l-19 { left: 37%; bottom: 62%; animation-duration: 7.4s; animation-delay: 2.2s; }
+.l-20 { left: 39%; bottom: 15%; animation-duration: 5.4s; animation-delay: 1.0s; }
 
-.balloon-right-1 { right: 5%; bottom: 20%; animation-duration: 5.5s; }
-.balloon-right-2 { right: 15%; bottom: 40%; animation-duration: 6.5s; animation-delay: 1.5s; }
-/* --- NEW RIGHT BALLOONS --- */
-.balloon-right-3 { right: 2%; bottom: 50%; animation-duration: 7.5s; animation-delay: 0.3s; }
-.balloon-right-4 { right: 20%; bottom: 25%; animation-duration: 5.8s; animation-delay: 2.2s; }
+/* Right Side (20 Balloons) */
+.r-1  { right: 1%;  bottom: 8%;  animation-duration: 5.3s; animation-delay: 0.2s; }
+.r-2  { right: 3%;  bottom: 28%; animation-duration: 6.7s; animation-delay: 1.3s; }
+.r-3  { right: 5%;  bottom: 48%; animation-duration: 7.3s; animation-delay: 0.5s; }
+.r-4  { right: 7%;  bottom: 68%; animation-duration: 5.7s; animation-delay: 1.8s; }
+.r-5  { right: 9%;  bottom: 15%; animation-duration: 6.2s; animation-delay: 0.9s; }
+.r-6  { right: 11%; bottom: 35%; animation-duration: 7.6s; animation-delay: 2.0s; }
+.r-7  { right: 13%; bottom: 55%; animation-duration: 5.1s; animation-delay: 0.4s; }
+.r-8  { right: 15%; bottom: 75%; animation-duration: 6.5s; animation-delay: 1.6s; }
+.r-9  { right: 17%; bottom: 10%; animation-duration: 7.0s; animation-delay: 0.7s; }
+.r-10 { right: 19%; bottom: 30%; animation-duration: 5.8s; animation-delay: 2.2s; }
+.r-11 { right: 21%; bottom: 50%; animation-duration: 6.6s; animation-delay: 0.1s; }
+.r-12 { right: 23%; bottom: 70%; animation-duration: 7.9s; animation-delay: 1.4s; }
+.r-13 { right: 25%; bottom: 20%; animation-duration: 5.4s; animation-delay: 0.8s; }
+.r-14 { right: 27%; bottom: 40%; animation-duration: 6.8s; animation-delay: 2.4s; }
+.r-15 { right: 29%; bottom: 60%; animation-duration: 7.2s; animation-delay: 0.3s; }
+.r-16 { right: 31%; bottom: 80%; animation-duration: 5.6s; animation-delay: 1.5s; }
+.r-17 { right: 33%; bottom: 25%; animation-duration: 6.3s; animation-delay: 1.0s; }
+.r-18 { right: 35%; bottom: 45%; animation-duration: 7.7s; animation-delay: 0.6s; }
+.r-19 { right: 37%; bottom: 65%; animation-duration: 5.0s; animation-delay: 2.1s; }
+.r-20 { right: 39%; bottom: 18%; animation-duration: 6.1s; animation-delay: 1.2s; }
 
-/* The gentle floating up and down animation */
 @keyframes floatBalloon {
-  0% {
-    transform: translateY(0) rotate(-3deg);
-  }
-  50% {
-    transform: translateY(-20px) rotate(3deg);
-  }
-  100% {
-    transform: translateY(0) rotate(-3deg);
-  }
+  0% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-20px) rotate(3deg); }
+  100% { transform: translateY(0) rotate(-3deg); }
+}
 }.balloon-right-2 { right: 15%; bottom: 40%; animation-duration: 6.5s; animation-delay: 1.5s; }
 
 /* The gentle floating up and down animation */
@@ -197,48 +222,51 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="balloon-container">
+ <div class="balloon-container">
   
-  <svg class="balloon balloon-left-1" viewBox="0 0 100 200">
-    <path d="M50,30 C50,10 20,10 20,35 C20,60 50,85 50,95 C50,85 80,60 80,35 C80,10 50,10 50,30 Z" fill="#ff6b81" />
-    <path d="M50,95 L50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" />
-  </svg>
+  <!-- LEFT SIDE (20 Balloons) -->
+  <svg class="balloon l-1" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon l-2" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon l-3" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon l-4" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon l-5" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon l-6" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon l-7" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon l-8" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon l-9" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon l-10" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon l-11" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon l-12" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon l-13" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon l-14" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon l-15" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon l-16" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon l-17" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon l-18" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon l-19" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon l-20" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
 
-  <svg class="balloon balloon-left-2" viewBox="0 0 100 200">
-    <path d="M50,30 C50,10 20,10 20,35 C20,60 50,85 50,95 C50,85 80,60 80,35 C80,10 50,10 50,30 Z" fill="#ffb3bc" />
-    <path d="M50,95 L50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" />
-  </svg>
-
-  <svg class="balloon balloon-left-3" viewBox="0 0 100 200">
-    <path d="M50,30 C50,10 20,10 20,35 C20,60 50,85 50,95 C50,85 80,60 80,35 C80,10 50,10 50,30 Z" fill="#ff4757" />
-    <path d="M50,95 L50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" />
-  </svg>
-
-  <svg class="balloon balloon-left-4" viewBox="0 0 100 200">
-    <path d="M50,30 C50,10 20,10 20,35 C20,60 50,85 50,95 C50,85 80,60 80,35 C80,10 50,10 50,30 Z" fill="#fff0f2" />
-    <path d="M50,95 L50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" />
-  </svg>
-
-
-  <svg class="balloon balloon-right-1" viewBox="0 0 100 200">
-    <path d="M50,30 C50,10 20,10 20,35 C20,60 50,85 50,95 C50,85 80,60 80,35 C80,10 50,10 50,30 Z" fill="#ff4757" />
-    <path d="M50,95 L50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" />
-  </svg>
-
-  <svg class="balloon balloon-right-2" viewBox="0 0 100 200">
-    <path d="M50,30 C50,10 20,10 20,35 C20,60 50,85 50,95 C50,85 80,60 80,35 C80,10 50,10 50,30 Z" fill="#fff0f2" />
-    <path d="M50,95 L50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" />
-  </svg>
-
-  <svg class="balloon balloon-right-3" viewBox="0 0 100 200">
-    <path d="M50,30 C50,10 20,10 20,35 C20,60 50,85 50,95 C50,85 80,60 80,35 C80,10 50,10 50,30 Z" fill="#ff6b81" />
-    <path d="M50,95 L50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" />
-  </svg>
-
-  <svg class="balloon balloon-right-4" viewBox="0 0 100 200">
-    <path d="M50,30 C50,10 20,10 20,35 C20,60 50,85 50,95 C50,85 80,60 80,35 C80,10 50,10 50,30 Z" fill="#ffb3bc" />
-    <path d="M50,95 L50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" />
-  </svg>
+  <!-- RIGHT SIDE (20 Balloons) -->
+  <svg class="balloon r-1" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon r-2" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon r-3" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon r-4" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon r-5" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon r-6" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon r-7" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon r-8" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon r-9" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon r-10" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon r-11" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon r-12" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon r-13" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon r-14" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon r-15" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon r-16" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon r-17" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon r-18" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon r-19" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+  <svg class="balloon r-20" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
 
 </div>
 <audio id="bgMusic" src="birthday-song.mp3" loop></audio>
@@ -357,7 +385,11 @@
       "Are you for real?!!!🫩🫩",
       "Just click yes already🙂",
       "There is no need to be stubborn😒😒 ",
-      "Believe me it will not work😩😩"
+      "Believe me it will not work😩😩",
+      "just quit doing that!!",
+      "Enough playing games and press yes ommmgg😩😩",
+      "commmee onn, the no button has almost vanished",
+      "Look how large the yes button is!!! just press it"
     ];
     bubble.innerHTML = funnyResponses[Math.floor(Math.random() * funnyResponses.length)];
   }
