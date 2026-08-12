@@ -7,123 +7,141 @@
   <style>
     /* Final Styling for the Cartoon Character Webpage */
   /* --- RETRO PIXEL SUNSET STYLING --- */
-body {
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* Multi-stage gradient matching the pixel sunset image (Purple -> Pink -> Peach) */
-  background: linear-gradient(180deg, #8a73b9 0%, #b87eb8 35%, #e8869c 65%, #fca886 100%);
-  font-family: 'Poppins', sans-serif;
-  overflow: hidden;
-  position: relative;
-}
+  body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffe5ec, #ffc2d1); /* Warm, celebratory gradient */
+      font-family: 'Poppins', sans-serif; /* Friendly font */
+      overflow: hidden;
+    }
 
-/* Twinkling Pixel Stars Overlay */
-body::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-image: 
-    radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
-    radial-gradient(2px 2px at 150px 80px, #fff, rgba(0,0,0,0)),
-    radial-gradient(3px 3px at 280px 120px, #ffffffce, rgba(0,0,0,0)),
-    radial-gradient(2px 2px at 90px 220px, #fff, rgba(0,0,0,0)),
-    radial-gradient(2px 2px at 350px 40px, #fff, rgba(0,0,0,0));
-  background-repeat: repeat;
-  background-size: 400px 300px;
-  opacity: 0.6;
-  animation: starTwinkle 3s ease-in-out infinite alternate;
-  pointer-events: none;
-}
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
 
-@keyframes starTwinkle {
-  0% { opacity: 0.3; }
-  100% { opacity: 0.8; }
-}
+    /* 1. Speech Bubble Style (Pointing Up) */
+    .speech-bubble {
+      background: white;
+      padding: 18px 25px;
+      border-radius: 25px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #4a4a4a;
+      max-width: 280px;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      margin-bottom: 20px; /* Space above character */
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  z-index: 5;
-}
+    /* Bubble triangle */
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 12px 12px 0;
+      border-style: solid;
+      border-color: white transparent;
+    }
 
-/* 1. Retro Speech Bubble Style */
-.speech-bubble {
-  background: #ffffff;
-  padding: 18px 25px;
-  border-radius: 20px;
-  border: 4px solid #5a3c66; /* Dark purple retro outline */
-  box-shadow: 0 8px 0px #5a3c66, 0 12px 20px rgba(0,0,0,0.15);
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: #4a2e56;
-  max-width: 280px;
-  text-align: center;
-  cursor: pointer;
-  position: relative;
-  margin-bottom: 25px;
-  transition: all 0.2s ease;
-  z-index: 10;
-}
+    .speech-bubble:hover {
+      transform: scale(1.05);
+      background: #fdfdfd;
+    }
 
-/* Bubble Triangle */
-.speech-bubble::after {
-  content: '';
-  position: absolute;
-  bottom: -16px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 12px 12px 0;
-  border-style: solid;
-  border-color: #5a3c66 transparent;
-}
+    /* 2. Character Image Styling (No Border) */
+    .character {
+      width: 250px; /* Perfect size for the full body cartoon */
+      height: auto; /* Mantains original aspect ratio */
+      object-fit: contain;
+      user-select: none; /* Prevents selecting the image */
+      transform: scale(3.0);
+      /* Applying the entrance and idle animations */
+      animation: 
+        slideUpFade 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, 
+        floatingAction 3.5s ease-in-out infinite 1.2s; 
+    }
 
-.speech-bubble:hover {
-  transform: scale(1.03);
-}
+    /* 3. Animations */
+    
+    /* Smooth Entrance */
+    @keyframes slideUpFade {
+      0% { transform: translateY(150px) scale(0.8); opacity: 0; }
+      100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
 
-/* Button Container & Buttons matching the theme */
+    /* Continuous Gentle Floating/Hopping */
+    @keyframes floatingAction {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-18px) rotate(1deg); } /* Extra rotation adds dynamic feel */
+      100% { transform: translateY(0px); }
+    }
+
+    /* Quick jump animation triggered by JS on click */
+    @keyframes hop {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-50px) scale(1.05); }
+      100% { transform: translateY(0); }
+    }
+    
+    /* Background accents (optional hearts/stars) */
+    .bg-accent {
+      position: absolute;
+      opacity: 0.2;
+      animation: drift 10s linear infinite;
+    }
+
+    @keyframes drift {
+      from { transform: translateY(0) rotate(0deg); }
+      to { transform: translateY(-200px) rotate(360deg); }
+    }
 .button-container {
-  margin-top: 50px;
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  z-index: 10;
-}
+    margin-top: 50px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+  }
 
-.btn {
-  padding: 12px 28px;
-  font-size: 18px;
-  font-weight: bold;
-  border: 3px solid #5a3c66;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 5px 0px #5a3c66;
-}
+  .btn {
+    padding: 12px 28px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
 
-.yes-btn {
-  background-color: #ff758c;
-  color: white;
-}
+  .yes-btn {
+    background-color: #ff6b81;
+    color: white;
+  }
 
-.yes-btn:hover {
-  background-color: #ff5271;
-  transform: translateY(-2px);
-  box-shadow: 0 7px 0px #5a3c66;
-}
+  .yes-btn:hover {
+    background-color: #ff4757;
+    transform: scale(1.1);
+  }
 
-.no-btn {
-  background-color: #f7e8ff;
-  color: #5a3c66;
-  position: relative;
-}
+  .no-btn {
+    background-color: #f1f2f6;
+    color: #57606f;
+    position: relative;
+  }/* --- HEART BALLOONS STYLING --- */
 .balloon-container {
   position: fixed;
   bottom: -10px;
