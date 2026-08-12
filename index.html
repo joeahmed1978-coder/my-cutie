@@ -6,16 +6,16 @@
   <title>Happy Birthday 🎉</title>
   <style>
     /* Final Styling for the Cartoon Character Webpage */
-  /* --- RETRO PIXEL SUNSET STYLING --- */
-  body {
+    /* --- RETRO PIXEL SUNSET STYLING --- */
+    body {
       margin: 0;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #ffe5ec, #ffc2d1); /* Warm, celebratory gradient */
-      font-family: 'Poppins', sans-serif; /* Friendly font */
-      overflow: hidden;
+      background: linear-gradient(135deg, #ffe5ec, #ffc2d1);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
     }
 
     .container {
@@ -38,12 +38,11 @@
       text-align: center;
       cursor: pointer;
       position: relative;
-      margin-bottom: 20px; /* Space above character */
+      margin-bottom: 20px;
       transition: all 0.2s ease;
       z-index: 10;
     }
 
-    /* Bubble triangle */
     .speech-bubble::after {
       content: '';
       position: absolute;
@@ -60,42 +59,36 @@
       background: #fdfdfd;
     }
 
-    /* 2. Character Image Styling (No Border) */
+    /* 2. Character Image Styling */
     .character {
-      width: 250px; /* Perfect size for the full body cartoon */
-      height: auto; /* Mantains original aspect ratio */
+      width: 250px;
+      height: auto;
       object-fit: contain;
-      user-select: none; /* Prevents selecting the image */
+      user-select: none;
       transform: scale(3.0);
-      /* Applying the entrance and idle animations */
-      animation: 
-        slideUpFade 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, 
-        floatingAction 3.5s ease-in-out infinite 1.2s; 
+      animation:
+        slideUpFade 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+        floatingAction 3.5s ease-in-out infinite 1.2s;
     }
 
     /* 3. Animations */
-    
-    /* Smooth Entrance */
     @keyframes slideUpFade {
       0% { transform: translateY(150px) scale(0.8); opacity: 0; }
       100% { transform: translateY(0) scale(1); opacity: 1; }
     }
 
-    /* Continuous Gentle Floating/Hopping */
     @keyframes floatingAction {
       0% { transform: translateY(0px); }
-      50% { transform: translateY(-18px) rotate(1deg); } /* Extra rotation adds dynamic feel */
+      50% { transform: translateY(-18px) rotate(1deg); }
       100% { transform: translateY(0px); }
     }
 
-    /* Quick jump animation triggered by JS on click */
     @keyframes hop {
       0% { transform: translateY(0); }
       50% { transform: translateY(-50px) scale(1.05); }
       100% { transform: translateY(0); }
     }
-    
-    /* Background accents (optional hearts/stars) */
+
     .bg-accent {
       position: absolute;
       opacity: 0.2;
@@ -106,388 +99,348 @@
       from { transform: translateY(0) rotate(0deg); }
       to { transform: translateY(-200px) rotate(360deg); }
     }
-.button-container {
-    margin-top: 50px;
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    z-index: 10;
-  }
 
-  .btn {
-    padding: 12px 28px;
-    font-size: 18px;
-    font-weight: bold;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
+    .button-container {
+      margin-top: 50px;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
 
-  .yes-btn {
-    background-color: #ff6b81;
-    color: white;
-  }
+    .btn {
+      padding: 12px 28px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
 
-  .yes-btn:hover {
-    background-color: #ff4757;
-    transform: scale(1.1);
-  }
+    .yes-btn {
+      background-color: #ff6b81;
+      color: white;
+    }
 
-  .no-btn {
-    background-color: #f1f2f6;
-    color: #57606f;
-    position: relative;
-  }/* --- HEART BALLOONS STYLING --- */
-.balloon-container {
-  position: fixed;
-  bottom: -10px;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
+    .yes-btn:hover {
+      background-color: #ff4757;
+      transform: scale(1.1);
+    }
 
-.balloon {
-  position: absolute;
-  width: 65px; /* Slightly smaller so 40 fit nicely! */
-  height: auto;
-  animation: floatBalloon 6s ease-in-out infinite;
-}
+    .no-btn {
+      background-color: #f1f2f6;
+      color: #57606f;
+      position: relative;
+    }
 
-/* Left Side (20 Balloons) */
-.l-1  { left: 1%;  bottom: 5%;  animation-duration: 5.0s; animation-delay: 0.1s; }
-.l-2  { left: 3%;  bottom: 25%; animation-duration: 7.2s; animation-delay: 1.2s; }
-.l-3  { left: 5%;  bottom: 45%; animation-duration: 6.1s; animation-delay: 0.4s; }
-.l-4  { left: 7%;  bottom: 65%; animation-duration: 8.0s; animation-delay: 2.1s; }
-.l-5  { left: 9%;  bottom: 12%; animation-duration: 5.5s; animation-delay: 0.8s; }
-.l-6  { left: 11%; bottom: 35%; animation-duration: 6.8s; animation-delay: 1.5s; }
-.l-7  { left: 13%; bottom: 55%; animation-duration: 7.5s; animation-delay: 0.3s; }
-.l-8  { left: 15%; bottom: 75%; animation-duration: 5.8s; animation-delay: 1.9s; }
-.l-9  { left: 17%; bottom: 8%;  animation-duration: 6.3s; animation-delay: 0.6s; }
-.l-10 { left: 19%; bottom: 28%; animation-duration: 7.0s; animation-delay: 1.1s; }
-.l-11 { left: 21%; bottom: 48%; animation-duration: 5.2s; animation-delay: 2.3s; }
-.l-12 { left: 23%; bottom: 68%; animation-duration: 6.6s; animation-delay: 0.2s; }
-.l-13 { left: 25%; bottom: 18%; animation-duration: 7.8s; animation-delay: 1.7s; }
-.l-14 { left: 27%; bottom: 38%; animation-duration: 5.9s; animation-delay: 0.9s; }
-.l-15 { left: 29%; bottom: 58%; animation-duration: 6.4s; animation-delay: 2.0s; }
-.l-16 { left: 31%; bottom: 78%; animation-duration: 7.1s; animation-delay: 0.5s; }
-.l-17 { left: 33%; bottom: 22%; animation-duration: 5.6s; animation-delay: 1.4s; }
-.l-18 { left: 35%; bottom: 42%; animation-duration: 6.9s; animation-delay: 0.7s; }
-.l-19 { left: 37%; bottom: 62%; animation-duration: 7.4s; animation-delay: 2.2s; }
-.l-20 { left: 39%; bottom: 15%; animation-duration: 5.4s; animation-delay: 1.0s; }
+    /* --- HEART BALLOONS STYLING --- */
+    .balloon-container {
+      position: fixed;
+      bottom: -10px;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
 
-/* Right Side (20 Balloons) */
-.r-1  { right: 1%;  bottom: 8%;  animation-duration: 5.3s; animation-delay: 0.2s; }
-.r-2  { right: 3%;  bottom: 28%; animation-duration: 6.7s; animation-delay: 1.3s; }
-.r-3  { right: 5%;  bottom: 48%; animation-duration: 7.3s; animation-delay: 0.5s; }
-.r-4  { right: 7%;  bottom: 68%; animation-duration: 5.7s; animation-delay: 1.8s; }
-.r-5  { right: 9%;  bottom: 15%; animation-duration: 6.2s; animation-delay: 0.9s; }
-.r-6  { right: 11%; bottom: 35%; animation-duration: 7.6s; animation-delay: 2.0s; }
-.r-7  { right: 13%; bottom: 55%; animation-duration: 5.1s; animation-delay: 0.4s; }
-.r-8  { right: 15%; bottom: 75%; animation-duration: 6.5s; animation-delay: 1.6s; }
-.r-9  { right: 17%; bottom: 10%; animation-duration: 7.0s; animation-delay: 0.7s; }
-.r-10 { right: 19%; bottom: 30%; animation-duration: 5.8s; animation-delay: 2.2s; }
-.r-11 { right: 21%; bottom: 50%; animation-duration: 6.6s; animation-delay: 0.1s; }
-.r-12 { right: 23%; bottom: 70%; animation-duration: 7.9s; animation-delay: 1.4s; }
-.r-13 { right: 25%; bottom: 20%; animation-duration: 5.4s; animation-delay: 0.8s; }
-.r-14 { right: 27%; bottom: 40%; animation-duration: 6.8s; animation-delay: 2.4s; }
-.r-15 { right: 29%; bottom: 60%; animation-duration: 7.2s; animation-delay: 0.3s; }
-.r-16 { right: 31%; bottom: 80%; animation-duration: 5.6s; animation-delay: 1.5s; }
-.r-17 { right: 33%; bottom: 25%; animation-duration: 6.3s; animation-delay: 1.0s; }
-.r-18 { right: 35%; bottom: 45%; animation-duration: 7.7s; animation-delay: 0.6s; }
-.r-19 { right: 37%; bottom: 65%; animation-duration: 5.0s; animation-delay: 2.1s; }
-.r-20 { right: 39%; bottom: 18%; animation-duration: 6.1s; animation-delay: 1.2s; }
+    .balloon {
+      position: absolute;
+      width: 65px;
+      height: auto;
+      animation: floatBalloon 6s ease-in-out infinite;
+    }
 
-@keyframes floatBalloon {
-  0% { transform: translateY(0) rotate(-3deg); }
-  50% { transform: translateY(-20px) rotate(3deg); }
-  100% { transform: translateY(0) rotate(-3deg); }
-}
-}.balloon-right-2 { right: 15%; bottom: 40%; animation-duration: 6.5s; animation-delay: 1.5s; }
+    /* Left Side (20 Balloons) */
+    .l-1  { left: 1%;  bottom: 5%;  animation-duration: 5.0s; animation-delay: 0.1s; }
+    .l-2  { left: 3%;  bottom: 25%; animation-duration: 7.2s; animation-delay: 1.2s; }
+    .l-3  { left: 5%;  bottom: 45%; animation-duration: 6.1s; animation-delay: 0.4s; }
+    .l-4  { left: 7%;  bottom: 65%; animation-duration: 8.0s; animation-delay: 2.1s; }
+    .l-5  { left: 9%;  bottom: 12%; animation-duration: 5.5s; animation-delay: 0.8s; }
+    .l-6  { left: 11%; bottom: 35%; animation-duration: 6.8s; animation-delay: 1.5s; }
+    .l-7  { left: 13%; bottom: 55%; animation-duration: 7.5s; animation-delay: 0.3s; }
+    .l-8  { left: 15%; bottom: 75%; animation-duration: 5.8s; animation-delay: 1.9s; }
+    .l-9  { left: 17%; bottom: 8%;  animation-duration: 6.3s; animation-delay: 0.6s; }
+    .l-10 { left: 19%; bottom: 28%; animation-duration: 7.0s; animation-delay: 1.1s; }
+    .l-11 { left: 21%; bottom: 48%; animation-duration: 5.2s; animation-delay: 2.3s; }
+    .l-12 { left: 23%; bottom: 68%; animation-duration: 6.6s; animation-delay: 0.2s; }
+    .l-13 { left: 25%; bottom: 18%; animation-duration: 7.8s; animation-delay: 1.7s; }
+    .l-14 { left: 27%; bottom: 38%; animation-duration: 5.9s; animation-delay: 0.9s; }
+    .l-15 { left: 29%; bottom: 58%; animation-duration: 6.4s; animation-delay: 2.0s; }
+    .l-16 { left: 31%; bottom: 78%; animation-duration: 7.1s; animation-delay: 0.5s; }
+    .l-17 { left: 33%; bottom: 22%; animation-duration: 5.6s; animation-delay: 1.4s; }
+    .l-18 { left: 35%; bottom: 42%; animation-duration: 6.9s; animation-delay: 0.7s; }
+    .l-19 { left: 37%; bottom: 62%; animation-duration: 7.4s; animation-delay: 2.2s; }
+    .l-20 { left: 39%; bottom: 15%; animation-duration: 5.4s; animation-delay: 1.0s; }
 
-/* The gentle floating up and down animation */
-@keyframes floatBalloon {
-  0% {
-    transform: translateY(0) rotate(-3deg);
-  }
-  50% {
-    transform: translateY(-20px) rotate(3deg);
-  }
-  100% {
-    transform: translateY(0) rotate(-3deg);
-  } </style>
+    /* Right Side (20 Balloons) */
+    .r-1  { right: 1%;  bottom: 8%;  animation-duration: 5.3s; animation-delay: 0.2s; }
+    .r-2  { right: 3%;  bottom: 28%; animation-duration: 6.7s; animation-delay: 1.3s; }
+    .r-3  { right: 5%;  bottom: 48%; animation-duration: 7.3s; animation-delay: 0.5s; }
+    .r-4  { right: 7%;  bottom: 68%; animation-duration: 5.7s; animation-delay: 1.8s; }
+    .r-5  { right: 9%;  bottom: 15%; animation-duration: 6.2s; animation-delay: 0.9s; }
+    .r-6  { right: 11%; bottom: 35%; animation-duration: 7.6s; animation-delay: 2.0s; }
+    .r-7  { right: 13%; bottom: 55%; animation-duration: 5.1s; animation-delay: 0.4s; }
+    .r-8  { right: 15%; bottom: 75%; animation-duration: 6.5s; animation-delay: 1.6s; }
+    .r-9  { right: 17%; bottom: 10%; animation-duration: 7.0s; animation-delay: 0.7s; }
+    .r-10 { right: 19%; bottom: 30%; animation-duration: 5.8s; animation-delay: 2.2s; }
+    .r-11 { right: 21%; bottom: 50%; animation-duration: 6.6s; animation-delay: 0.1s; }
+    .r-12 { right: 23%; bottom: 70%; animation-duration: 7.9s; animation-delay: 1.4s; }
+    .r-13 { right: 25%; bottom: 20%; animation-duration: 5.4s; animation-delay: 0.8s; }
+    .r-14 { right: 27%; bottom: 40%; animation-duration: 6.8s; animation-delay: 2.4s; }
+    .r-15 { right: 29%; bottom: 60%; animation-duration: 7.2s; animation-delay: 0.3s; }
+    .r-16 { right: 31%; bottom: 80%; animation-duration: 5.6s; animation-delay: 1.5s; }
+    .r-17 { right: 33%; bottom: 25%; animation-duration: 6.3s; animation-delay: 1.0s; }
+    .r-18 { right: 35%; bottom: 45%; animation-duration: 7.7s; animation-delay: 0.6s; }
+    .r-19 { right: 37%; bottom: 65%; animation-duration: 5.0s; animation-delay: 2.1s; }
+    .r-20 { right: 39%; bottom: 18%; animation-duration: 6.1s; animation-delay: 1.2s; }
+
+    @keyframes floatBalloon {
+      0% { transform: translateY(0) rotate(-3deg); }
+      50% { transform: translateY(-20px) rotate(3deg); }
+      100% { transform: translateY(0) rotate(-3deg); }
+    }
+  </style>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
- <div class="balloon-container">
-  
-  <!-- LEFT SIDE (20 Balloons) -->
-  <svg class="balloon l-1" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon l-2" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon l-3" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon l-4" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon l-5" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon l-6" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon l-7" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon l-8" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon l-9" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon l-10" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon l-11" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon l-12" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon l-13" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon l-14" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon l-15" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon l-16" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon l-17" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon l-18" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon l-19" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon l-20" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+  <div class="balloon-container">
+    <!-- LEFT SIDE (20 Balloons) -->
+    <svg class="balloon l-1" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-2" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-3" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-4" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-5" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-6" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-7" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-8" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-9" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-10" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-11" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-12" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-13" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-14" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-15" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-16" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-17" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-18" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-19" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-20" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
 
-  <!-- RIGHT SIDE (20 Balloons) -->
-  <svg class="balloon r-1" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon r-2" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon r-3" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon r-4" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon r-5" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon r-6" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon r-7" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon r-8" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon r-9" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon r-10" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon r-11" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon r-12" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon r-13" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon r-14" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon r-15" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon r-16" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon r-17" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon r-18" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon r-19" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-  <svg class="balloon r-20" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <!-- RIGHT SIDE (20 Balloons) -->
+    <svg class="balloon r-1" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-2" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-3" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-4" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-5" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-6" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-7" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-8" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-9" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-10" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-11" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-12" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-13" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-14" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-15" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-16" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-17" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-18" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-19" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-20" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+  </div>
 
-</div>
-<audio id="bgMusic" src="birthday-song.mp3" loop></audio>
+  <audio id="bgMusic" src="birthday-song.mp3" loop></audio>
+
   <!-- Container for Character & Bubble -->
-<div class="container">
-  <!-- Speech Bubble -->
-  <div class="speech-bubble" id="speechBubble">
-    Are you Malak? (click me to continue)
-  </div>
+  <div class="container">
+    <div class="speech-bubble" id="speechBubble">
+      Are you Malak? (click me to continue)
+    </div>
 
-  <!-- Your Cartoon Character -->
-  <img 
-    src="cartoon-you.png" 
-    alt="Cartoon Me" 
-    class="character" 
-    id="myCharacter"
-    onclick="startQuestion()"
-  >
-
-  <!-- Yes/No Buttons (Hidden by default) -->
-  <div class="button-container" id="buttonContainer" style="display: none; flex-direction: column; align-items: center; gap: 15px;">
-  
-  <!-- Yes / No Controls -->
-  <div id="yesNoBox" style="display: flex; gap: 20px; align-items: center;">
-    <button class="btn yes-btn" onclick="handleYes()">Yes</button>
-    <button class="btn no-btn" id="noBtn" onclick="dodgeNo()">No</button>
-  </div>
-
-  <!-- Text Input Controls (Hidden initially) -->
-  <div id="textInputBox" style="display: none; flex-direction: column; align-items: center; gap: 10px;">
-    <input 
-      type="text" 
-      id="answerInput" 
-      placeholder="Type your answer..." 
-      style="padding: 10px 15px; font-size: 16px; border-radius: 20px; border: 2px solid #ff6b81; outline: none; text-align: center; width: 220px;"
+    <img
+      src="cartoon-you.png"
+      alt="Cartoon Me"
+      class="character"
+      id="myCharacter"
+      onclick="startQuestion()"
     >
-    <button class="btn yes-btn" onclick="checkAnswer()">Submit</button>
-    <p id="errorMsg" style="color: #ff4757; font-weight: bold; margin: 5px 0 0 0; font-size: 14px; display: none;"></p>
+
+    <div class="button-container" id="buttonContainer" style="display: none; flex-direction: column; align-items: center; gap: 15px;">
+      <div id="yesNoBox" style="display: flex; gap: 20px; align-items: center;">
+        <button class="btn yes-btn" onclick="handleYes()">Yes</button>
+        <button class="btn no-btn" id="noBtn" onclick="dodgeNo()">No</button>
+      </div>
+
+      <div id="textInputBox" style="display: none; flex-direction: column; align-items: center; gap: 10px;">
+        <input
+          type="text"
+          id="answerInput"
+          placeholder="Type your answer..."
+          style="padding: 10px 15px; font-size: 16px; border-radius: 20px; border: 2px solid #ff6b81; outline: none; text-align: center; width: 220px;"
+        >
+        <button class="btn yes-btn" id="submitBtn" onclick="checkAnswer()">Submit</button>
+        <p id="errorMsg" style="color: #ff4757; font-weight: bold; margin: 5px 0 0 0; font-size: 14px; display: none;"></p>
+      </div>
+    </div>
   </div>
 
-</div>
-
- <script>
-  // --- STAGE 1: YES/NO QUESTIONS ---
-  const yesNoQuestions = [
-    "Are you really Malak?",
-    "Are you ready to put that to the test? (don't you dare say no but you can try though)"
-  ];
-  let yesNoIndex = 0;
-  let yesScale = 1.0;
-  let noScale = 1.0;
-
-  // --- STAGE 2: SEQUENCE (QUESTIONS & MESSAGES) ---
-  // To add a simple message, just leave out the "answer" line!
-  const sequence = [
-    {
-      question: "how old is Malak turning today?",
-      answer: "18"
-    },
-    {
-      question: "mhmmm, that's easy to guess, iam not sure yet that you are Malak"
-      // No answer line needed for intermediate sentences!
-    },
-    {
-      question: "what is Malak's fav color",
-      answer: "pink"
-    },
-    {
-      question: "That's easy to guess too😒😒"
-    },
-    {
-      question: "who is Malak's fav artist?",
-      answer: "lana del rey"
-    },
-    {
-      question: "ohhh you know that, you might actually be Malak but let's make sure" 
-    },
-    {
-      question: "what is the last thing i say to Malak everyday at the end of our chat?",
-      answer: "goodnight cutie"
-    },
-    {
-      question: "YOU ARE MALAK!! Happy birhtday cutie🥳🥳 welcome to my surprise for you❤️"
-    },
-    {
-      question: "but this just the start, be ready for what i prepared for you in this surprise🙃"
-    }
-  ];
-  let seqIndex = 0;
-
-  function startQuestion() {
-    const bubble = document.getElementById('speechBubble');
-    const container = document.getElementById('buttonContainer');
-    const yesNoBox = document.getElementById('yesNoBox');
-    const textInputBox = document.getElementById('textInputBox');
-    const music = document.getElementById('bgMusic');
-
-    if (music) {
-      music.play().catch(e => console.log("Audio waiting for user click.", e));
-    }
-
-    yesNoIndex = 0;
-    seqIndex = 0;
-    yesScale = 1.0;
-    noScale = 1.0;
-    updateButtonScales();
-
-    yesNoBox.style.display = 'flex';
-    textInputBox.style.display = 'none';
-    container.style.display = 'flex';
-
-    bubble.innerHTML = yesNoQuestions[yesNoIndex];
-  }
-
-  function updateButtonScales() {
-    const yesBtn = document.querySelector('.yes-btn');
-    const noBtn = document.getElementById('noBtn');
-    yesBtn.style.transform = `scale(${yesScale})`;
-    noBtn.style.transform = `scale(${noScale})`;
-  }
-
-  function dodgeNo() {
-    const bubble = document.getElementById('speechBubble');
-    yesScale += 0.25;
-    noScale = Math.max(0.2, noScale - 0.2);
-    updateButtonScales();
-
-    const funnyResponses = [
-      "Are you for real?!!!🫩🫩",
-      "Just click yes already🙂",
-      "There is no need to be stubborn😒😒 ",
-      "Believe me it will not work😩😩",
-      "just quit doing that!!",
-      "Enough playing games and press yes ommmgg😩😩",
-      "commmee onn, the no button has almost vanished",
-      "Look how large the yes button is!!! just press it"
+  <script>
+    // --- STAGE 1: YES/NO QUESTIONS ---
+    const yesNoQuestions = [
+      "Are you really Malak?",
+      "Are you ready to put that to the test? (don't you dare say no but you can try though)"
     ];
-    bubble.innerHTML = funnyResponses[Math.floor(Math.random() * funnyResponses.length)];
-  }
+    let yesNoIndex = 0;
+    let yesScale = 1.0;
+    let noScale = 1.0;
 
-  function handleYes() {
-    const bubble = document.getElementById('speechBubble');
-    yesNoIndex++;
-    yesScale = 1.0;
-    noScale = 1.0;
-    updateButtonScales();
+    // --- STAGE 2: SEQUENCE (QUESTIONS & MESSAGES) ---
+    // To add a simple message, just leave out the "answer" line!
+    const sequence = [
+      { question: "how old is Malak turning today?", answer: "18" },
+      { question: "mhmmm, that's easy to guess, iam not sure yet that you are Malak" },
+      { question: "what is Malak's fav color", answer: "pink" },
+      { question: "That's easy to guess too😒😒" },
+      { question: "who is Malak's fav artist?", answer: "lana del rey" },
+      { question: "ohhh you know that, you might actually be Malak but let's make sure" },
+      { question: "what is the last thing i say to Malak everyday at the end of our chat?", answer: "goodnight cutie" },
+      { question: "YOU ARE MALAK!! Happy birhtday cutie🥳🥳 welcome to my surprise for you❤️" },
+      { question: "but this just the start, be ready for what i prepared for you in this surprise🙃" }
+    ];
+    let seqIndex = 0;
 
-    if (yesNoIndex < yesNoQuestions.length) {
-      bubble.innerHTML = yesNoQuestions[yesNoIndex];
-    } else {
-      switchToSequence();
-    }
-  }
+    function startQuestion() {
+      const bubble = document.getElementById('speechBubble');
+      const container = document.getElementById('buttonContainer');
+      const yesNoBox = document.getElementById('yesNoBox');
+      const textInputBox = document.getElementById('textInputBox');
+      const music = document.getElementById('bgMusic');
 
-  function switchToSequence() {
-    document.getElementById('yesNoBox').style.display = 'none';
-    document.getElementById('textInputBox').style.display = 'flex';
-    showStep();
-  }
-
-  function showStep() {
-    const bubble = document.getElementById('speechBubble');
-    const input = document.getElementById('answerInput');
-    const submitBtn = document.getElementById('submitBtn');
-    const errorMsg = document.getElementById('errorMsg');
-
-    const currentItem = sequence[seqIndex];
-    bubble.innerHTML = currentItem.question;
-    errorMsg.style.display = "none";
-
-    // If it's a question with an answer
-    if (currentItem.answer) {
-      input.style.display = "block";
-      input.value = "";
-      submitBtn.innerHTML = "Submit";
-    } else {
-      // It's a sentence between questions!
-      input.style.display = "none";
-      submitBtn.innerHTML = "Next ➡️";
-    }
-  }
-
-  function checkAnswer() {
-    const currentItem = sequence[seqIndex];
-    const input = document.getElementById('answerInput');
-    const errorMsg = document.getElementById('errorMsg');
-
-    if (currentItem.answer) {
-      const userTyped = input.value.trim().toLowerCase();
-      const correctAnswer = currentItem.answer.toLowerCase();
-
-      if (userTyped === correctAnswer) {
-        advanceSequence();
-      } else {
-        errorMsg.innerHTML = "Wrong answer! Try again 😜";
-        errorMsg.style.display = "block";
+      if (music) {
+        music.play().catch(e => console.log("Audio waiting for user click.", e));
       }
-    } else {
-      advanceSequence();
-    }
-  }
 
-  function advanceSequence() {
-    seqIndex++;
-    if (seqIndex < sequence.length) {
+      yesNoIndex = 0;
+      seqIndex = 0;
+      yesScale = 1.0;
+      noScale = 1.0;
+      updateButtonScales();
+
+      yesNoBox.style.display = 'flex';
+      textInputBox.style.display = 'none';
+      container.style.display = 'flex';
+
+      bubble.innerHTML = yesNoQuestions[yesNoIndex];
+    }
+
+    function updateButtonScales() {
+      const yesBtn = document.querySelector('.yes-btn');
+      const noBtn = document.getElementById('noBtn');
+      yesBtn.style.transform = `scale(${yesScale})`;
+      noBtn.style.transform = `scale(${noScale})`;
+    }
+
+    function dodgeNo() {
+      const bubble = document.getElementById('speechBubble');
+      yesScale += 0.25;
+      noScale = Math.max(0.2, noScale - 0.2);
+      updateButtonScales();
+
+      const funnyResponses = [
+        "Are you for real?!!!🫩🫩",
+        "Just click yes already🙂",
+        "There is no need to be stubborn😒😒 ",
+        "Believe me it will not work😩😩",
+        "just quit doing that!!",
+        "Enough playing games and press yes ommmgg😩😩",
+        "commmee onn, the no button has almost vanished",
+        "Look how large the yes button is!!! just press it"
+      ];
+      bubble.innerHTML = funnyResponses[Math.floor(Math.random() * funnyResponses.length)];
+    }
+
+    function handleYes() {
+      const bubble = document.getElementById('speechBubble');
+      yesNoIndex++;
+      yesScale = 1.0;
+      noScale = 1.0;
+      updateButtonScales();
+
+      if (yesNoIndex < yesNoQuestions.length) {
+        bubble.innerHTML = yesNoQuestions[yesNoIndex];
+      } else {
+        switchToSequence();
+      }
+    }
+
+    function switchToSequence() {
+      document.getElementById('yesNoBox').style.display = 'none';
+      document.getElementById('textInputBox').style.display = 'flex';
       showStep();
-    } else {
-      document.getElementById('buttonContainer').style.display = 'none';
-      document.getElementById('speechBubble').innerHTML = "Bingo! 🥳 You passed all the tests! Your first clue is hidden where you keep things cold... ❄️";
     }
-  }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const input = document.getElementById('answerInput');
-    if (input) {
-      input.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") checkAnswer();
-      });
+    function showStep() {
+      const bubble = document.getElementById('speechBubble');
+      const input = document.getElementById('answerInput');
+      const submitBtn = document.getElementById('submitBtn');
+      const errorMsg = document.getElementById('errorMsg');
+
+      const currentItem = sequence[seqIndex];
+      bubble.innerHTML = currentItem.question;
+      errorMsg.style.display = "none";
+
+      if (currentItem.answer) {
+        input.style.display = "block";
+        input.value = "";
+        submitBtn.innerHTML = "Submit";
+      } else {
+        input.style.display = "none";
+        submitBtn.innerHTML = "Next ➡️";
+      }
     }
-  });
-</script>
+
+    function checkAnswer() {
+      const currentItem = sequence[seqIndex];
+      const input = document.getElementById('answerInput');
+      const errorMsg = document.getElementById('errorMsg');
+
+      if (currentItem.answer) {
+        const userTyped = input.value.trim().toLowerCase();
+        const correctAnswer = currentItem.answer.toLowerCase();
+
+        if (userTyped === correctAnswer) {
+          advanceSequence();
+        } else {
+          errorMsg.innerHTML = "Wrong answer! Try again 😜";
+          errorMsg.style.display = "block";
+        }
+      } else {
+        advanceSequence();
+      }
+    }
+
+    function advanceSequence() {
+      seqIndex++;
+      if (seqIndex < sequence.length) {
+        showStep();
+      } else {
+        document.getElementById('buttonContainer').style.display = 'none';
+        document.getElementById('speechBubble').innerHTML = "Bingo! 🥳 You passed all the tests! Your first clue is hidden where you keep things cold... ❄️";
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const input = document.getElementById('answerInput');
+      if (input) {
+        input.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") checkAnswer();
+        });
+      }
+    });
+  </script>
 </body>
 </html>
