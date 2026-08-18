@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unlock Your Birthday Gifts 🎁</title>
+  <title>Happy Birthday 🎉</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    /* --- RETRO PIXEL SUNSET STYLING --- */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -16,47 +17,150 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+      align-items: center;
+      background-image: url('pixel-sky.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      image-rendering: pixelated;
       font-family: 'Poppins', sans-serif;
-      padding: 20px;
       overflow-x: hidden;
+      overflow-y: auto;
       position: relative;
+      padding: 30px 15px;
     }
 
-    h1 {
-      color: #fff;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      margin-bottom: 8px;
-      text-align: center;
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
       z-index: 10;
     }
 
-    p.subtitle {
-      color: #6a4c59;
-      margin-bottom: 30px;
+    /* 1. Speech Bubble Style (Pointing Up) */
+    .speech-bubble {
+      background: white;
+      padding: 18px 25px;
+      border-radius: 25px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      font-size: 1.15rem;
       font-weight: 600;
+      color: #4a4a4a;
+      max-width: 320px;
       text-align: center;
+      cursor: pointer;
+      position: relative;
+      margin-bottom: 20px;
+      transition: all 0.2s ease;
       z-index: 10;
     }
 
-    /* --- BALLOON ANIMATIONS & STYLING --- */
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 12px 12px 0;
+      border-style: solid;
+      border-color: white transparent;
+    }
+
+    .speech-bubble:hover {
+      transform: scale(1.03);
+      background: #fdfdfd;
+    }
+
+    /* 2. Character Image Styling */
+    .character {
+      width: 230px;
+      height: auto;
+      object-fit: contain;
+      user-select: none;
+      cursor: pointer;
+      animation:
+        slideUpFade 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+        floatingAction 3.5s ease-in-out infinite 1.2s;
+    }
+
+    /* 3. Button Styling */
+    .button-container {
+      margin-top: 15px;
+      z-index: 10;
+    }
+
+    .btn {
+      padding: 10px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .yes-btn {
+      background-color: #ff6b81;
+      color: white;
+    }
+
+    .yes-btn:hover {
+      background-color: #ff4757;
+    }
+
+    .no-btn {
+      background-color: #e0e0e0;
+      color: #333;
+    }
+
+    .no-btn:hover {
+      background-color: #d6d6d6;
+    }
+
+    /* 4. Animations */
+    @keyframes slideUpFade {
+      0% { transform: translateY(150px) scale(0.8); opacity: 0; }
+      100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    @keyframes floatingAction {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-18px) rotate(1deg); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* --- BALLOONS --- */
     .balloon-container {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1.5s ease-in-out;
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       overflow: hidden;
-      pointer-events: none;
       z-index: 1;
+    }
+
+    .balloon-container.show-balloons {
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .balloon {
       position: absolute;
       width: 50px;
       height: 100px;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .balloon-container.show-balloons .balloon {
       opacity: 0.85;
       animation: floatUp 6s linear infinite;
     }
@@ -67,63 +171,98 @@
       100% { transform: translateY(-120px) rotate(-3deg); }
     }
 
-    /* Staggered Balloon Positions */
+    /* Left Side Staggered Positions & Durations */
     .l-1  { left: 2%;  animation-duration: 5.0s !important; animation-delay: 0.1s !important; }
-    .l-2  { left: 8%;  animation-duration: 7.2s !important; animation-delay: 1.2s !important; }
-    .l-3  { left: 14%; animation-duration: 6.1s !important; animation-delay: 0.4s !important; }
-    .l-4  { left: 20%; animation-duration: 8.0s !important; animation-delay: 2.1s !important; }
-    .l-5  { left: 26%; animation-duration: 5.5s !important; animation-delay: 0.8s !important; }
-    .l-6  { left: 32%; animation-duration: 6.8s !important; animation-delay: 1.5s !important; }
-    .l-7  { left: 38%; animation-duration: 7.5s !important; animation-delay: 0.3s !important; }
-    .r-1  { right: 2%;  animation-duration: 5.3s !important; animation-delay: 0.2s !important; }
-    .r-2  { right: 8%;  animation-duration: 6.7s !important; animation-delay: 1.3s !important; }
-    .r-3  { right: 14%; animation-duration: 7.3s !important; animation-delay: 0.5s !important; }
-    .r-4  { right: 20%; animation-duration: 5.7s !important; animation-delay: 1.8s !important; }
-    .r-5  { right: 26%; animation-duration: 6.2s !important; animation-delay: 0.9s !important; }
-    .r-6  { right: 32%; animation-duration: 7.6s !important; animation-delay: 2.0s !important; }
-    .r-7  { right: 38%; animation-duration: 5.1s !important; animation-delay: 0.4s !important; }
+    .l-2  { left: 6%;  animation-duration: 7.2s !important; animation-delay: 1.2s !important; }
+    .l-3  { left: 10%; animation-duration: 6.1s !important; animation-delay: 0.4s !important; }
+    .l-4  { left: 14%; animation-duration: 8.0s !important; animation-delay: 2.1s !important; }
+    .l-5  { left: 18%; animation-duration: 5.5s !important; animation-delay: 0.8s !important; }
+    .l-6  { left: 22%; animation-duration: 6.8s !important; animation-delay: 1.5s !important; }
+    .l-7  { left: 26%; animation-duration: 7.5s !important; animation-delay: 0.3s !important; }
+    .l-8  { left: 30%; animation-duration: 5.8s !important; animation-delay: 1.9s !important; }
+    .l-9  { left: 34%; animation-duration: 6.3s !important; animation-delay: 0.6s !important; }
+    .l-10 { left: 38%; animation-duration: 7.0s !important; animation-delay: 1.1s !important; }
+    .l-11 { left: 4%;  animation-duration: 5.2s !important; animation-delay: 2.3s !important; }
+    .l-12 { left: 8%;  animation-duration: 6.6s !important; animation-delay: 0.2s !important; }
+    .l-13 { left: 12%; animation-duration: 7.8s !important; animation-delay: 1.7s !important; }
+    .l-14 { left: 16%; animation-duration: 5.9s !important; animation-delay: 0.9s !important; }
+    .l-15 { left: 20%; animation-duration: 6.4s !important; animation-delay: 2.0s !important; }
+    .l-16 { left: 24%; animation-duration: 7.1s !important; animation-delay: 0.5s !important; }
+    .l-17 { left: 28%; animation-duration: 5.6s !important; animation-delay: 1.4s !important; }
+    .l-18 { left: 32%; animation-duration: 6.9s !important; animation-delay: 0.7s !important; }
+    .l-19 { left: 36%; animation-duration: 7.4s !important; animation-delay: 2.2s !important; }
+    .l-20 { left: 40%; animation-duration: 5.4s !important; animation-delay: 1.0s !important; }
 
-    /* --- GIFT GRID (2x2 Layout) --- */
+    /* Right Side Staggered Positions & Durations */
+    .r-1  { right: 2%;  animation-duration: 5.3s !important; animation-delay: 0.2s !important; }
+    .r-2  { right: 6%;  animation-duration: 6.7s !important; animation-delay: 1.3s !important; }
+    .r-3  { right: 10%; animation-duration: 7.3s !important; animation-delay: 0.5s !important; }
+    .r-4  { right: 14%; animation-duration: 5.7s !important; animation-delay: 1.8s !important; }
+    .r-5  { right: 18%; animation-duration: 6.2s !important; animation-delay: 0.9s !important; }
+    .r-6  { right: 22%; animation-duration: 7.6s !important; animation-delay: 2.0s !important; }
+    .r-7  { right: 26%; animation-duration: 5.1s !important; animation-delay: 0.4s !important; }
+    .r-8  { right: 30%; animation-duration: 6.5s !important; animation-delay: 1.6s !important; }
+    .r-9  { right: 34%; animation-duration: 7.0s !important; animation-delay: 0.7s !important; }
+    .r-10 { right: 38%; animation-duration: 5.8s !important; animation-delay: 2.2s !important; }
+    .r-11 { right: 4%;  animation-duration: 6.6s !important; animation-delay: 0.1s !important; }
+    .r-12 { right: 8%;  animation-duration: 7.9s !important; animation-delay: 1.4s !important; }
+    .r-13 { right: 12%; animation-duration: 5.4s !important; animation-delay: 0.8s !important; }
+    .r-14 { right: 16%; animation-duration: 6.8s !important; animation-delay: 2.4s !important; }
+    .r-15 { right: 20%; animation-duration: 7.2s !important; animation-delay: 0.3s !important; }
+    .r-16 { right: 24%; animation-duration: 5.6s !important; animation-delay: 1.5s !important; }
+    .r-17 { right: 28%; animation-duration: 6.3s !important; animation-delay: 1.0s !important; }
+    .r-18 { right: 32%; animation-duration: 7.7s !important; animation-delay: 0.6s !important; }
+    .r-19 { right: 36%; animation-duration: 5.0s !important; animation-delay: 2.1s !important; }
+    .r-20 { right: 40%; animation-duration: 6.1s !important; animation-delay: 1.2s !important; }
+
+    /* --- GIFTS SECTION STYLING --- */
+    .gifts-section {
+      display: none;
+      width: 100%;
+      max-width: 500px;
+      margin-top: 25px;
+      z-index: 10;
+      animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
     .gifts-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      max-width: 500px;
+      gap: 15px;
       width: 100%;
-      z-index: 10;
     }
 
     .gift-card {
       background: rgba(255, 255, 255, 0.92);
       border-radius: 20px;
-      padding: 25px 15px;
+      padding: 20px 15px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
       cursor: pointer;
       transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
       text-align: center;
-      min-height: 180px;
+      min-height: 160px;
       position: relative;
       backdrop-filter: blur(4px);
     }
 
     .gift-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.18);
     }
 
     .gift-icon {
-      font-size: 3.5rem;
-      margin-bottom: 10px;
+      font-size: 3rem;
+      margin-bottom: 8px;
     }
 
     .gift-title {
       font-weight: 700;
       color: #4a4a4a;
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
 
     .gift-status {
@@ -143,26 +282,24 @@
     }
 
     .reward-content {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: #333;
       margin-top: 8px;
       font-weight: 600;
       word-break: break-word;
     }
 
-    /* --- FINAL GRAND GIFT / SURPRISE SECTION (Appears when all questions end) --- */
+    /* GRAND SURPRISE SECTION */
     .final-gift-section {
       display: none;
-      margin-top: 35px;
-      max-width: 500px;
+      margin-top: 25px;
       width: 100%;
       background: #ffffff;
       border-radius: 25px;
-      padding: 30px 20px;
+      padding: 25px 20px;
       text-align: center;
       box-shadow: 0 15px 35px rgba(255, 71, 87, 0.25);
       border: 3px dashed #ff4757;
-      z-index: 10;
       animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
@@ -172,13 +309,13 @@
 
     .final-gift-section h2 {
       color: #ff4757;
-      font-size: 1.5rem;
-      margin-bottom: 10px;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
     }
 
     .final-gift-section p {
       color: #4a4a4a;
-      font-size: 1rem;
+      font-size: 0.95rem;
       line-height: 1.5;
     }
 
@@ -194,7 +331,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.45);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -212,11 +349,11 @@
 
     .modal {
       background: white;
-      padding: 30px 25px;
+      padding: 25px 20px;
       border-radius: 25px;
-      max-width: 380px;
+      max-width: 360px;
       width: 100%;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
       text-align: center;
       transform: scale(0.8);
       transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -228,26 +365,26 @@
 
     .modal h3 {
       color: #ff4757;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       font-size: 1.2rem;
     }
 
     .modal p {
       color: #555;
-      font-size: 1rem;
-      margin-bottom: 20px;
+      font-size: 0.95rem;
+      margin-bottom: 18px;
       line-height: 1.4;
     }
 
     .modal input {
       width: 100%;
-      padding: 12px 18px;
+      padding: 10px 15px;
       border-radius: 20px;
       border: 2px solid #ff6b81;
       outline: none;
-      font-size: 16px;
+      font-size: 15px;
       text-align: center;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       font-family: inherit;
     }
 
@@ -257,41 +394,12 @@
       justify-content: center;
     }
 
-    .btn {
-      padding: 10px 20px;
-      border-radius: 20px;
-      border: none;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 0.95rem;
-      transition: background 0.2s ease, transform 0.1s ease;
-      font-family: inherit;
-    }
-
-    .btn-submit {
-      background: #ff6b81;
-      color: white;
-    }
-
-    .btn-submit:hover {
-      background: #ff4757;
-    }
-
-    .btn-cancel {
-      background: #e0e0e0;
-      color: #555;
-    }
-
-    .btn-cancel:hover {
-      background: #d6d6d6;
-    }
-
-    .error-msg {
+    .modal-error-msg {
       color: #ff4757;
       font-size: 0.85rem;
       font-weight: 600;
-      margin-top: -8px;
-      margin-bottom: 12px;
+      margin-top: -5px;
+      margin-bottom: 10px;
       display: none;
     }
 
@@ -301,11 +409,11 @@
       }
     }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-
-  <!-- FLOATING BALLOONS BACKGROUND -->
   <div class="balloon-container">
+    <!-- LEFT SIDE (20 Balloons) -->
     <svg class="balloon l-1" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
     <svg class="balloon l-2" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
     <svg class="balloon l-3" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
@@ -313,7 +421,21 @@
     <svg class="balloon l-5" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
     <svg class="balloon l-6" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
     <svg class="balloon l-7" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-    
+    <svg class="balloon l-8" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-9" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-10" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-11" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-12" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-13" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-14" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-15" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-16" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-17" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-18" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-19" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-20" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+
+    <!-- RIGHT SIDE (20 Balloons) -->
     <svg class="balloon r-1" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
     <svg class="balloon r-2" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
     <svg class="balloon r-3" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
@@ -321,36 +443,108 @@
     <svg class="balloon r-5" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
     <svg class="balloon r-6" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
     <svg class="balloon r-7" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-8" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-9" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-10" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-11" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-12" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-13" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-14" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-15" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-16" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-17" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-18" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-19" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-20" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
   </div>
 
-  <h1>Unlock Your Gifts 🔒</h1>
-  <p class="subtitle">Answer the question for each gift to reveal your surprise!</p>
+  <audio id="bgMusic" src="birthday-song.mp3" loop></audio>
 
-  <div class="gifts-grid" id="giftsGrid">
-    <!-- Cards rendered dynamically -->
+  <!-- Container for Character & Speech Bubble -->
+  <div class="container">
+    <div class="speech-bubble" id="speechBubble" onclick="startQuestion()">
+      Are you Malak? (click me to continue)
+    </div>
+
+    <img
+      src="cartoon-you.png"
+      alt="Cartoon Me"
+      class="character"
+      id="myCharacter"
+      onclick="startQuestion()"
+    >
+
+    <div class="button-container" id="buttonContainer" style="display: none; flex-direction: column; align-items: center; gap: 15px;">
+      <div id="yesNoBox" style="display: flex; gap: 20px; align-items: center;">
+        <button class="btn yes-btn" onclick="handleYes()">Yes</button>
+        <button class="btn no-btn" id="noBtn" onclick="dodgeNo()">No</button>
+      </div>
+
+      <div id="textInputBox" style="display: none; flex-direction: column; align-items: center; gap: 10px;">
+        <input
+          type="text"
+          id="answerInput"
+          placeholder="Type your answer..."
+          style="padding: 10px 15px; font-size: 16px; border-radius: 20px; border: 2px solid #ff6b81; outline: none; text-align: center; width: 220px;"
+        >
+        <button class="btn yes-btn" id="submitBtn" onclick="checkAnswer()">Submit</button>
+        <p id="errorMsg" style="color: #ff4757; font-weight: bold; margin: 5px 0 0 0; font-size: 14px; display: none;"></p>
+      </div>
+    </div>
   </div>
 
-  <!-- GRAND FINAL GIFT SECTION (Revealed automatically once all 4 questions are answered) -->
-  <div class="final-gift-section" id="finalGiftSection">
-    <h2>🎉 All Gifts Unlocked! 🎉</h2>
-    <p>You answered all the questions correctly! Here is your final surprise grand prize 🎁✨</p>
+  <!-- GIFTS SECTION (Revealed automatically after all questions finish) -->
+  <div class="gifts-section" id="giftsSection">
+    <div class="gifts-grid" id="giftsGrid">
+      <!-- Gift Cards rendered dynamically via JS -->
+    </div>
+
+    <!-- GRAND FINAL SURPRISE SECTION -->
+    <div class="final-gift-section" id="finalGiftSection">
+      <h2>🎉 All Gifts Unlocked! 🎉</h2>
+      <p>You answered all the gift questions correctly! Here is your final surprise grand prize 🎁✨</p>
+    </div>
   </div>
 
-  <!-- Question Popup Modal -->
+  <!-- GIFT QUESTION POPUP MODAL -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
       <h3 id="modalGiftTitle">Gift #1 Question</h3>
       <p id="modalQuestionText">Question text goes here?</p>
-      <input type="text" id="answerInput" placeholder="Type your answer..." />
-      <div class="error-msg" id="errorMsg">Incorrect answer! Try again 😜</div>
+      <input type="text" id="giftAnswerInput" placeholder="Type your answer..." />
+      <div class="modal-error-msg" id="modalErrorMsg">Incorrect answer! Try again 😜</div>
       <div class="modal-buttons">
-        <button class="btn btn-submit" onclick="submitAnswer()">Unlock 🔓</button>
-        <button class="btn btn-cancel" onclick="closeModal()">Cancel</button>
+        <button class="btn yes-btn" onclick="submitGiftAnswer()">Unlock 🔓</button>
+        <button class="btn no-btn" onclick="closeModal()">Cancel</button>
       </div>
     </div>
   </div>
 
   <script>
+    // --- STAGE 1: YES/NO QUESTIONS ---
+    const yesNoQuestions = [
+      "Are you really Malak?",
+      "Are you ready to put that to the test? (don't you dare say no but you can try though)"
+    ];
+    let yesNoIndex = 0;
+    let yesScale = 1.0;
+    let noScale = 1.0;
+
+    // --- STAGE 2: SEQUENCE (QUESTIONS & MESSAGES) ---
+    const sequence = [
+      { question: "how old is Malak turning today?", answer: "18" },
+      { question: "mhmmm, that's easy to guess, iam not sure yet that you are Malak" },
+      { question: "what is Malak's fav color", answer: "pink" },
+      { question: "That's easy to guess too😒😒" },
+      { question: "who is Malak's fav artist?", answer: "lana del rey" },
+      { question: "ohhh you know that, you might actually be Malak but let's make sure" },
+      { question: "what is the last thing i say to Malak everyday at the end of our chat?", answer: "goodnight cutie" },
+      { question: "YOU ARE MALAK!! Happy birhtday cutie🥳🥳 welcome to my surprise for you❤️" },
+      { question: "but this just the start, be ready for what i prepared for you in this surprise🙃" }
+    ];
+    let seqIndex = 0;
+
+    // --- STAGE 3: GIFTS DATA ---
     const giftsData = [
       {
         id: 1,
@@ -388,6 +582,143 @@
 
     let currentGiftIndex = null;
 
+    function startQuestion() {
+      const bubble = document.getElementById('speechBubble');
+      const container = document.getElementById('buttonContainer');
+      const yesNoBox = document.getElementById('yesNoBox');
+      const textInputBox = document.getElementById('textInputBox');
+      const music = document.getElementById('bgMusic');
+
+      if (music) {
+        music.play().catch(e => console.log("Audio waiting for user click.", e));
+      }
+
+      yesNoIndex = 0;
+      seqIndex = 0;
+      yesScale = 1.0;
+      noScale = 1.0;
+      updateButtonScales();
+
+      yesNoBox.style.display = 'flex';
+      textInputBox.style.display = 'none';
+      container.style.display = 'flex';
+
+      bubble.innerHTML = yesNoQuestions[yesNoIndex];
+    }
+
+    function updateButtonScales() {
+      const yesBtn = document.querySelector('.yes-btn');
+      const noBtn = document.getElementById('noBtn');
+      yesBtn.style.transform = `scale(${yesScale})`;
+      noBtn.style.transform = `scale(${noScale})`;
+    }
+
+    function dodgeNo() {
+      const bubble = document.getElementById('speechBubble');
+      yesScale += 0.25;
+      noScale = Math.max(0.2, noScale - 0.2);
+      updateButtonScales();
+
+      const funnyResponses = [
+        "Are you for real?!!!🫩🫩",
+        "Just click yes already🙂",
+        "There is no need to be stubborn😒😒 ",
+        "Believe me it will not work😩😩",
+        "just quit doing that!!",
+        "Enough playing games and press yes ommmgg😩😩",
+        "commmee onn, the no button has almost vanished",
+        "Look how large the yes button is!!! just press it"
+      ];
+      bubble.innerHTML = funnyResponses[Math.floor(Math.random() * funnyResponses.length)];
+    }
+
+    function handleYes() {
+      const bubble = document.getElementById('speechBubble');
+      yesNoIndex++;
+      yesScale = 1.0;
+      noScale = 1.0;
+      updateButtonScales();
+
+      if (yesNoIndex < yesNoQuestions.length) {
+        bubble.innerHTML = yesNoQuestions[yesNoIndex];
+      } else {
+        switchToSequence();
+      }
+    }
+
+    function switchToSequence() {
+      document.getElementById('yesNoBox').style.display = 'none';
+      document.getElementById('textInputBox').style.display = 'flex';
+      showStep();
+    }
+
+    function showStep() {
+      const bubble = document.getElementById('speechBubble');
+      const input = document.getElementById('answerInput');
+      const submitBtn = document.getElementById('submitBtn');
+      const errorMsg = document.getElementById('errorMsg');
+
+      const currentItem = sequence[seqIndex];
+      bubble.innerHTML = currentItem.question;
+      errorMsg.style.display = "none";
+
+      if (currentItem.answer) {
+        input.style.display = "block";
+        input.value = "";
+        submitBtn.innerHTML = "Submit";
+      } else {
+        input.style.display = "none";
+        submitBtn.innerHTML = "Next ➡️";
+      }
+    }
+
+    function checkAnswer() {
+      const currentItem = sequence[seqIndex];
+      const input = document.getElementById('answerInput');
+      const errorMsg = document.getElementById('errorMsg');
+
+      if (currentItem.answer) {
+        const userTyped = input.value.trim().toLowerCase();
+        const correctAnswer = currentItem.answer.toLowerCase();
+
+        if (userTyped === correctAnswer) {
+          advanceSequence();
+        } else {
+          errorMsg.innerHTML = "Wrong answer! Try again 😜";
+          errorMsg.style.display = "block";
+        }
+      } else {
+        advanceSequence();
+      }
+    }
+
+    function advanceSequence() {
+      seqIndex++;
+      if (seqIndex < sequence.length) {
+        showStep();
+      } else {
+        // --- ALL QUESTIONS FINISHED ---
+        document.getElementById('buttonContainer').style.display = 'none';
+        document.getElementById('speechBubble').innerHTML = "Bingo! 🥳 You passed all the tests! Now click on the gift boxes below to unlock your surprises! 🎁✨";
+
+        // Show Balloons
+        const balloonContainer = document.querySelector('.balloon-container');
+        if (balloonContainer) {
+          balloonContainer.classList.add('show-balloons');
+        } else {
+          document.querySelectorAll('.balloon').forEach(balloon => {
+            balloon.classList.add('show-balloons');
+          });
+        }
+
+        // Show Gifts Section
+        const giftsSection = document.getElementById('giftsSection');
+        giftsSection.style.display = 'block';
+        renderGifts();
+      }
+    }
+
+    // --- GIFT CARDS RENDER & MODAL LOGIC ---
     function renderGifts() {
       const grid = document.getElementById('giftsGrid');
       grid.innerHTML = '';
@@ -424,11 +755,11 @@
       currentGiftIndex = index;
       document.getElementById('modalGiftTitle').innerText = gift.title;
       document.getElementById('modalQuestionText').innerText = gift.question;
-      document.getElementById('answerInput').value = '';
-      document.getElementById('errorMsg').style.display = 'none';
+      document.getElementById('giftAnswerInput').value = '';
+      document.getElementById('modalErrorMsg').style.display = 'none';
       document.getElementById('modalOverlay').classList.add('active');
       
-      setTimeout(() => document.getElementById('answerInput').focus(), 100);
+      setTimeout(() => document.getElementById('giftAnswerInput').focus(), 100);
     }
 
     function closeModal() {
@@ -436,12 +767,12 @@
       currentGiftIndex = null;
     }
 
-    function submitAnswer() {
+    function submitGiftAnswer() {
       if (currentGiftIndex === null) return;
 
-      const userTyped = document.getElementById('answerInput').value.trim().toLowerCase();
+      const userTyped = document.getElementById('giftAnswerInput').value.trim().toLowerCase();
       const correctAnswer = giftsData[currentGiftIndex].answer.toLowerCase();
-      const errorMsg = document.getElementById('errorMsg');
+      const errorMsg = document.getElementById('modalErrorMsg');
 
       if (userTyped === correctAnswer) {
         giftsData[currentGiftIndex].isUnlocked = true;
@@ -452,13 +783,21 @@
       }
     }
 
-    document.getElementById('answerInput').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        submitAnswer();
+    document.addEventListener("DOMContentLoaded", () => {
+      const input = document.getElementById('answerInput');
+      if (input) {
+        input.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") checkAnswer();
+        });
+      }
+
+      const giftInput = document.getElementById('giftAnswerInput');
+      if (giftInput) {
+        giftInput.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") submitGiftAnswer();
+        });
       }
     });
-
-    renderGifts();
   </script>
 </body>
 </html>
