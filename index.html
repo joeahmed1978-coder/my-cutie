@@ -3,171 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday 🎉</title>
+  <title>Unlock Your Birthday Gifts 🎁</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    /* Final Styling for the Cartoon Character Webpage */
-    /* --- RETRO PIXEL SUNSET STYLING --- */
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-image: url('pixel-sky.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      image-rendering: pixelated;
-      font-family: 'Poppins', sans-serif;
-      overflow: hidden;
-      position: relative;
+      padding: 0;
     }
 
-    .container {
+    body {
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      position: relative;
-    }
-
-    /* 1. Speech Bubble Style (Pointing Up) */
-    .speech-bubble {
-      background: white;
-      padding: 18px 25px;
-      border-radius: 25px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: #4a4a4a;
-      max-width: 280px;
-      text-align: center;
-      cursor: pointer;
-      position: relative;
-      margin-bottom: 20px;
-      transition: all 0.2s ease;
-      z-index: 10;
-    }
-
-    .speech-bubble::after {
-      content: '';
-      position: absolute;
-      bottom: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-width: 12px 12px 0;
-      border-style: solid;
-      border-color: white transparent;
-    }
-
-    .speech-bubble:hover {
-      transform: scale(1.05);
-      background: #fdfdfd;
-    }
-
-    /* 2. Character Image Styling */
-    .character {
-      width: 250px;
-      height: auto;
-      object-fit: contain;
-      user-select: none;
-      transform: scale(3.0);
-      cursor: pointer;
-      animation:
-        slideUpFade 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
-        floatingAction 3.5s ease-in-out infinite 1.2s;
-    }
-
-    /* 3. Button Styling */
-    .button-container {
-      margin-top: 15px;
-      z-index: 10;
-    }
-
-    .btn {
-      padding: 10px 24px;
-      font-size: 1rem;
-      font-weight: 600;
+      justify-content: center;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
       font-family: 'Poppins', sans-serif;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      transition: transform 0.2s ease, background-color 0.2s ease;
+      padding: 20px;
+      overflow-x: hidden;
+      position: relative;
     }
 
-    .yes-btn {
-      background-color: #ff6b81;
-      color: white;
+    h1 {
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      margin-bottom: 8px;
+      text-align: center;
+      z-index: 10;
     }
 
-    .yes-btn:hover {
-      background-color: #ff4757;
+    p.subtitle {
+      color: #6a4c59;
+      margin-bottom: 30px;
+      font-weight: 600;
+      text-align: center;
+      z-index: 10;
     }
 
-    .no-btn {
-      background-color: #e0e0e0;
-      color: #555;
-    }
-
-    .no-btn:hover {
-      background-color: #d0d0d0;
-    }
-
-    /* 4. Animations */
-    @keyframes slideUpFade {
-      0% { transform: translateY(150px) scale(0.8); opacity: 0; }
-      100% { transform: translateY(0) scale(1); opacity: 1; }
-    }
-
-    @keyframes floatingAction {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-18px) rotate(1deg); }
-      100% { transform: translateY(0px); }
-    }
-
-    @keyframes hop {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-50px) scale(1.05); }
-      100% { transform: translateY(0); }
-    }
-
-    .bg-accent {
-      position: absolute;
-      opacity: 0.2;
-      animation: drift 10s linear infinite;
-    }
-
-    @keyframes drift {
-      from { transform: translateY(0) rotate(0deg); }
-      to { transform: translateY(-200px) rotate(360deg); }
-    }
-
+    /* --- BALLOON ANIMATIONS & STYLING --- */
     .balloon-container {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 1.5s ease-in-out;
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       overflow: hidden;
-    }
-
-    .balloon-container.show-balloons {
-      opacity: 1;
-      pointer-events: auto;
+      pointer-events: none;
+      z-index: 1;
     }
 
     .balloon {
       position: absolute;
       width: 50px;
       height: 100px;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-
-    .balloon-container.show-balloons .balloon {
       opacity: 0.85;
       animation: floatUp 6s linear infinite;
     }
@@ -178,7 +67,7 @@
       100% { transform: translateY(-120px) rotate(-3deg); }
     }
 
-    /* Left Side Staggered Positions & Durations */
+    /* Left Side Positions & Staggered Animations */
     .l-1  { left: 2%;  animation-duration: 5.0s !important; animation-delay: 0.1s !important; }
     .l-2  { left: 6%;  animation-duration: 7.2s !important; animation-delay: 1.2s !important; }
     .l-3  { left: 10%; animation-duration: 6.1s !important; animation-delay: 0.4s !important; }
@@ -200,7 +89,7 @@
     .l-19 { left: 36%; animation-duration: 7.4s !important; animation-delay: 2.2s !important; }
     .l-20 { left: 40%; animation-duration: 5.4s !important; animation-delay: 1.0s !important; }
 
-    /* Right Side Staggered Positions & Durations */
+    /* Right Side Positions & Staggered Animations */
     .r-1  { right: 2%;  animation-duration: 5.3s !important; animation-delay: 0.2s !important; }
     .r-2  { right: 6%;  animation-duration: 6.7s !important; animation-delay: 1.3s !important; }
     .r-3  { right: 10%; animation-duration: 7.3s !important; animation-delay: 0.5s !important; }
@@ -222,17 +111,193 @@
     .r-19 { right: 36%; animation-duration: 5.0s !important; animation-delay: 2.1s !important; }
     .r-20 { right: 40%; animation-duration: 6.1s !important; animation-delay: 1.2s !important; }
 
-    @keyframes floatBalloon {
-      0% { transform: translateY(0) rotate(-3deg); }
-      50% { transform: translateY(-20px) rotate(3deg); }
-      100% { transform: translateY(0) rotate(-3deg); }
+    /* --- GIFT GRID (2x2 Layout) --- */
+    .gifts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 500px;
+      width: 100%;
+      z-index: 10;
+    }
+
+    .gift-card {
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 20px;
+      padding: 25px 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
+      text-align: center;
+      min-height: 180px;
+      position: relative;
+      backdrop-filter: blur(4px);
+    }
+
+    .gift-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    .gift-icon {
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+    }
+
+    .gift-title {
+      font-weight: 700;
+      color: #4a4a4a;
+      font-size: 1.1rem;
+    }
+
+    .gift-status {
+      font-size: 0.85rem;
+      color: #ff4757;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .gift-card.unlocked {
+      background: #ffffff;
+      border: 2px solid #ff6b81;
+    }
+
+    .gift-card.unlocked .gift-status {
+      color: #2ed573;
+    }
+
+    .reward-content {
+      font-size: 0.95rem;
+      color: #333;
+      margin-top: 8px;
+      font-weight: 600;
+      word-break: break-word;
+    }
+
+    /* --- MODAL POPUP STYLING --- */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 100;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal {
+      background: white;
+      padding: 30px 25px;
+      border-radius: 25px;
+      max-width: 380px;
+      width: 100%;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+      text-align: center;
+      transform: scale(0.8);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .modal-overlay.active .modal {
+      transform: scale(1);
+    }
+
+    .modal h3 {
+      color: #ff4757;
+      margin-bottom: 12px;
+      font-size: 1.2rem;
+    }
+
+    .modal p {
+      color: #555;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .modal input {
+      width: 100%;
+      padding: 12px 18px;
+      border-radius: 20px;
+      border: 2px solid #ff6b81;
+      outline: none;
+      font-size: 16px;
+      text-align: center;
+      margin-bottom: 15px;
+      font-family: inherit;
+    }
+
+    .modal-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 20px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: background 0.2s ease, transform 0.1s ease;
+      font-family: inherit;
+    }
+
+    .btn-submit {
+      background: #ff6b81;
+      color: white;
+    }
+
+    .btn-submit:hover {
+      background: #ff4757;
+    }
+
+    .btn-cancel {
+      background: #e0e0e0;
+      color: #555;
+    }
+
+    .btn-cancel:hover {
+      background: #d6d6d6;
+    }
+
+    .error-msg {
+      color: #ff4757;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: -8px;
+      margin-bottom: 12px;
+      display: none;
+    }
+
+    @media (max-width: 420px) {
+      .gifts-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <!-- FLOATING BALLOONS BACKGROUND -->
   <div class="balloon-container">
-    <!-- LEFT SIDE (20 Balloons) -->
+    <!-- LEFT SIDE -->
     <svg class="balloon l-1" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
     <svg class="balloon l-2" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
     <svg class="balloon l-3" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
@@ -254,7 +319,7 @@
     <svg class="balloon l-19" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
     <svg class="balloon l-20" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
 
-    <!-- RIGHT SIDE (20 Balloons) -->
+    <!-- RIGHT SIDE -->
     <svg class="balloon r-1" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
     <svg class="balloon r-2" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
     <svg class="balloon r-3" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
@@ -277,203 +342,127 @@
     <svg class="balloon r-20" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
   </div>
 
-  <audio id="bgMusic" src="birthday-song.mp3" loop></audio>
+  <h1>Unlock Your Gifts 🔒</h1>
+  <p class="subtitle">Answer the question for each gift to reveal your surprise!</p>
 
-  <!-- Container for Character & Bubble -->
-  <div class="container">
-    <div class="speech-bubble" id="speechBubble" onclick="startQuestion()">
-      Are you Malak? (click me to continue)
-    </div>
+  <div class="gifts-grid" id="giftsGrid">
+    <!-- Gift Cards will be rendered dynamically via JavaScript -->
+  </div>
 
-    <img
-      src="cartoon-you.png"
-      alt="Cartoon Me"
-      class="character"
-      id="myCharacter"
-      onclick="startQuestion()"
-    >
-
-    <div class="button-container" id="buttonContainer" style="display: none; flex-direction: column; align-items: center; gap: 15px;">
-      <div id="yesNoBox" style="display: flex; gap: 20px; align-items: center;">
-        <button class="btn yes-btn" onclick="handleYes()">Yes</button>
-        <button class="btn no-btn" id="noBtn" onclick="dodgeNo()">No</button>
-      </div>
-
-      <div id="textInputBox" style="display: none; flex-direction: column; align-items: center; gap: 10px;">
-        <input
-          type="text"
-          id="answerInput"
-          placeholder="Type your answer..."
-          style="padding: 10px 15px; font-size: 16px; border-radius: 20px; border: 2px solid #ff6b81; outline: none; text-align: center; width: 220px;"
-        >
-        <button class="btn yes-btn" id="submitBtn" onclick="checkAnswer()">Submit</button>
-        <p id="errorMsg" style="color: #ff4757; font-weight: bold; margin: 5px 0 0 0; font-size: 14px; display: none;"></p>
+  <!-- Question Popup Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <h3 id="modalGiftTitle">Gift #1 Question</h3>
+      <p id="modalQuestionText">Question text goes here?</p>
+      <input type="text" id="answerInput" placeholder="Type your answer..." />
+      <div class="error-msg" id="errorMsg">Incorrect answer! Try again 😜</div>
+      <div class="modal-buttons">
+        <button class="btn btn-submit" onclick="submitAnswer()">Unlock 🔓</button>
+        <button class="btn btn-cancel" onclick="closeModal()">Cancel</button>
       </div>
     </div>
   </div>
 
   <script>
-    // --- STAGE 1: YES/NO QUESTIONS ---
-    const yesNoQuestions = [
-      "Are you really Malak?",
-      "Are you ready to put that to the test? (don't you dare say no but you can try though)"
-    ];
-    let yesNoIndex = 0;
-    let yesScale = 1.0;
-    let noScale = 1.0;
-
-    // --- STAGE 2: SEQUENCE (QUESTIONS & MESSAGES) ---
-    const sequence = [
-      { question: "how old is Malak turning today?", answer: "18" },
-      { question: "mhmmm, that's easy to guess, iam not sure yet that you are Malak" },
-      { question: "what is Malak's fav color", answer: "pink" },
-      { question: "That's easy to guess too😒😒" },
-      { question: "who is Malak's fav artist?", answer: "lana del rey" },
-      { question: "ohhh you know that, you might actually be Malak but let's make sure" },
-      { question: "what is the last thing i say to Malak everyday at the end of our chat?", answer: "goodnight cutie" },
-      { question: "YOU ARE MALAK!! Happy birhtday cutie🥳🥳 welcome to my surprise for you❤️" },
-      { question: "but this just the start, be ready for what i prepared for you in this surprise🙃" }
-    ];
-    let seqIndex = 0;
-
-    function startQuestion() {
-      const bubble = document.getElementById('speechBubble');
-      const container = document.getElementById('buttonContainer');
-      const yesNoBox = document.getElementById('yesNoBox');
-      const textInputBox = document.getElementById('textInputBox');
-      const music = document.getElementById('bgMusic');
-
-      if (music) {
-        music.play().catch(e => console.log("Audio waiting for user click.", e));
+    const giftsData = [
+      {
+        id: 1,
+        title: "Gift 1",
+        question: "Where did we first meet?",
+        answer: "cafe",
+        reward: "☕ A cozy coffee date on me!",
+        isUnlocked: false
+      },
+      {
+        id: 2,
+        title: "Gift 2",
+        question: "What is my favorite nickname for you?",
+        answer: "cutie",
+        reward: "💌 A handwritten letter with a custom playlist!",
+        isUnlocked: false
+      },
+      {
+        id: 3,
+        title: "Gift 3",
+        question: "What is our favorite show to watch together?",
+        answer: "supernatural",
+        reward: "🎬 Movie night coupon with unlimited snacks!",
+        isUnlocked: false
+      },
+      {
+        id: 4,
+        title: "Gift 4",
+        question: "What is the secret word?",
+        answer: "forever",
+        reward: "🎁 The physical gift hidden in your closet!",
+        isUnlocked: false
       }
+    ];
 
-      yesNoIndex = 0;
-      seqIndex = 0;
-      yesScale = 1.0;
-      noScale = 1.0;
-      updateButtonScales();
+    let currentGiftIndex = null;
 
-      yesNoBox.style.display = 'flex';
-      textInputBox.style.display = 'none';
-      container.style.display = 'flex';
+    function renderGifts() {
+      const grid = document.getElementById('giftsGrid');
+      grid.innerHTML = '';
 
-      bubble.innerHTML = yesNoQuestions[yesNoIndex];
+      giftsData.forEach((gift, index) => {
+        const card = document.createElement('div');
+        card.className = `gift-card ${gift.isUnlocked ? 'unlocked' : ''}`;
+        card.onclick = () => openModal(index);
+
+        card.innerHTML = `
+          <div class="gift-icon">${gift.isUnlocked ? '🎁' : '🔒'}</div>
+          <div class="gift-title">${gift.title}</div>
+          <div class="gift-status">${gift.isUnlocked ? 'Unlocked!' : 'Locked'}</div>
+          ${gift.isUnlocked ? `<div class="reward-content">${gift.reward}</div>` : ''}
+        `;
+
+        grid.appendChild(card);
+      });
     }
 
-    function updateButtonScales() {
-      const yesBtn = document.querySelector('.yes-btn');
-      const noBtn = document.getElementById('noBtn');
-      if (yesBtn) yesBtn.style.transform = `scale(${yesScale})`;
-      if (noBtn) noBtn.style.transform = `scale(${noScale})`;
+    function openModal(index) {
+      const gift = giftsData[index];
+      if (gift.isUnlocked) return;
+
+      currentGiftIndex = index;
+      document.getElementById('modalGiftTitle').innerText = gift.title;
+      document.getElementById('modalQuestionText').innerText = gift.question;
+      document.getElementById('answerInput').value = '';
+      document.getElementById('errorMsg').style.display = 'none';
+      document.getElementById('modalOverlay').classList.add('active');
+      
+      setTimeout(() => document.getElementById('answerInput').focus(), 100);
     }
 
-    function dodgeNo() {
-      const bubble = document.getElementById('speechBubble');
-      yesScale += 0.25;
-      noScale = Math.max(0.2, noScale - 0.2);
-      updateButtonScales();
-
-      const funnyResponses = [
-        "Are you for real?!!!🫩🫩",
-        "Just click yes already🙂",
-        "There is no need to be stubborn😒😒 ",
-        "Believe me it will not work😩😩",
-        "just quit doing that!!",
-        "Enough playing games and press yes ommmgg😩😩",
-        "commmee onn, the no button has almost vanished",
-        "Look how large the yes button is!!! just press it"
-      ];
-      bubble.innerHTML = funnyResponses[Math.floor(Math.random() * funnyResponses.length)];
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+      currentGiftIndex = null;
     }
 
-    function handleYes() {
-      const bubble = document.getElementById('speechBubble');
-      yesNoIndex++;
-      yesScale = 1.0;
-      noScale = 1.0;
-      updateButtonScales();
+    function submitAnswer() {
+      if (currentGiftIndex === null) return;
 
-      if (yesNoIndex < yesNoQuestions.length) {
-        bubble.innerHTML = yesNoQuestions[yesNoIndex];
-      } else {
-        switchToSequence();
-      }
-    }
-
-    function switchToSequence() {
-      document.getElementById('yesNoBox').style.display = 'none';
-      document.getElementById('textInputBox').style.display = 'flex';
-      showStep();
-    }
-
-    function showStep() {
-      const bubble = document.getElementById('speechBubble');
-      const input = document.getElementById('answerInput');
-      const submitBtn = document.getElementById('submitBtn');
+      const userTyped = document.getElementById('answerInput').value.trim().toLowerCase();
+      const correctAnswer = giftsData[currentGiftIndex].answer.toLowerCase();
       const errorMsg = document.getElementById('errorMsg');
 
-      const currentItem = sequence[seqIndex];
-      bubble.innerHTML = currentItem.question;
-      errorMsg.style.display = "none";
-
-      if (currentItem.answer) {
-        input.style.display = "block";
-        input.value = "";
-        submitBtn.innerHTML = "Submit";
+      if (userTyped === correctAnswer) {
+        giftsData[currentGiftIndex].isUnlocked = true;
+        closeModal();
+        renderGifts();
       } else {
-        input.style.display = "none";
-        submitBtn.innerHTML = "Next ➡️";
+        errorMsg.style.display = 'block';
       }
     }
 
-    function checkAnswer() {
-      const currentItem = sequence[seqIndex];
-      const input = document.getElementById('answerInput');
-      const errorMsg = document.getElementById('errorMsg');
-
-      if (currentItem.answer) {
-        const userTyped = input.value.trim().toLowerCase();
-        const correctAnswer = currentItem.answer.toLowerCase();
-
-        if (userTyped === correctAnswer) {
-          advanceSequence();
-        } else {
-          errorMsg.innerHTML = "Wrong answer! Try again 😜";
-          errorMsg.style.display = "block";
-        }
-      } else {
-        advanceSequence();
-      }
-    }
-
-    function advanceSequence() {
-      seqIndex++;
-      if (seqIndex < sequence.length) {
-        showStep();
-      } else {
-        document.getElementById('buttonContainer').style.display = 'none';
-        document.getElementById('speechBubble').innerHTML = "Bingo! 🥳 You passed all the tests! Your first clue is hidden where you keep things cold... ❄️";
-        
-        // --- TRIGGER BALLOONS WHEN QUESTIONS END ---
-        const balloonContainer = document.querySelector('.balloon-container');
-        if (balloonContainer) {
-          balloonContainer.classList.add('show-balloons');
-        } else {
-          document.querySelectorAll('.balloon').forEach(balloon => {
-            balloon.classList.add('show-balloons');
-          });
-        }
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const input = document.getElementById('answerInput');
-      if (input) {
-        input.addEventListener("keypress", (e) => {
-          if (e.key === "Enter") checkAnswer();
-        });
+    document.getElementById('answerInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        submitAnswer();
       }
     });
+
+    renderGifts();
   </script>
 </body>
 </html>
