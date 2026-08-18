@@ -110,99 +110,92 @@
       to { transform: translateY(-200px) rotate(360deg); }
     }
 
-    .button-container {
-      margin-top: 50px;
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      z-index: 10;
-    }
-
-    .btn {
-      padding: 12px 28px;
-      font-size: 18px;
-      font-weight: bold;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .yes-btn {
-      background-color: #ff6b81;
-      color: white;
-    }
-
-    .yes-btn:hover {
-      background-color: #ff4757;
-      transform: scale(1.1);
-    }
-
-    .no-btn {
-      background-color: #f1f2f6;
-      color: #57606f;
-      position: relative;
-    }
-
-    /* --- HEART BALLOONS STYLING --- */
-    .balloon-container, .balloon {
+    ..balloon-container {
   opacity: 0;
-  pointer-events: none; /* Prevents clicks while hidden */
+  pointer-events: none;
   transition: opacity 1.5s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
-/* Active class added when questions end */
-.balloon-container.show-balloons, .balloon.show-balloons {
+.balloon-container.show-balloons {
   opacity: 1;
   pointer-events: auto;
 }
 
-    /* Left Side (20 Balloons) */
-    .l-1  { left: 1%;  bottom: 5%;  animation-duration: 5.0s; animation-delay: 0.1s; }
-    .l-2  { left: 3%;  bottom: 25%; animation-duration: 7.2s; animation-delay: 1.2s; }
-    .l-3  { left: 5%;  bottom: 45%; animation-duration: 6.1s; animation-delay: 0.4s; }
-    .l-4  { left: 7%;  bottom: 65%; animation-duration: 8.0s; animation-delay: 2.1s; }
-    .l-5  { left: 9%;  bottom: 12%; animation-duration: 5.5s; animation-delay: 0.8s; }
-    .l-6  { left: 11%; bottom: 35%; animation-duration: 6.8s; animation-delay: 1.5s; }
-    .l-7  { left: 13%; bottom: 55%; animation-duration: 7.5s; animation-delay: 0.3s; }
-    .l-8  { left: 15%; bottom: 75%; animation-duration: 5.8s; animation-delay: 1.9s; }
-    .l-9  { left: 17%; bottom: 8%;  animation-duration: 6.3s; animation-delay: 0.6s; }
-    .l-10 { left: 19%; bottom: 28%; animation-duration: 7.0s; animation-delay: 1.1s; }
-    .l-11 { left: 21%; bottom: 48%; animation-duration: 5.2s; animation-delay: 2.3s; }
-    .l-12 { left: 23%; bottom: 68%; animation-duration: 6.6s; animation-delay: 0.2s; }
-    .l-13 { left: 25%; bottom: 18%; animation-duration: 7.8s; animation-delay: 1.7s; }
-    .l-14 { left: 27%; bottom: 38%; animation-duration: 5.9s; animation-delay: 0.9s; }
-    .l-15 { left: 29%; bottom: 58%; animation-duration: 6.4s; animation-delay: 2.0s; }
-    .l-16 { left: 31%; bottom: 78%; animation-duration: 7.1s; animation-delay: 0.5s; }
-    .l-17 { left: 33%; bottom: 22%; animation-duration: 5.6s; animation-delay: 1.4s; }
-    .l-18 { left: 35%; bottom: 42%; animation-duration: 6.9s; animation-delay: 0.7s; }
-    .l-19 { left: 37%; bottom: 62%; animation-duration: 7.4s; animation-delay: 2.2s; }
-    .l-20 { left: 39%; bottom: 15%; animation-duration: 5.4s; animation-delay: 1.0s; }
+.balloon {
+  position: absolute;
+  width: 50px;
+  height: 100px;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
 
-    /* Right Side (20 Balloons) */
-    .r-1  { right: 1%;  bottom: 8%;  animation-duration: 5.3s; animation-delay: 0.2s; }
-    .r-2  { right: 3%;  bottom: 28%; animation-duration: 6.7s; animation-delay: 1.3s; }
-    .r-3  { right: 5%;  bottom: 48%; animation-duration: 7.3s; animation-delay: 0.5s; }
-    .r-4  { right: 7%;  bottom: 68%; animation-duration: 5.7s; animation-delay: 1.8s; }
-    .r-5  { right: 9%;  bottom: 15%; animation-duration: 6.2s; animation-delay: 0.9s; }
-    .r-6  { right: 11%; bottom: 35%; animation-duration: 7.6s; animation-delay: 2.0s; }
-    .r-7  { right: 13%; bottom: 55%; animation-duration: 5.1s; animation-delay: 0.4s; }
-    .r-8  { right: 15%; bottom: 75%; animation-duration: 6.5s; animation-delay: 1.6s; }
-    .r-9  { right: 17%; bottom: 10%; animation-duration: 7.0s; animation-delay: 0.7s; }
-    .r-10 { right: 19%; bottom: 30%; animation-duration: 5.8s; animation-delay: 2.2s; }
-    .r-11 { right: 21%; bottom: 50%; animation-duration: 6.6s; animation-delay: 0.1s; }
-    .r-12 { right: 23%; bottom: 70%; animation-duration: 7.9s; animation-delay: 1.4s; }
-    .r-13 { right: 25%; bottom: 20%; animation-duration: 5.4s; animation-delay: 0.8s; }
-    .r-14 { right: 27%; bottom: 40%; animation-duration: 6.8s; animation-delay: 2.4s; }
-    .r-15 { right: 29%; bottom: 60%; animation-duration: 7.2s; animation-delay: 0.3s; }
-    .r-16 { right: 31%; bottom: 80%; animation-duration: 5.6s; animation-delay: 1.5s; }
-    .r-17 { right: 33%; bottom: 25%; animation-duration: 6.3s; animation-delay: 1.0s; }
-    .r-18 { right: 35%; bottom: 45%; animation-duration: 7.7s; animation-delay: 0.6s; }
-    .r-19 { right: 37%; bottom: 65%; animation-duration: 5.0s; animation-delay: 2.1s; }
-    .r-20 { right: 39%; bottom: 18%; animation-duration: 6.1s; animation-delay: 1.2s; }
+.balloon-container.show-balloons .balloon {
+  opacity: 0.85;
+  animation: floatUp 6s linear infinite;
+}
+
+/* Floating animation rising from off-screen bottom to top */
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(50vh) rotate(3deg);
+  }
+  100% {
+    transform: translateY(-120px) rotate(-3deg);
+  }
+}
+
+/* Left Side Staggered Positions & Durations */
+.l-1  { left: 2%;  animation-duration: 5.0s !important; animation-delay: 0.1s !important; }
+.l-2  { left: 6%;  animation-duration: 7.2s !important; animation-delay: 1.2s !important; }
+.l-3  { left: 10%; animation-duration: 6.1s !important; animation-delay: 0.4s !important; }
+.l-4  { left: 14%; animation-duration: 8.0s !important; animation-delay: 2.1s !important; }
+.l-5  { left: 18%; animation-duration: 5.5s !important; animation-delay: 0.8s !important; }
+.l-6  { left: 22%; animation-duration: 6.8s !important; animation-delay: 1.5s !important; }
+.l-7  { left: 26%; animation-duration: 7.5s !important; animation-delay: 0.3s !important; }
+.l-8  { left: 30%; animation-duration: 5.8s !important; animation-delay: 1.9s !important; }
+.l-9  { left: 34%; animation-duration: 6.3s !important; animation-delay: 0.6s !important; }
+.l-10 { left: 38%; animation-duration: 7.0s !important; animation-delay: 1.1s !important; }
+.l-11 { left: 4%;  animation-duration: 5.2s !important; animation-delay: 2.3s !important; }
+.l-12 { left: 8%;  animation-duration: 6.6s !important; animation-delay: 0.2s !important; }
+.l-13 { left: 12%; animation-duration: 7.8s !important; animation-delay: 1.7s !important; }
+.l-14 { left: 16%; animation-duration: 5.9s !important; animation-delay: 0.9s !important; }
+.l-15 { left: 20%; animation-duration: 6.4s !important; animation-delay: 2.0s !important; }
+.l-16 { left: 24%; animation-duration: 7.1s !important; animation-delay: 0.5s !important; }
+.l-17 { left: 28%; animation-duration: 5.6s !important; animation-delay: 1.4s !important; }
+.l-18 { left: 32%; animation-duration: 6.9s !important; animation-delay: 0.7s !important; }
+.l-19 { left: 36%; animation-duration: 7.4s !important; animation-delay: 2.2s !important; }
+.l-20 { left: 40%; animation-duration: 5.4s !important; animation-delay: 1.0s !important; }
+
+/* Right Side Staggered Positions & Durations */
+.r-1  { right: 2%;  animation-duration: 5.3s !important; animation-delay: 0.2s !important; }
+.r-2  { right: 6%;  animation-duration: 6.7s !important; animation-delay: 1.3s !important; }
+.r-3  { right: 10%; animation-duration: 7.3s !important; animation-delay: 0.5s !important; }
+.r-4  { right: 14%; animation-duration: 5.7s !important; animation-delay: 1.8s !important; }
+.r-5  { right: 18%; animation-duration: 6.2s !important; animation-delay: 0.9s !important; }
+.r-6  { right: 22%; animation-duration: 7.6s !important; animation-delay: 2.0s !important; }
+.r-7  { right: 26%; animation-duration: 5.1s !important; animation-delay: 0.4s !important; }
+.r-8  { right: 30%; animation-duration: 6.5s !important; animation-delay: 1.6s !important; }
+.r-9  { right: 34%; animation-duration: 7.0s !important; animation-delay: 0.7s !important; }
+.r-10 { right: 38%; animation-duration: 5.8s !important; animation-delay: 2.2s !important; }
+.r-11 { right: 4%;  animation-duration: 6.6s !important; animation-delay: 0.1s !important; }
+.r-12 { right: 8%;  animation-duration: 7.9s !important; animation-delay: 1.4s !important; }
+.r-13 { right: 12%; animation-duration: 5.4s !important; animation-delay: 0.8s !important; }
+.r-14 { right: 16%; animation-duration: 6.8s !important; animation-delay: 2.4s !important; }
+.r-15 { right: 20%; animation-duration: 7.2s !important; animation-delay: 0.3s !important; }
+.r-16 { right: 24%; animation-duration: 5.6s !important; animation-delay: 1.5s !important; }
+.r-17 { right: 28%; animation-duration: 6.3s !important; animation-delay: 1.0s !important; }
+.r-18 { right: 32%; animation-duration: 7.7s !important; animation-delay: 0.6s !important; }
+.r-19 { right: 36%; animation-duration: 5.0s !important; animation-delay: 2.1s !important; }
+.r-20 { right: 40%; animation-duration: 6.1s !important; animation-delay: 1.2s !important; }
 
     @keyframes floatBalloon {
       0% { transform: translateY(0) rotate(-3deg); }
