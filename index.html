@@ -294,7 +294,7 @@
     </div>
   </div>
 
-  <script>
+ <script>
     // --- STAGE 1: YES/NO QUESTIONS ---
     const yesNoQuestions = [
       "Are you really Malak?",
@@ -436,6 +436,16 @@
       } else {
         document.getElementById('buttonContainer').style.display = 'none';
         document.getElementById('speechBubble').innerHTML = "Bingo! 🥳 You passed all the tests! Your first clue is hidden where you keep things cold... ❄️";
+        
+        // --- TRIGGER BALLOONS WHEN QUESTIONS END ---
+        const balloonContainer = document.querySelector('.balloon-container');
+        if (balloonContainer) {
+          balloonContainer.classList.add('show-balloons');
+        } else {
+          document.querySelectorAll('.balloon').forEach(balloon => {
+            balloon.classList.add('show-balloons');
+          });
+        }
       }
     }
 
