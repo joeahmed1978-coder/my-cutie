@@ -601,7 +601,7 @@
 
   <script>
     // --- STAGE 1: YES/NO QUESTIONS ---
-    let isStarted = false; // 👈 Add this line here!
+   let isStarted = false; // 👈 Add this line here!
 const yesNoQuestions = [
   "Are you really Malak?",
   "Are you ready to put that to the test? (don't you dare say no but you can try though)"
@@ -662,29 +662,33 @@ const yesNoQuestions = [
 
     let currentGiftIndex = null;
 
-    function startQuestion() {
-      const bubble = document.getElementById('speechBubble');
-      const container = document.getElementById('buttonContainer');
-      const yesNoBox = document.getElementById('yesNoBox');
-      const textInputBox = document.getElementById('textInputBox');
-      const music = document.getElementById('bgMusic');
+  function startQuestion() {
+  // 🛑 Stop the function if the quiz has already started
+  if (isStarted) return; 
+  isStarted = true;
 
-      if (music) {
-        music.play().catch(e => console.log("Audio waiting for user click.", e));
-      }
+  const bubble = document.getElementById('speechBubble');
+  const container = document.getElementById('buttonContainer');
+  const yesNoBox = document.getElementById('yesNoBox');
+  const textInputBox = document.getElementById('textInputBox');
+  const music = document.getElementById('bgMusic');
 
-      yesNoIndex = 0;
-      seqIndex = 0;
-      yesScale = 1.0;
-      noScale = 1.0;
-      updateButtonScales();
+  if (music) {
+    music.play().catch(e => console.log("Audio waiting for user click.", e));
+  }
 
-      yesNoBox.style.display = 'flex';
-      textInputBox.style.display = 'none';
-      container.style.display = 'flex';
+  yesNoIndex = 0;
+  seqIndex = 0;
+  yesScale = 1.0;
+  noScale = 1.0;
+  updateButtonScales();
 
-      bubble.innerHTML = yesNoQuestions[yesNoIndex];
-    }
+  yesNoBox.style.display = 'flex';
+  textInputBox.style.display = 'none';
+  container.style.display = 'flex';
+
+  bubble.innerHTML = yesNoQuestions[yesNoIndex];
+}
 
     function updateButtonScales() {
       const yesBtn = document.querySelector('.yes-btn');
