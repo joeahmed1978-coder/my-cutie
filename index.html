@@ -39,7 +39,7 @@
       z-index: 10;
     }
 
-    /* 1. Speech Bubble Style (Pointing Up) */
+    /* 1. Speech Bubble Style */
     .speech-bubble {
       background: white;
       padding: 18px 25px;
@@ -93,25 +93,22 @@
     }
 
     /* 🎂 Chocolate Cake Overlay */
-   .cake-overlay {
-  position: absolute;
-  /* Tweak 'bottom' to raise or lower the cake into the character's hands */
-  bottom: 35px; 
-  left: 50%;
-  /* Adjust scale(0.85) if you need the cake smaller or larger */
-  transform: translateX(-50%) scale(0.85); 
-  opacity: 0;
-  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
-  z-index: 15;
-  pointer-events: none;
-  filter: drop-shadow(0px 8px 12px rgba(0, 0, 0, 0.25));
-}
+    .cake-overlay {
+      position: absolute;
+      bottom: 35px; 
+      left: 50%;
+      transform: translateX(-50%) scale(0.85); 
+      opacity: 0;
+      transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+      z-index: 15;
+      pointer-events: none;
+      filter: drop-shadow(0px 8px 12px rgba(0, 0, 0, 0.25));
+    }
 
-.cake-overlay.show-cake {
-  /* This scale should match the scale above so it pops in smoothly */
-  transform: translateX(-50%) scale(0.85); 
-  opacity: 1;
-}
+    .cake-overlay.show-cake {
+      transform: translateX(-50%) scale(0.85); 
+      opacity: 1;
+    }
 
     /* Flame Animation */
     @keyframes flameFlicker {
@@ -130,7 +127,7 @@
       z-index: 10;
     }
 
-    .btn {
+    .btn, .action-btn {
       padding: 10px 24px;
       font-size: 1rem;
       font-weight: 600;
@@ -142,13 +139,14 @@
       font-family: 'Poppins', sans-serif;
     }
 
-    .yes-btn {
+    .yes-btn, .action-btn {
       background-color: #ff6b81;
       color: white;
     }
 
-    .yes-btn:hover {
+    .yes-btn:hover, .action-btn:hover {
       background-color: #ff4757;
+      transform: scale(1.03);
     }
 
     .no-btn {
@@ -158,6 +156,100 @@
 
     .no-btn:hover {
       background-color: #d6d6d6;
+    }
+
+    /* 🎂 CAKE TABLE & RECORD STAGE CSS */
+    #cakeTableStage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+      z-index: 10;
+      animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .table-scene {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      margin: 40px auto 25px auto;
+      height: 180px;
+    }
+
+    .table-surface {
+      position: relative;
+      width: 320px;
+      height: 80px;
+      background: #8b5a2b;
+      border-radius: 15px 15px 5px 5px;
+      box-shadow: inset 0 8px 0 #a06832, 0 12px 20px rgba(0,0,0,0.25);
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+    }
+
+    .table-cake {
+      position: absolute;
+      top: -55px;
+      left: 35px;
+      font-size: 65px;
+      user-select: none;
+    }
+
+    .record-player {
+      position: absolute;
+      top: -50px;
+      right: 35px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      user-select: none;
+    }
+
+    .record-player:hover {
+      transform: scale(1.08);
+    }
+
+    .vinyl-disc {
+      width: 65px;
+      height: 65px;
+      background: #222;
+      border: 4px solid #444;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      margin: 0 auto;
+    }
+
+    .vinyl-disc.playing {
+      animation: spinRecord 2s linear infinite;
+    }
+
+    @keyframes spinRecord {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .record-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: #333;
+      margin-top: 6px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 3px 8px;
+      border-radius: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    #toGiftsBtn {
+      margin-top: 15px;
+      padding: 12px 28px;
+      font-size: 1.05rem;
     }
 
     /* 4. Animations */
@@ -450,7 +542,7 @@
   </style>
 </head>
 <body>
-  <div class="balloon-container">
+  <div class="balloon-container" id="balloonContainer">
     <!-- LEFT SIDE (20 Balloons) -->
     <svg class="balloon l-1" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
     <svg class="balloon l-2" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
@@ -499,7 +591,7 @@
   <audio id="bgMusic" src="birthday-song.mp3" loop></audio>
 
   <!-- Container for Character, Speech Bubble, and Chocolate Cake -->
-  <div class="container">
+  <div class="container" id="mainContainer">
     <div class="speech-bubble" id="speechBubble" onclick="startQuestion()">
       Are you Malak? (click me to continue)
     </div>
@@ -555,7 +647,7 @@
 
     <div class="button-container" id="buttonContainer" style="display: none; flex-direction: column; align-items: center; gap: 15px;">
       <div id="yesNoBox" style="display: flex; gap: 20px; align-items: center;">
-        <button class="btn yes-btn" onclick="handleYes()">Yes</button>
+        <button class="btn yes-btn" id="yesBtn" onclick="handleYes()">Yes</button>
         <button class="btn no-btn" id="noBtn" onclick="dodgeNo()">No</button>
       </div>
 
@@ -572,7 +664,40 @@
     </div>
   </div>
 
-  <!-- GIFTS SECTION (Revealed automatically after all questions finish) -->
+  <!-- 🎂 STAGE: CAKE TABLE & VOICE RECORD -->
+  <div id="cakeTableStage" style="display: none;">
+    <div class="speech-bubble" id="tableSpeechBubble">
+      Tap the vinyl record to listen to a special message! 🎶
+    </div>
+
+    <div class="table-scene">
+      <!-- The Table Surface -->
+      <div class="table-surface">
+        
+        <!-- Cake on top of table -->
+        <div class="table-cake">
+          <div class="cake-container">🎂</div>
+        </div>
+
+        <!-- Vinyl Record Player -->
+        <div class="record-player" onclick="toggleRecordAudio()">
+          <div class="vinyl-disc" id="vinylDisc">🎵</div>
+          <span class="record-label">Click to Play 🔊</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Audio element for your voice recording -->
+    <audio id="voiceRecordAudio" src="your-recording.mp3"></audio>
+
+    <!-- Button to proceed to gifts stage -->
+    <button id="toGiftsBtn" class="action-btn" onclick="goToGiftsStage()">
+      Open Your Gifts! 🎁✨
+    </button>
+  </div>
+
+  <!-- GIFTS SECTION -->
   <div class="gifts-section" id="giftsSection">
     <div class="gifts-grid" id="giftsGrid">
       <!-- Gift Cards rendered dynamically via JS -->
@@ -601,11 +726,11 @@
 
   <script>
     // --- STAGE 1: YES/NO QUESTIONS ---
-   let isStarted = false; // 👈 Add this line here!
-const yesNoQuestions = [
-  "Are you really Malak?",
-  "Are you ready to put that to the test? (don't you dare say no but you can try though)"
-];
+    let isStarted = false; // Guard flag to prevent clicking character from resetting
+    const yesNoQuestions = [
+      "Are you really Malak?",
+      "Are you ready to put that to the test? (don't you dare say no but you can try though)"
+    ];
     let yesNoIndex = 0;
     let yesScale = 1.0;
     let noScale = 1.0;
@@ -639,137 +764,120 @@ const yesNoQuestions = [
         title: "Gift 2",
         question: "What is my favorite nickname for you?",
         answer: "cutie",
-        reward: "💌 A handwritten letter with a custom playlist!",
+        reward: "💌 A handwritten letter & playlist!",
         isUnlocked: false
       },
       {
         id: 3,
         title: "Gift 3",
-        question: "What is our favorite show to watch together?",
-        answer: "supernatural",
-        reward: "🎬 Movie night coupon with unlimited snacks!",
+        question: "What is our favorite activity together?",
+        answer: "chatting",
+        reward: "🎬 Movie night voucher with snacks!",
         isUnlocked: false
       },
       {
         id: 4,
         title: "Gift 4",
-        question: "What is the secret word?",
-        answer: "forever",
-        reward: "🎁 The physical gift hidden in your closet!",
+        question: "What month is your birthday?",
+        answer: "august",
+        reward: "👑 A custom birthday crown & treat!",
         isUnlocked: false
       }
     ];
 
-    let currentGiftIndex = null;
+    let currentModalGiftId = null;
 
-  function startQuestion() {
-  // 🛑 Stop the function if the quiz has already started
-  if (isStarted) return; 
-  isStarted = true;
+    // --- 1. START GAME ---
+    function startQuestion() {
+      if (isStarted) return; // Prevent restarting if already in progress
+      isStarted = true;
 
-  const bubble = document.getElementById('speechBubble');
-  const container = document.getElementById('buttonContainer');
-  const yesNoBox = document.getElementById('yesNoBox');
-  const textInputBox = document.getElementById('textInputBox');
-  const music = document.getElementById('bgMusic');
-
-  if (music) {
-    music.play().catch(e => console.log("Audio waiting for user click.", e));
-  }
-
-  yesNoIndex = 0;
-  seqIndex = 0;
-  yesScale = 1.0;
-  noScale = 1.0;
-  updateButtonScales();
-
-  yesNoBox.style.display = 'flex';
-  textInputBox.style.display = 'none';
-  container.style.display = 'flex';
-
-  bubble.innerHTML = yesNoQuestions[yesNoIndex];
-}
-
-    function updateButtonScales() {
-      const yesBtn = document.querySelector('.yes-btn');
-      const noBtn = document.getElementById('noBtn');
-      yesBtn.style.transform = `scale(${yesScale})`;
-      noBtn.style.transform = `scale(${noScale})`;
-    }
-
-    function dodgeNo() {
       const bubble = document.getElementById('speechBubble');
-      yesScale += 0.25;
-      noScale = Math.max(0.2, noScale - 0.2);
-      updateButtonScales();
+      const container = document.getElementById('buttonContainer');
+      const yesNoBox = document.getElementById('yesNoBox');
+      const textInputBox = document.getElementById('textInputBox');
+      const music = document.getElementById('bgMusic');
 
-      const funnyResponses = [
-        "Are you for real?!!!🫩🫩",
-        "Just click yes already🙂",
-        "There is no need to be stubborn😒😒 ",
-        "Believe me it will not work😩😩",
-        "just quit doing that!!",
-        "Enough playing games and press yes ommmgg😩😩",
-        "commmee onn, the no button has almost vanished",
-        "Look how large the yes button is!!! just press it"
-      ];
-      bubble.innerHTML = funnyResponses[Math.floor(Math.random() * funnyResponses.length)];
-    }
+      if (music) {
+        music.play().catch(e => console.log("Audio waiting for user interaction.", e));
+      }
 
-    function handleYes() {
-      const bubble = document.getElementById('speechBubble');
-      yesNoIndex++;
+      yesNoIndex = 0;
+      seqIndex = 0;
       yesScale = 1.0;
       noScale = 1.0;
       updateButtonScales();
 
+      yesNoBox.style.display = 'flex';
+      textInputBox.style.display = 'none';
+      container.style.display = 'flex';
+
+      bubble.innerHTML = yesNoQuestions[yesNoIndex];
+    }
+
+    // --- 2. YES/NO HANDLERS ---
+    function handleYes() {
+      yesNoIndex++;
       if (yesNoIndex < yesNoQuestions.length) {
-        bubble.innerHTML = yesNoQuestions[yesNoIndex];
+        document.getElementById('speechBubble').innerHTML = yesNoQuestions[yesNoIndex];
+        yesScale = 1.0;
+        noScale = 1.0;
+        updateButtonScales();
       } else {
-        switchToSequence();
+        // Transition to text questions / sequence
+        document.getElementById('yesNoBox').style.display = 'none';
+        document.getElementById('textInputBox').style.display = 'flex';
+        showCurrentSeqItem();
       }
     }
 
-    function switchToSequence() {
-      document.getElementById('yesNoBox').style.display = 'none';
-      document.getElementById('textInputBox').style.display = 'flex';
-      showStep();
+    function dodgeNo() {
+      yesScale += 0.25;
+      noScale = Math.max(0.2, noScale - 0.2);
+      updateButtonScales();
     }
 
-    function showStep() {
+    function updateButtonScales() {
+      const yesBtn = document.getElementById('yesBtn');
+      const noBtn = document.getElementById('noBtn');
+      if (yesBtn) yesBtn.style.transform = `scale(${yesScale})`;
+      if (noBtn) noBtn.style.transform = `scale(${noScale})`;
+    }
+
+    // --- 3. SEQUENCE HANDLERS ---
+    function showCurrentSeqItem() {
       const bubble = document.getElementById('speechBubble');
-      const input = document.getElementById('answerInput');
+      const answerInput = document.getElementById('answerInput');
       const submitBtn = document.getElementById('submitBtn');
       const errorMsg = document.getElementById('errorMsg');
 
-      const currentItem = sequence[seqIndex];
-      bubble.innerHTML = currentItem.question;
-      errorMsg.style.display = "none";
+      errorMsg.style.display = 'none';
+      answerInput.value = '';
 
-      if (currentItem.answer) {
-        input.style.display = "block";
-        input.value = "";
+      const current = sequence[seqIndex];
+      bubble.innerHTML = current.question;
+
+      if (current.answer) {
+        answerInput.style.display = 'block';
         submitBtn.innerHTML = "Submit";
       } else {
-        input.style.display = "none";
+        answerInput.style.display = 'none';
         submitBtn.innerHTML = "Next ➡️";
       }
     }
 
     function checkAnswer() {
-      const currentItem = sequence[seqIndex];
-      const input = document.getElementById('answerInput');
+      const current = sequence[seqIndex];
+      const answerInput = document.getElementById('answerInput');
       const errorMsg = document.getElementById('errorMsg');
 
-      if (currentItem.answer) {
-        const userTyped = input.value.trim().toLowerCase();
-        const correctAnswer = currentItem.answer.toLowerCase();
-
-        if (userTyped === correctAnswer) {
+      if (current.answer) {
+        const userVal = answerInput.value.trim().toLowerCase();
+        if (userVal === current.answer.toLowerCase()) {
           advanceSequence();
         } else {
-          errorMsg.innerHTML = "Wrong answer! Try again 😜";
-          errorMsg.style.display = "block";
+          errorMsg.innerHTML = "Wrong answer, cutie! Try again 😜";
+          errorMsg.style.display = 'block';
         }
       } else {
         advanceSequence();
@@ -779,93 +887,101 @@ const yesNoQuestions = [
     function advanceSequence() {
       seqIndex++;
       if (seqIndex < sequence.length) {
-        showStep();
+        showCurrentSeqItem();
       } else {
-        // --- ALL QUESTIONS FINISHED ---
+        // All sequence questions complete -> Show Cake & Table Stage!
         document.getElementById('buttonContainer').style.display = 'none';
-        document.getElementById('speechBubble').innerHTML = "Bingo! 🥳 You passed all the tests! Now click on the gift boxes below to unlock your surprises! 🎁✨";
+        document.getElementById('mainContainer').style.display = 'none';
 
-        // 🎂 1. REVEAL CHOCOLATE CAKE WITH "18" CANDLE IN CHARACTER'S HANDS!
-        const cakeOverlay = document.getElementById('cakeOverlay');
-        if (cakeOverlay) {
-          cakeOverlay.classList.add('show-cake');
-        }
+        // Show Balloons!
+        const balloons = document.getElementById('balloonContainer');
+        if (balloons) balloons.classList.add('show-balloons');
 
-        // 2. Show Floating Balloons
-        const balloonContainer = document.querySelector('.balloon-container');
-        if (balloonContainer) {
-          balloonContainer.classList.add('show-balloons');
-        } else {
-          document.querySelectorAll('.balloon').forEach(balloon => {
-            balloon.classList.add('show-balloons');
-          });
-        }
+        // Show Table Stage
+        document.getElementById('cakeTableStage').style.display = 'flex';
+      }
+    }
 
-        // 3. Show Gifts Section
-        const giftsSection = document.getElementById('giftsSection');
+    // --- 4. RECORD AUDIO & TABLE FUNCTIONS ---
+    function toggleRecordAudio() {
+      const audio = document.getElementById('voiceRecordAudio');
+      const disc = document.getElementById('vinylDisc');
+
+      if (audio.paused) {
+        audio.play().catch(e => console.log("Record play error:", e));
+        disc.classList.add('playing');
+      } else {
+        audio.pause();
+        disc.classList.remove('playing');
+      }
+
+      audio.onended = function() {
+        disc.classList.remove('playing');
+      };
+    }
+
+    function goToGiftsStage() {
+      // Pause recording if playing
+      const audio = document.getElementById('voiceRecordAudio');
+      if (audio) audio.pause();
+
+      document.getElementById('cakeTableStage').style.display = 'none';
+      
+      const giftsSection = document.getElementById('giftsSection');
+      if (giftsSection) {
         giftsSection.style.display = 'block';
         renderGifts();
       }
     }
 
-    // --- GIFT CARDS RENDER & MODAL LOGIC ---
+    // --- 5. GIFTS SYSTEM ---
     function renderGifts() {
-      const grid = document.getElementById('giftsGrid');
-      grid.innerHTML = '';
+      const giftsGrid = document.getElementById('giftsGrid');
+      giftsGrid.innerHTML = '';
 
-      giftsData.forEach((gift, index) => {
+      giftsData.forEach(gift => {
         const card = document.createElement('div');
         card.className = `gift-card ${gift.isUnlocked ? 'unlocked' : ''}`;
-        card.onclick = () => openModal(index);
+        card.onclick = () => openGiftModal(gift.id);
 
         card.innerHTML = `
           <div class="gift-icon">${gift.isUnlocked ? '🎁' : '🔒'}</div>
           <div class="gift-title">${gift.title}</div>
-          <div class="gift-status">${gift.isUnlocked ? 'Unlocked!' : 'Locked'}</div>
+          <div class="gift-status">${gift.isUnlocked ? 'Unlocked!' : 'Click to Unlock'}</div>
           ${gift.isUnlocked ? `<div class="reward-content">${gift.reward}</div>` : ''}
         `;
 
-        grid.appendChild(card);
+        giftsGrid.appendChild(card);
       });
 
-      checkAllUnlocked();
+      checkAllGiftsUnlocked();
     }
 
-    function checkAllUnlocked() {
-      const allUnlocked = giftsData.every(gift => gift.isUnlocked);
-      if (allUnlocked) {
-        document.getElementById('finalGiftSection').classList.add('active');
+    function openGiftModal(giftId) {
+      const gift = giftsData.find(g => g.id === giftId);
+      if (!gift) return;
+
+      if (gift.isUnlocked) {
+        alert(`Already Unlocked! 🎉\n${gift.reward}`);
+        return;
       }
-    }
 
-    function openModal(index) {
-      const gift = giftsData[index];
-      if (gift.isUnlocked) return;
-
-      currentGiftIndex = index;
+      currentModalGiftId = giftId;
       document.getElementById('modalGiftTitle').innerText = gift.title;
       document.getElementById('modalQuestionText').innerText = gift.question;
       document.getElementById('giftAnswerInput').value = '';
       document.getElementById('modalErrorMsg').style.display = 'none';
-      document.getElementById('modalOverlay').classList.add('active');
-      
-      setTimeout(() => document.getElementById('giftAnswerInput').focus(), 100);
-    }
 
-    function closeModal() {
-      document.getElementById('modalOverlay').classList.remove('active');
-      currentGiftIndex = null;
+      document.getElementById('modalOverlay').classList.add('active');
     }
 
     function submitGiftAnswer() {
-      if (currentGiftIndex === null) return;
-
-      const userTyped = document.getElementById('giftAnswerInput').value.trim().toLowerCase();
-      const correctAnswer = giftsData[currentGiftIndex].answer.toLowerCase();
+      const gift = giftsData.find(g => g.id === currentModalGiftId);
+      const input = document.getElementById('giftAnswerInput').value.trim().toLowerCase();
       const errorMsg = document.getElementById('modalErrorMsg');
 
-      if (userTyped === correctAnswer) {
-        giftsData[currentGiftIndex].isUnlocked = true;
+      if (gift && input === gift.answer.toLowerCase()) {
+        gift.isUnlocked = true;
         closeModal();
         renderGifts();
       } else {
@@ -873,19 +989,27 @@ const yesNoQuestions = [
       }
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const input = document.getElementById('answerInput');
-      if (input) {
-        input.addEventListener("keypress", (e) => {
-          if (e.key === "Enter") checkAnswer();
-        });
-      }
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+      currentModalGiftId = null;
+    }
 
-      const giftInput = document.getElementById('giftAnswerInput');
-      if (giftInput) {
-        giftInput.addEventListener("keypress", (e) => {
-          if (e.key === "Enter") submitGiftAnswer();
-        });
+    function checkAllGiftsUnlocked() {
+      const allUnlocked = giftsData.every(g => g.isUnlocked);
+      if (allUnlocked) {
+        const finalSec = document.getElementById('finalGiftSection');
+        if (finalSec) finalSec.classList.add('active');
+      }
+    }
+
+    // Enter Key Listener for Input Fields
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        if (document.getElementById('modalOverlay').classList.contains('active')) {
+          submitGiftAnswer();
+        } else if (document.getElementById('textInputBox').style.display === 'flex') {
+          checkAnswer();
+        }
       }
     });
   </script>
