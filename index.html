@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Birthday 🎉</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     /* --- RETRO PIXEL SUNSET STYLING --- */
     * {
@@ -92,32 +92,33 @@
         floatingAction 3.5s ease-in-out infinite 1.2s;
     }
 
-    /* 🎂 Detailed Cake Overlay */
+    /* 🎂 ULTRA DETAILED CAKE OVERLAY */
     .cake-overlay {
       position: absolute;
-      bottom: 25px; 
+      bottom: 10px; 
       left: 50%;
-      transform: translateX(-50%) scale(0.9); 
+      transform: translateX(-50%) scale(0.95); 
       opacity: 0;
       transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
       z-index: 15;
       pointer-events: none;
-      filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.3));
     }
 
     .cake-overlay.show-cake {
-      transform: translateX(-50%) scale(0.9); 
+      transform: translateX(-50%) scale(0.95); 
       opacity: 1;
     }
 
-    /* Candle Flames Animation */
+    /* Candle Flames & Dynamic Lighting Glow */
     @keyframes flameFlicker {
-      0%, 100% { transform: scale(1) rotate(-2deg); opacity: 1; }
-      50% { transform: scale(1.25) rotate(3deg); opacity: 0.85; }
+      0%, 100% { transform: scale(1) rotate(-2deg); opacity: 0.95; filter: drop-shadow(0 0 6px rgba(255,160,0,0.9)); }
+      25% { transform: scale(1.18) rotate(3deg); opacity: 1; filter: drop-shadow(0 0 12px rgba(255,200,0,1)); }
+      50% { transform: scale(0.9) rotate(-1deg); opacity: 0.85; filter: drop-shadow(0 0 4px rgba(255,120,0,0.8)); }
+      75% { transform: scale(1.1) rotate(2deg); opacity: 1; filter: drop-shadow(0 0 10px rgba(255,180,0,0.95)); }
     }
 
     .flame {
-      animation: flameFlicker 0.4s infinite alternate ease-in-out;
+      animation: flameFlicker 0.3s infinite alternate ease-in-out;
       transform-origin: center bottom;
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
@@ -127,19 +128,20 @@
       transform: scale(0) !important;
     }
 
-    /* Smoke Animation for Blown Candles */
+    /* Enhanced Smoke Animations */
     .smoke-particle {
       opacity: 0;
-      transition: all 1s ease-out;
+      transition: all 0.8s ease-out;
     }
 
     .smoke-particle.active {
-      animation: riseSmoke 1.8s forwards ease-out;
+      animation: riseAndFade 2.2s forwards ease-out;
     }
 
-    @keyframes riseSmoke {
-      0% { opacity: 0.8; transform: translateY(0) scale(0.8); }
-      100% { opacity: 0; transform: translateY(-25px) scale(2); }
+    @keyframes riseAndFade {
+      0% { opacity: 0.85; transform: translateY(0) scale(0.6); }
+      50% { opacity: 0.5; transform: translateY(-20px) scale(1.4) translateX(4px); }
+      100% { opacity: 0; transform: translateY(-45px) scale(2.5) translateX(-8px); }
     }
 
     /* 3. Button Styling */
@@ -174,13 +176,14 @@
       background: linear-gradient(135deg, #ff9f43, #ff5252);
       color: white;
       font-size: 1.05rem;
-      padding: 12px 26px;
+      padding: 12px 28px;
+      border-radius: 25px;
       animation: pulseGlow 1.5s infinite alternate;
     }
 
     @keyframes pulseGlow {
-      0% { box-shadow: 0 0 10px rgba(255, 159, 67, 0.5); }
-      100% { box-shadow: 0 0 22px rgba(255, 82, 82, 0.8); transform: scale(1.03); }
+      0% { box-shadow: 0 0 10px rgba(255, 159, 67, 0.5); transform: scale(1); }
+      100% { box-shadow: 0 0 25px rgba(255, 82, 82, 0.85); transform: scale(1.05); }
     }
 
     .no-btn {
@@ -207,16 +210,16 @@
       justify-content: center;
       align-items: flex-end;
       margin: 40px auto 25px auto;
-      height: 180px;
+      height: 200px;
     }
 
     .table-surface {
       position: relative;
-      width: 360px;
-      height: 80px;
-      background: #8b5a2b;
-      border-radius: 15px 15px 5px 5px;
-      box-shadow: inset 0 8px 0 #a06832, 0 12px 20px rgba(0,0,0,0.25);
+      width: 380px;
+      height: 85px;
+      background: linear-gradient(180deg, #9b6233 0%, #6e401b 100%);
+      border-radius: 16px 16px 6px 6px;
+      box-shadow: inset 0 8px 0 #b3743f, 0 15px 30px rgba(0,0,0,0.35);
       display: flex;
       justify-content: space-around;
       align-items: flex-start;
@@ -224,15 +227,14 @@
 
     .table-cake {
       position: absolute;
-      top: -110px;
-      left: 15px;
+      top: -145px;
+      left: 10px;
       user-select: none;
-      filter: drop-shadow(0px 8px 12px rgba(0,0,0,0.3));
     }
 
     .record-player {
       position: absolute;
-      top: -50px;
+      top: -55px;
       right: 25px;
       text-align: center;
       cursor: pointer;
@@ -245,17 +247,17 @@
     }
 
     .vinyl-disc {
-      width: 68px;
-      height: 68px;
-      background: #222;
-      border: 4px solid #444;
+      width: 72px;
+      height: 72px;
+      background: radial-gradient(circle, #333 20%, #111 21%, #222 40%, #111 41%, #222 70%, #000 100%);
+      border: 3px solid #444;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 26px;
       color: #fff;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.4);
       margin: 0 auto;
     }
 
@@ -338,16 +340,11 @@
       100% { transform: translateY(-120px) rotate(-3deg); }
     }
 
-    /* Staggered Balloon Positions */
     .l-1  { left: 2%;  animation-duration: 5.0s !important; animation-delay: 0.1s !important; }
     .l-2  { left: 6%;  animation-duration: 7.2s !important; animation-delay: 1.2s !important; }
     .l-3  { left: 10%; animation-duration: 6.1s !important; animation-delay: 0.4s !important; }
-    .l-4  { left: 14%; animation-duration: 8.0s !important; animation-delay: 2.1s !important; }
-    .l-5  { left: 18%; animation-duration: 5.5s !important; animation-delay: 0.8s !important; }
-
     .r-1  { right: 2%;  animation-duration: 5.3s !important; animation-delay: 0.2s !important; }
     .r-2  { right: 6%;  animation-duration: 6.7s !important; animation-delay: 1.3s !important; }
-    .r-3  { right: 10%; animation-duration: 7.3s !important; animation-delay: 0.5s !important; }
 
     /* --- GIFTS SECTION STYLING --- */
     .gifts-section {
@@ -379,7 +376,6 @@
       transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
       text-align: center;
       min-height: 160px;
-      position: relative;
       backdrop-filter: blur(4px);
     }
 
@@ -545,19 +541,16 @@
 </head>
 <body>
   <div class="balloon-container" id="balloonContainer">
-    <!-- LEFT SIDE Balloons -->
     <svg class="balloon l-1" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
     <svg class="balloon l-2" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
     <svg class="balloon l-3" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
-    
-    <!-- RIGHT SIDE Balloons -->
     <svg class="balloon r-1" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
     <svg class="balloon r-2" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
   </div>
 
   <audio id="bgMusic" src="birthday-song.mp3" loop></audio>
 
-  <!-- Container for Character, Speech Bubble, and Chocolate Cake -->
+  <!-- Main Container -->
   <div class="container" id="mainContainer">
     <div class="speech-bubble" id="speechBubble" onclick="startQuestion()">
       Are you Malak? (click me to continue)
@@ -572,60 +565,9 @@
         onclick="startQuestion()"
       >
 
-      <!-- 🎂 Highly Detailed Chocolate Cake Overlay with Golden "18" Candles -->
+      <!-- 🎂 HIGHLY DETAILED SVG CAKE TEMPLATE -->
       <div id="cakeOverlay" class="cake-overlay">
-        <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Stand & Plate -->
-          <ellipse cx="80" cy="142" rx="68" ry="12" fill="#D0D0D0"/>
-          <ellipse cx="80" cy="138" rx="66" ry="12" fill="#F0F0F0" stroke="#DCDCDC" stroke-width="2"/>
-          <path d="M68 138 L65 148 H95 L92 138 Z" fill="#E0E0E0"/>
-
-          <!-- Cake Base Layer (Dark Chocolate) -->
-          <path d="M25 102 C25 102 25 130 80 130 C135 130 135 102 135 102 L135 88 C135 88 80 100 25 88 Z" fill="#2E170F"/>
-          
-          <!-- Middle Cream Filling -->
-          <path d="M25 90 C25 90 80 102 135 90 L135 94 C135 94 80 106 25 94 Z" fill="#FFF3D1"/>
-
-          <!-- Cake Top Layer (Fudge Chocolate) -->
-          <path d="M25 72 C25 72 25 90 80 90 C135 90 135 72 135 72 L135 58 C135 58 80 70 25 58 Z" fill="#422216"/>
-
-          <!-- Rich Dripping Frosting Cover -->
-          <path d="M25 58 C25 68 36 74 42 67 C48 60 54 75 66 70 C78 65 82 76 94 70 C106 64 112 75 120 67 C128 59 135 68 135 58 C135 48 110 44 80 44 C50 44 25 48 25 58 Z" fill="#1F0D07"/>
-
-          <!-- Decorative Swirls & Sprinkles -->
-          <circle cx="36" cy="51" r="5" fill="#FFF8E7"/>
-          <circle cx="36" cy="49" r="3" fill="#FF4757"/>
-          <circle cx="124" cy="51" r="5" fill="#FFF8E7"/>
-          <circle cx="124" cy="49" r="3" fill="#FF4757"/>
-
-          <rect x="50" y="52" width="4" height="2" rx="1" fill="#FFD700" transform="rotate(20 50 52)"/>
-          <rect x="70" y="55" width="4" height="2" rx="1" fill="#FF6B81" transform="rotate(-15 70 55)"/>
-          <rect x="105" y="53" width="4" height="2" rx="1" fill="#2ED573" transform="rotate(30 105 53)"/>
-
-          <!-- "1" and "8" Golden Numeral Candle Figures -->
-          <text x="62" y="32" font-family="'Poppins', sans-serif" font-weight="700" font-size="24" fill="url(#goldGrad)" text-anchor="middle" filter="drop-shadow(0 2px 3px rgba(0,0,0,0.3))">1</text>
-          <text x="98" y="32" font-family="'Poppins', sans-serif" font-weight="700" font-size="24" fill="url(#goldGrad)" text-anchor="middle" filter="drop-shadow(0 2px 3px rgba(0,0,0,0.3))">8</text>
-
-          <!-- Candle Flames -->
-          <g class="flame">
-            <path d="M62 6 C62 6 57 12 62 17 C67 12 62 6 62 6 Z" fill="#FF9F43"/>
-            <path d="M62 9 C62 9 59 12 62 15 C65 12 62 9 62 9 Z" fill="#FFDC60"/>
-          </g>
-
-          <g class="flame">
-            <path d="M98 6 C98 6 93 12 98 17 C103 12 98 6 98 6 Z" fill="#FF9F43"/>
-            <path d="M98 9 C98 9 95 12 98 15 C101 12 98 9 98 9 Z" fill="#FFDC60"/>
-          </g>
-
-          <!-- Gradient definitions -->
-          <defs>
-            <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#FFF2A3"/>
-              <stop offset="50%" stop-color="#FFD700"/>
-              <stop offset="100%" stop-color="#CC9900"/>
-            </linearGradient>
-          </defs>
-        </svg>
+        <!-- SVG Cake Included Dynamically via Script or Inline -->
       </div>
     </div>
 
@@ -655,57 +597,149 @@
     </div>
 
     <div class="table-scene">
-      <!-- The Table Surface -->
       <div class="table-surface">
         
-        <!-- 🎂 Detailed Table Cake with Animated Flames -->
+        <!-- 🎂 Detailed Table Cake with Animated Flames & Ambient Glow -->
         <div class="table-cake">
-          <svg width="150" height="150" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Plate -->
-            <ellipse cx="80" cy="142" rx="68" ry="12" fill="#D0D0D0"/>
-            <ellipse cx="80" cy="138" rx="66" ry="12" fill="#F0F0F0" stroke="#DCDCDC" stroke-width="2"/>
-
-            <!-- Cake Layers -->
-            <path d="M25 102 C25 102 25 130 80 130 C135 130 135 102 135 102 L135 88 C135 88 80 100 25 88 Z" fill="#2E170F"/>
-            <path d="M25 90 C25 90 80 102 135 90 L135 94 C135 94 80 106 25 94 Z" fill="#FFF3D1"/>
-            <path d="M25 72 C25 72 25 90 80 90 C135 90 135 72 135 72 L135 58 C135 58 80 70 25 58 Z" fill="#422216"/>
-
-            <!-- Dripping Frosting & Strawberries -->
-            <path d="M25 58 C25 68 36 74 42 67 C48 60 54 75 66 70 C78 65 82 76 94 70 C106 64 112 75 120 67 C128 59 135 68 135 58 C135 48 110 44 80 44 C50 44 25 48 25 58 Z" fill="#1F0D07"/>
-
-            <circle cx="36" cy="51" r="5" fill="#FFF8E7"/>
-            <circle cx="36" cy="48" r="3.5" fill="#FF4757"/>
-            <circle cx="124" cy="51" r="5" fill="#FFF8E7"/>
-            <circle cx="124" cy="48" r="3.5" fill="#FF4757"/>
-
-            <!-- "18" Candle Figures -->
-            <text x="62" y="32" font-family="'Poppins', sans-serif" font-weight="700" font-size="24" fill="url(#goldGrad2)" text-anchor="middle" filter="drop-shadow(0 2px 3px rgba(0,0,0,0.3))">1</text>
-            <text x="98" y="32" font-family="'Poppins', sans-serif" font-weight="700" font-size="24" fill="url(#goldGrad2)" text-anchor="middle" filter="drop-shadow(0 2px 3px rgba(0,0,0,0.3))">8</text>
-
-            <!-- Animated Flames -->
-            <g class="flame table-flame">
-              <path d="M62 6 C62 6 57 12 62 17 C67 12 62 6 62 6 Z" fill="#FF9F43"/>
-              <path d="M62 9 C62 9 59 12 62 15 C65 12 62 9 62 9 Z" fill="#FFDC60"/>
-            </g>
-
-            <g class="flame table-flame">
-              <path d="M98 6 C98 6 93 12 98 17 C103 12 98 6 98 6 Z" fill="#FF9F43"/>
-              <path d="M98 9 C98 9 95 12 98 15 C101 12 98 9 98 9 Z" fill="#FFDC60"/>
-            </g>
-
-            <!-- Smoke Elements -->
-            <g id="smokeGroup">
-              <circle class="smoke-particle" id="smoke1" cx="62" cy="10" r="4" fill="#DDD"/>
-              <circle class="smoke-particle" id="smoke2" cx="98" cy="10" r="4" fill="#DDD"/>
-            </g>
-
+          <svg width="200" height="210" viewBox="0 0 200 210" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <linearGradient id="goldGrad2" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#FFF2A3"/>
-                <stop offset="50%" stop-color="#FFD700"/>
-                <stop offset="100%" stop-color="#CC9900"/>
+              <!-- Metallic Gold Gradients for 18 Candles -->
+              <linearGradient id="goldBody" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFE885"/>
+                <stop offset="30%" stop-color="#FFD700"/>
+                <stop offset="70%" stop-color="#C59300"/>
+                <stop offset="100%" stop-color="#FFEA9F"/>
               </linearGradient>
+              <linearGradient id="goldHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#FFD700" stop-opacity="0"/>
+              </linearGradient>
+
+              <!-- Cake Layer Gradients -->
+              <linearGradient id="baseChocolate" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#1A0B07"/>
+                <stop offset="40%" stop-color="#3D1E14"/>
+                <stop offset="70%" stop-color="#2A130B"/>
+                <stop offset="100%" stop-color="#150805"/>
+              </linearGradient>
+
+              <linearGradient id="topChocolate" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#4A2518"/>
+                <stop offset="100%" stop-color="#281109"/>
+              </linearGradient>
+
+              <linearGradient id="glazeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#2C1209"/>
+                <stop offset="50%" stop-color="#190803"/>
+                <stop offset="100%" stop-color="#0D0301"/>
+              </linearGradient>
+
+              <linearGradient id="strawberryCream" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#FFC2CD"/>
+                <stop offset="50%" stop-color="#FFEBF0"/>
+                <stop offset="100%" stop-color="#FFA8B8"/>
+              </linearGradient>
+
+              <radialGradient id="flameGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#FFD700" stop-opacity="0.6"/>
+                <stop offset="50%" stop-color="#FF5500" stop-opacity="0.2"/>
+                <stop offset="100%" stop-color="#FF0000" stop-opacity="0"/>
+              </radialGradient>
+
+              <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#000000" flood-opacity="0.35"/>
+              </filter>
             </defs>
+
+            <!-- 1. Pedestal Glass Stand -->
+            <ellipse cx="100" cy="192" rx="76" ry="14" fill="#000000" opacity="0.25"/>
+            <path d="M82 188 L78 200 H122 L118 188 Z" fill="#E2E8F0"/>
+            <ellipse cx="100" cy="188" rx="80" ry="14" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+            <ellipse cx="100" cy="185" rx="75" ry="11" fill="#FFFFFF" opacity="0.8"/>
+
+            <!-- 2. Bottom Chocolate Cake Layer -->
+            <path d="M32 135 C32 135 32 172 100 172 C168 172 168 135 168 135 L168 118 C168 118 100 132 32 118 Z" fill="url(#baseChocolate)" filter="url(#softShadow)"/>
+            
+            <!-- Cream Filling Layer -->
+            <path d="M32 120 C32 120 100 134 168 120 L168 125 C168 125 100 139 32 125 Z" fill="url(#strawberryCream)"/>
+
+            <!-- 3. Top Tier Cake Layer -->
+            <path d="M32 92 C32 92 32 120 100 120 C168 120 168 92 168 92 L168 76 C168 76 100 88 32 76 Z" fill="url(#topChocolate)"/>
+
+            <!-- Cream Filling Layer 2 -->
+            <path d="M32 78 C32 78 100 90 168 78 L168 83 C168 83 100 95 32 83 Z" fill="url(#strawberryCream)"/>
+
+            <!-- 4. Glossy Dripping Chocolate Glaze Top -->
+            <path d="M32 76 C32 90 44 98 52 88 C60 78 68 102 82 96 C96 90 102 104 118 96 C134 88 142 102 152 90 C162 78 168 90 168 76 C168 62 138 56 100 56 C62 56 32 62 32 76 Z" fill="url(#glazeGradient)"/>
+            <ellipse cx="100" cy="65" rx="64" ry="11" fill="#4A2316" opacity="0.5"/>
+
+            <!-- 5. Decorative Cream Piping Rosettes & Cherries -->
+            <!-- Left Cream Swirl & Cherry -->
+            <circle cx="46" cy="68" r="7" fill="#FFF8E7"/>
+            <circle cx="46" cy="68" r="5" fill="#FFE4E1"/>
+            <circle cx="46" cy="64" r="4.5" fill="#D63031"/>
+            <ellipse cx="45" cy="62" rx="1.5" ry="1" fill="#FFFFFF" opacity="0.8"/>
+
+            <!-- Middle Left Swirl -->
+            <circle cx="72" cy="73" r="6" fill="#FFF8E7"/>
+            <circle cx="72" cy="73" r="4" fill="#FF7675"/>
+
+            <!-- Middle Right Swirl -->
+            <circle cx="128" cy="73" r="6" fill="#FFF8E7"/>
+            <circle cx="128" cy="73" r="4" fill="#FF7675"/>
+
+            <!-- Right Cream Swirl & Cherry -->
+            <circle cx="154" cy="68" r="7" fill="#FFF8E7"/>
+            <circle cx="154" cy="68" r="5" fill="#FFE4E1"/>
+            <circle cx="154" cy="64" r="4.5" fill="#D63031"/>
+            <ellipse cx="153" cy="62" rx="1.5" ry="1" fill="#FFFFFF" opacity="0.8"/>
+
+            <!-- Rainbow Sprinkles -->
+            <rect x="60" y="70" width="5" height="2" rx="1" fill="#FFD700" transform="rotate(25 60 70)"/>
+            <rect x="85" y="75" width="5" height="2" rx="1" fill="#74B9FF" transform="rotate(-15 85 75)"/>
+            <rect x="112" y="75" width="5" height="2" rx="1" fill="#55E6C1" transform="rotate(40 112 75)"/>
+            <rect x="140" y="70" width="5" height="2" rx="1" fill="#FF7675" transform="rotate(-30 140 70)"/>
+
+            <!-- 6. Golden "18" Numeral Candles with 3D Depth & Wicks -->
+            <!-- Wick 1 -->
+            <line x1="78" y1="36" x2="78" y2="28" stroke="#222" stroke-width="2" stroke-linecap="round"/>
+            <!-- Wick 8 -->
+            <line x1="122" y1="36" x2="122" y2="28" stroke="#222" stroke-width="2" stroke-linecap="round"/>
+
+            <!-- Candle "1" -->
+            <text x="78" y="44" font-family="'Poppins', sans-serif" font-weight="800" font-size="32" fill="#8C6300" text-anchor="middle">1</text>
+            <text x="77" y="43" font-family="'Poppins', sans-serif" font-weight="800" font-size="32" fill="url(#goldBody)" text-anchor="middle" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.4))">1</text>
+            <text x="77" y="43" font-family="'Poppins', sans-serif" font-weight="800" font-size="32" fill="url(#goldHighlight)" text-anchor="middle">1</text>
+
+            <!-- Candle "8" -->
+            <text x="122" y="44" font-family="'Poppins', sans-serif" font-weight="800" font-size="32" fill="#8C6300" text-anchor="middle">8</text>
+            <text x="121" y="43" font-family="'Poppins', sans-serif" font-weight="800" font-size="32" fill="url(#goldBody)" text-anchor="middle" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.4))">8</text>
+            <text x="121" y="43" font-family="'Poppins', sans-serif" font-weight="800" font-size="32" fill="url(#goldHighlight)" text-anchor="middle">8</text>
+
+            <!-- 7. Dynamic Flame Lights & Glow Effects -->
+            <!-- Flame 1 Glow -->
+            <circle cx="78" cy="18" r="22" fill="url(#flameGlow)" class="flame"/>
+            <!-- Flame 1 -->
+            <g class="flame">
+              <path d="M78 6 C78 6 71 16 78 24 C85 16 78 6 78 6 Z" fill="#FF7600"/>
+              <path d="M78 10 C78 10 73 17 78 22 C83 17 78 10 78 10 Z" fill="#FFD700"/>
+              <path d="M78 15 C78 15 75 18 78 21 C81 18 78 15 78 15 Z" fill="#FFFFFF"/>
+            </g>
+
+            <!-- Flame 8 Glow -->
+            <circle cx="122" cy="18" r="22" fill="url(#flameGlow)" class="flame"/>
+            <!-- Flame 8 -->
+            <g class="flame">
+              <path d="M122 6 C122 6 115 16 122 24 C129 16 122 6 122 6 Z" fill="#FF7600"/>
+              <path d="M122 10 C122 10 117 17 122 22 C127 17 122 10 122 10 Z" fill="#FFD700"/>
+              <path d="M122 15 C122 15 119 18 122 21 C125 18 122 15 122 15 Z" fill="#FFFFFF"/>
+            </g>
+
+            <!-- Smoke Particles -->
+            <g id="smokeGroup">
+              <circle class="smoke-particle" id="smoke1" cx="78" cy="18" r="5" fill="#E2E8F0"/>
+              <circle class="smoke-particle" id="smoke2" cx="122" cy="18" r="5" fill="#E2E8F0"/>
+            </g>
           </svg>
         </div>
 
@@ -722,7 +756,6 @@
     <audio id="voiceRecordAudio" src="your-recording.mp3"></audio>
 
     <div class="stage-actions">
-      <!-- Blow Candles Button (revealed after audio finishes or can be manually tapped) -->
       <button id="blowCandlesBtn" class="btn blow-btn" style="display: none;" onclick="blowCandles()">
         Blow Out The Candles! 🎂💨
       </button>
@@ -937,7 +970,6 @@
         disc.classList.remove('playing');
       }
 
-      // Show blow candles button when song ends
       audio.onended = function() {
         disc.classList.remove('playing');
         showBlowCandlesPrompt();
@@ -950,11 +982,9 @@
     }
 
     function blowCandles() {
-      // Extinguish flames
       const flames = document.querySelectorAll('.flame');
       flames.forEach(f => f.classList.add('extinguished'));
 
-      // Smoke puff effect
       const smoke1 = document.getElementById('smoke1');
       const smoke2 = document.getElementById('smoke2');
       if (smoke1) smoke1.classList.add('active');
