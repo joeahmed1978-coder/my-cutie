@@ -362,7 +362,7 @@
       display: flex;
       justify-content: center;
       align-items: flex-end;
-      margin: 230px auto 25px auto; /* 🌟 Raised margin to place speech bubble cleanly above the cake */
+      margin: 230px auto 25px auto;
     }
 
     .table-surface {
@@ -485,8 +485,8 @@
 
     .balloon {
       position: absolute;
-      width: 50px;
-      height: 100px;
+      width: 90px;  /* Increased size */
+      height: 180px; /* Increased size */
       opacity: 0;
       transition: opacity 1s ease-in-out;
     }
@@ -499,7 +499,7 @@
     @keyframes floatUp {
       0% { transform: translateY(100vh) rotate(-3deg); }
       50% { transform: translateY(50vh) rotate(3deg); }
-      100% { transform: translateY(-120px) rotate(-3deg); }
+      100% { transform: translateY(-200px) rotate(-3deg); }
     }
 
     .l-1  { left: 2%;  animation-duration: 5.0s !important; animation-delay: 0.1s !important; }
@@ -651,7 +651,6 @@
 </head>
 <body>
 
-  <!-- Floating Balloons Background -->
   <div class="balloon-container" id="balloonContainer">
     <svg class="balloon l-1" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
     <svg class="balloon l-2" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
@@ -662,7 +661,6 @@
 
   <audio id="bgMusic" src="birthday-song.mp3" loop></audio>
 
-  <!-- Main Question & Character Container -->
   <div class="container" id="mainContainer">
     <div class="speech-bubble" id="speechBubble" onclick="startQuestion()">
       Are you Malak? (click me to continue)
@@ -671,7 +669,6 @@
     <div class="character-wrapper">
       <img src="cartoon-you.png" alt="Cartoon Me" class="character" id="myCharacter" onclick="startQuestion()">
 
-      <!-- 🎂 CHOCOLATE CAKE OVERLAY CONTAINER -->
       <div id="cakeOverlay" class="cake-overlay">
         <div class="cake-wrapper">
           <div class="candle-glow"></div>
@@ -727,7 +724,6 @@
     </div>
   </div>
 
-  <!-- 🎂 STAGE: CAKE TABLE & VOICE RECORD -->
   <div id="cakeTableStage" style="display: none;">
     <div class="speech-bubble" id="tableSpeechBubble">
       Tap the vinyl record to listen to a special message! 🎶
@@ -736,10 +732,9 @@
     <div class="table-scene">
       <div class="table-surface">
         
-        <!-- Detailed Chocolate 18 Cake Stage -->
         <div class="table-cake">
           <div class="cake-wrapper">
-            <div class="candle-glow"></div>
+            <div class="candle-glow" id="stageCandleGlow"></div>
             <div class="smoke-particle" id="smoke1" style="left: 42%;"></div>
             <div class="smoke-particle" id="smoke2" style="left: 55%;"></div>
             
@@ -784,16 +779,14 @@
           </div>
         </div>
 
-        <!-- Vinyl Record Player -->
         <div class="record-player" onclick="toggleRecordAudio()">
           <div class="vinyl-disc" id="vinylDisc">🎵</div>
-          <span class="record-label">Click to Play 🔊</span>
+          <span class="record-label" id="recordLabel">Click to Play 🔊</span>
         </div>
 
       </div>
     </div>
 
-    <!-- Audio element for voice recording -->
     <audio id="voiceRecordAudio" src="your-recording.mp3"></audio>
 
     <div class="stage-actions">
@@ -807,7 +800,6 @@
     </div>
   </div>
 
-  <!-- GIFTS SECTION -->
   <div class="gifts-section" id="giftsSection">
     <div class="gifts-grid" id="giftsGrid"></div>
 
@@ -817,7 +809,6 @@
     </div>
   </div>
 
-  <!-- GIFT QUESTION POPUP MODAL -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
       <h3 id="modalGiftTitle">Gift #1 Question</h3>
@@ -1022,53 +1013,64 @@
       if (seqIndex < sequence.length) {
         showCurrentSeqItem();
       } else {
-        document.getElementById('buttonContainer').style.display = 'none';
-        document.getElementById('mainContainer').style.display = 'none';
-
-        const balloons = document.getElementById('balloonContainer');
-        if (balloons) balloons.classList.add('show-balloons');
-
-        const cakeStage = document.getElementById('cakeTableStage');
-        if (cakeStage) cakeStage.style.display = 'flex';
-
-        const blowBtn = document.getElementById('blowCandlesBtn');
-        if (blowBtn) blowBtn.style.display = 'inline-block';
+        startCakeStage();
       }
     }
 
-    function blowCandles() {
-      const flames = document.querySelectorAll('.flame');
-      flames.forEach(flame => flame.classList.add('extinguished'));
-
-      const smoke1 = document.getElementById('smoke1');
-      const smoke2 = document.getElementById('smoke2');
-      if (smoke1) smoke1.classList.add('active');
-      if (smoke2) smoke2.classList.add('active');
-
-      document.getElementById('blowCandlesBtn').style.display = 'none';
-      document.getElementById('toGiftsBtn').style.display = 'inline-block';
-      document.getElementById('tableSpeechBubble').innerHTML = "Candles blown out! Make a wish ✨ Now time for your gifts!";
+    function startCakeStage() {
+      document.getElementById('mainContainer').style.display = 'none';
+      document.getElementById('cakeTableStage').style.display = 'flex';
+      document.getElementById('balloonContainer').classList.add('show-balloons');
     }
 
     function toggleRecordAudio() {
-      const audio = document.getElementById('voiceRecordAudio');
-      const disc = document.getElementById('vinylDisc');
+      const voiceAudio = document.getElementById('voiceRecordAudio');
       const bgMusic = document.getElementById('bgMusic');
+      const vinylDisc = document.getElementById('vinylDisc');
+      const recordLabel = document.getElementById('recordLabel');
 
-      if (audio.paused) {
+      if (voiceAudio.paused) {
         if (bgMusic) bgMusic.pause();
-        audio.play().catch(e => console.log("Audio play blocked:", e));
-        disc.classList.add('playing');
+        voiceAudio.play();
+        vinylDisc.classList.add('playing');
+        recordLabel.innerHTML = "Playing... 🔊";
       } else {
-        audio.pause();
-        disc.classList.remove('playing');
+        voiceAudio.pause();
+        vinylDisc.classList.remove('playing');
+        recordLabel.innerHTML = "Click to Play 🔊";
+        if (bgMusic) bgMusic.play();
       }
+
+      voiceAudio.onended = () => {
+        vinylDisc.classList.remove('playing');
+        recordLabel.innerHTML = "Click to Play 🔊";
+        if (bgMusic) bgMusic.play();
+        document.getElementById('blowCandlesBtn').style.display = 'inline-block';
+      };
+
+      document.getElementById('blowCandlesBtn').style.display = 'inline-block';
+    }
+
+    function blowCandles() {
+      const stageFlames = document.querySelectorAll('.stage-flame');
+      stageFlames.forEach(flame => flame.classList.add('extinguished'));
+      
+      const glow = document.getElementById('stageCandleGlow');
+      if (glow) glow.style.opacity = '0';
+
+      const s1 = document.getElementById('smoke1');
+      const s2 = document.getElementById('smoke2');
+      if (s1) s1.classList.add('active');
+      if (s2) s2.classList.add('active');
+
+      document.getElementById('tableSpeechBubble').innerHTML = "Make a wish! 💖✨";
+      document.getElementById('blowCandlesBtn').style.display = 'none';
+      document.getElementById('toGiftsBtn').style.display = 'inline-block';
     }
 
     function goToGiftsStage() {
       document.getElementById('cakeTableStage').style.display = 'none';
-      const giftsSection = document.getElementById('giftsSection');
-      giftsSection.style.display = 'block';
+      document.getElementById('giftsSection').style.display = 'block';
       renderGifts();
     }
 
@@ -1081,23 +1083,31 @@
         card.className = `gift-card ${gift.isUnlocked ? 'unlocked' : ''}`;
         card.onclick = () => openGiftModal(gift.id);
 
-        card.innerHTML = `
-          <div class="gift-icon">${gift.isUnlocked ? '🎁' : '🔒'}</div>
-          <div class="gift-title">${gift.title}</div>
-          <div class="gift-status">${gift.isUnlocked ? 'Unlocked!' : 'Tap to Unlock'}</div>
-          ${gift.isUnlocked ? `<div class="reward-content">${gift.reward}</div>` : ''}
-        `;
+        if (gift.isUnlocked) {
+          card.innerHTML = `
+            <div class="gift-icon">🎁</div>
+            <div class="gift-title">${gift.title}</div>
+            <div class="gift-status">Unlocked 🔓</div>
+            <div class="reward-content">${gift.reward}</div>
+          `;
+        } else {
+          card.innerHTML = `
+            <div class="gift-icon">🔒</div>
+            <div class="gift-title">${gift.title}</div>
+            <div class="gift-status">Tap to Unlock</div>
+          `;
+        }
         grid.appendChild(card);
       });
 
-      checkAllUnlocked();
+      checkAllGiftsUnlocked();
     }
 
-    function openGiftModal(id) {
-      const gift = giftsData.find(g => g.id === id);
+    function openGiftModal(giftId) {
+      const gift = giftsData.find(g => g.id === giftId);
       if (!gift || gift.isUnlocked) return;
 
-      currentModalGiftId = id;
+      currentModalGiftId = giftId;
       document.getElementById('modalGiftTitle').innerText = gift.title;
       document.getElementById('modalQuestionText').innerText = gift.question;
       document.getElementById('giftAnswerInput').value = '';
@@ -1105,18 +1115,11 @@
       document.getElementById('modalOverlay').classList.add('active');
     }
 
-    function closeModal() {
-      document.getElementById('modalOverlay').classList.remove('active');
-      currentModalGiftId = null;
-    }
-
     function submitGiftAnswer() {
-      if (!currentModalGiftId) return;
-
       const gift = giftsData.find(g => g.id === currentModalGiftId);
-      const inputVal = document.getElementById('giftAnswerInput').value.trim().toLowerCase();
+      const userAns = document.getElementById('giftAnswerInput').value.trim().toLowerCase();
 
-      if (inputVal === gift.answer.toLowerCase()) {
+      if (userAns === gift.answer.toLowerCase()) {
         gift.isUnlocked = true;
         closeModal();
         renderGifts();
@@ -1125,9 +1128,13 @@
       }
     }
 
-    function checkAllUnlocked() {
-      const allUnlocked = giftsData.every(g => g.isUnlocked);
-      if (allUnlocked) {
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+    }
+
+    function checkAllGiftsUnlocked() {
+      const allDone = giftsData.every(g => g.isUnlocked);
+      if (allDone) {
         document.getElementById('finalGiftSection').classList.add('active');
       }
     }
