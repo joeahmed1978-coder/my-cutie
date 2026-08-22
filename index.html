@@ -615,4 +615,505 @@
       transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .modal-overlay.active .modal { transform: scale(
+    .modal-overlay.active .modal { transform: scale(1); }
+    .modal h3 { color: #ff4757; margin-bottom: 10px; font-size: 1.2rem; }
+    .modal p { color: #555; font-size: 0.95rem; margin-bottom: 18px; line-height: 1.4; }
+
+    .modal input {
+      width: 100%;
+      padding: 10px 15px;
+      border-radius: 20px;
+      border: 2px solid #ff6b81;
+      outline: none;
+      font-size: 15px;
+      text-align: center;
+      margin-bottom: 12px;
+      font-family: inherit;
+    }
+
+    .modal-buttons { display: flex; gap: 10px; justify-content: center; }
+    .modal-error-msg {
+      color: #ff4757;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: -5px;
+      margin-bottom: 10px;
+      display: none;
+    }
+
+    @media (max-width: 420px) {
+      .gifts-grid { grid-template-columns: 1fr; }
+      .table-surface { width: 340px; }
+      .cake-wrapper { transform: scale(0.72); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Balloons Background -->
+  <div class="balloon-container" id="balloonContainer">
+    <svg class="balloon l-1" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff6b81" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-2" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ffb3bc" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon l-3" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-1" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#ff4757" /><path d="M50,102 Q45,140 50,200" stroke="#ffb3bc" stroke-width="1.5" fill="none" /></svg>
+    <svg class="balloon r-2" viewBox="0 0 100 200"><path d="M50,10 C25,10 20,40 20,60 C20,85 40,95 48,98 L46,102 L54,102 L52,98 C60,95 80,85 80,60 C80,40 75,10 50,10 Z" fill="#fff0f2" /><path d="M50,102 Q55,140 50,200" stroke="#ffd2d7" stroke-width="1.5" fill="none" /></svg>
+  </div>
+
+  <audio id="bgMusic" src="birthday-song.mp3" loop></audio>
+
+  <!-- Main Question & Character Container -->
+  <div class="container" id="mainContainer">
+    <div class="speech-bubble" id="speechBubble" onclick="startQuestion()">
+      Are you Malak? (click me to continue)
+    </div>
+
+    <div class="character-wrapper">
+      <img src="cartoon-you.png" alt="Cartoon Me" class="character" id="myCharacter" onclick="startQuestion()">
+
+      <!-- 🎂 CHOCOLATE CAKE OVERLAY CONTAINER -->
+      <div id="cakeOverlay" class="cake-overlay">
+        <div class="cake-wrapper">
+          <div class="candle-glow"></div>
+          <div class="top-decorations">
+            <div class="candles-group">
+              <div class="number-candle">
+                <div class="flame main-flame"></div>
+                <div class="wick"></div>
+                1
+              </div>
+              <div class="number-candle">
+                <div class="flame main-flame"></div>
+                <div class="wick"></div>
+                8
+              </div>
+            </div>
+            <div class="berry berry-1"></div>
+            <div class="berry berry-2"></div>
+            <div class="berry berry-3"></div>
+            <div class="berry berry-4"></div>
+            <div class="curl curl-1"></div>
+            <div class="curl curl-2"></div>
+          </div>
+          <div class="tier tier-top">
+            <div class="glaze"></div>
+            <div class="drip-container">
+              <div class="drip"></div><div class="drip"></div><div class="drip"></div><div class="drip"></div><div class="drip"></div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="tier tier-bottom">
+            <div class="glaze"></div>
+            <div class="drip-container">
+              <div class="drip"></div><div class="drip"></div><div class="drip"></div><div class="drip"></div><div class="drip"></div><div class="drip"></div>
+            </div>
+          </div>
+          <div class="plate"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-container" id="buttonContainer" style="display: none; flex-direction: column; align-items: center; gap: 15px;">
+      <div id="yesNoBox" style="display: flex; gap: 20px; align-items: center;">
+        <button class="btn yes-btn" id="yesBtn" onclick="handleYes()">Yes</button>
+        <button class="btn no-btn" id="noBtn" onclick="dodgeNo()">No</button>
+      </div>
+
+      <div id="textInputBox" style="display: none; flex-direction: column; align-items: center; gap: 10px;">
+        <input type="text" id="answerInput" placeholder="Type your answer..." style="padding: 10px 15px; font-size: 16px; border-radius: 20px; border: 2px solid #ff6b81; outline: none; text-align: center; width: 220px;">
+        <button class="btn yes-btn" id="submitBtn" onclick="checkAnswer()">Submit</button>
+        <p id="errorMsg" style="color: #ff4757; font-weight: bold; margin: 5px 0 0 0; font-size: 14px; display: none;"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🎂 STAGE: CAKE TABLE & VOICE RECORD -->
+  <div id="cakeTableStage" style="display: none;">
+    <div class="speech-bubble" id="tableSpeechBubble">
+      Tap the vinyl record to listen to a special message! 🎶
+    </div>
+
+    <div class="table-scene">
+      <div class="table-surface">
+        
+        <!-- Detailed Chocolate 18 Cake Stage -->
+        <div class="table-cake">
+          <div class="cake-wrapper">
+            <div class="candle-glow"></div>
+            <div class="smoke-particle" id="smoke1" style="left: 42%;"></div>
+            <div class="smoke-particle" id="smoke2" style="left: 55%;"></div>
+            
+            <div class="top-decorations">
+              <div class="candles-group">
+                <div class="number-candle">
+                  <div class="flame stage-flame"></div>
+                  <div class="wick"></div>
+                  1
+                </div>
+                <div class="number-candle">
+                  <div class="flame stage-flame"></div>
+                  <div class="wick"></div>
+                  8
+                </div>
+              </div>
+              <div class="berry berry-1"></div>
+              <div class="berry berry-2"></div>
+              <div class="berry berry-3"></div>
+              <div class="berry berry-4"></div>
+              <div class="curl curl-1"></div>
+              <div class="curl curl-2"></div>
+            </div>
+
+            <div class="tier tier-top">
+              <div class="glaze"></div>
+              <div class="drip-container">
+                <div class="drip"></div><div class="drip"></div><div class="drip"></div><div class="drip"></div><div class="drip"></div>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="tier tier-bottom">
+              <div class="glaze"></div>
+              <div class="drip-container">
+                <div class="drip"></div><div class="drip"></div><div class="drip"></div><div class="drip"></div><div class="drip"></div><div class="drip"></div>
+              </div>
+            </div>
+
+            <div class="plate"></div>
+          </div>
+        </div>
+
+        <!-- Vinyl Record Player -->
+        <div class="record-player" onclick="toggleRecordAudio()">
+          <div class="vinyl-disc" id="vinylDisc">🎵</div>
+          <span class="record-label">Click to Play 🔊</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Audio element for voice recording -->
+    <audio id="voiceRecordAudio" src="your-recording.mp3"></audio>
+
+    <div class="stage-actions">
+      <button id="blowCandlesBtn" class="btn blow-btn" style="display: none;" onclick="blowCandles()">
+        Blow Out The Candles! 🎂💨
+      </button>
+
+      <button id="toGiftsBtn" class="action-btn" style="display: none;" onclick="goToGiftsStage()">
+        Open Your Gifts! 🎁✨
+      </button>
+    </div>
+  </div>
+
+  <!-- GIFTS SECTION -->
+  <div class="gifts-section" id="giftsSection">
+    <div class="gifts-grid" id="giftsGrid"></div>
+
+    <div class="final-gift-section" id="finalGiftSection">
+      <h2>🎉 All Gifts Unlocked! 🎉</h2>
+      <p>You answered all the gift questions correctly! Here is your final surprise grand prize 🎁✨</p>
+    </div>
+  </div>
+
+  <!-- GIFT QUESTION POPUP MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <h3 id="modalGiftTitle">Gift #1 Question</h3>
+      <p id="modalQuestionText">Question text goes here?</p>
+      <input type="text" id="giftAnswerInput" placeholder="Type your answer..." />
+      <div class="modal-error-msg" id="modalErrorMsg">Incorrect answer! Try again 😜</div>
+      <div class="modal-buttons">
+        <button class="btn yes-btn" onclick="submitGiftAnswer()">Unlock 🔓</button>
+        <button class="btn no-btn" onclick="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let isStarted = false;
+    const yesNoQuestions = [
+      "Are you really Malak?",
+      "Are you ready to put that to the test? (don't you dare say no but you can try though)"
+    ];
+    let yesNoIndex = 0;
+    let yesScale = 1.0;
+    let noScale = 1.0;
+
+    const sequence = [
+      { question: "how old is Malak turning today?", answer: "18" },
+      { question: "mhmmm, that's easy to guess, iam not sure yet that you are Malak" },
+      { question: "what is Malak's fav color", answer: "pink" },
+      { question: "That's easy to guess too😒😒" },
+      { question: "who is Malak's fav artist?", answer: "lana del rey" },
+      { question: "ohhh you know that, you might actually be Malak but let's make sure" },
+      { question: "what is the last thing i say to Malak everyday at the end of our chat?", answer: "goodnight cutie" },
+      { question: "YOU ARE MALAK!! Happy birthday cutie🥳🥳 welcome to my surprise for you❤️" },
+      { question: "but this just the start, be ready for what i prepared for you in this surprise🙃" }
+    ];
+    let seqIndex = 0;
+
+    const giftsData = [
+      {
+        id: 1,
+        title: "Gift 1",
+        question: "Where did we first meet?",
+        answer: "cafe",
+        reward: "☕ A cozy coffee date on me!",
+        isUnlocked: false
+      },
+      {
+        id: 2,
+        title: "Gift 2",
+        question: "What is my favorite nickname for you?",
+        answer: "cutie",
+        reward: "💌 A handwritten letter & playlist!",
+        isUnlocked: false
+      },
+      {
+        id: 3,
+        title: "Gift 3",
+        question: "What is our favorite activity together?",
+        answer: "chatting",
+        reward: "🎬 Movie night voucher with snacks!",
+        isUnlocked: false
+      },
+      {
+        id: 4,
+        title: "Gift 4",
+        question: "What month is your birthday?",
+        answer: "august",
+        reward: "👑 A custom birthday crown & treat!",
+        isUnlocked: false
+      }
+    ];
+
+    let currentModalGiftId = null;
+
+    function startQuestion() {
+      if (isStarted) return;
+      isStarted = true;
+
+      const bubble = document.getElementById('speechBubble');
+      const container = document.getElementById('buttonContainer');
+      const yesNoBox = document.getElementById('yesNoBox');
+      const textInputBox = document.getElementById('textInputBox');
+      const music = document.getElementById('bgMusic');
+
+      if (music) {
+        music.play().catch(e => console.log("Audio waiting for user interaction.", e));
+      }
+
+      yesNoIndex = 0;
+      seqIndex = 0;
+      yesScale = 1.0;
+      noScale = 1.0;
+      updateButtonScales();
+
+      yesNoBox.style.display = 'flex';
+      textInputBox.style.display = 'none';
+      container.style.display = 'flex';
+
+      bubble.innerHTML = yesNoQuestions[yesNoIndex];
+    }
+
+    function handleYes() {
+      yesNoIndex++;
+      if (yesNoIndex < yesNoQuestions.length) {
+        document.getElementById('speechBubble').innerHTML = yesNoQuestions[yesNoIndex];
+        yesScale = 1.0;
+        noScale = 1.0;
+        updateButtonScales();
+      } else {
+        document.getElementById('yesNoBox').style.display = 'none';
+        document.getElementById('textInputBox').style.display = 'flex';
+        showCurrentSeqItem();
+      }
+    }
+
+    function dodgeNo() {
+      yesScale += 0.25;
+      noScale -= 0.2;
+      updateButtonScales();
+    }
+
+    function updateButtonScales() {
+      const yesBtn = document.getElementById('yesBtn');
+      const noBtn = document.getElementById('noBtn');
+      
+      if (yesBtn) yesBtn.style.transform = `scale(${yesScale})`;
+      
+      if (noBtn) {
+        if (noScale <= 0.15) {
+          noBtn.style.opacity = '0';
+          noBtn.style.pointerEvents = 'none';
+          noBtn.style.transform = 'scale(0)';
+        } else {
+          noBtn.style.opacity = '1';
+          noBtn.style.pointerEvents = 'auto';
+          noBtn.style.transform = `scale(${noScale})`;
+        }
+      }
+    }
+
+    function showCurrentSeqItem() {
+      const bubble = document.getElementById('speechBubble');
+      const answerInput = document.getElementById('answerInput');
+      const submitBtn = document.getElementById('submitBtn');
+      const errorMsg = document.getElementById('errorMsg');
+      const cakeOverlay = document.getElementById('cakeOverlay');
+
+      errorMsg.style.display = 'none';
+      answerInput.value = '';
+
+      const current = sequence[seqIndex];
+      bubble.innerHTML = current.question;
+
+      if (seqIndex >= 7) {
+        cakeOverlay.classList.add('show-cake');
+      }
+
+      if (current.answer) {
+        answerInput.style.display = 'block';
+        submitBtn.innerHTML = "Submit";
+      } else {
+        answerInput.style.display = 'none';
+        submitBtn.innerHTML = "Next ➡️";
+      }
+    }
+
+    function checkAnswer() {
+      const current = sequence[seqIndex];
+      const answerInput = document.getElementById('answerInput');
+      const errorMsg = document.getElementById('errorMsg');
+
+      if (current.answer) {
+        const userVal = answerInput.value.trim().toLowerCase();
+        if (userVal === current.answer.toLowerCase()) {
+          advanceSequence();
+        } else {
+          errorMsg.innerHTML = "Wrong answer, cutie! Try again 😜";
+          errorMsg.style.display = 'block';
+        }
+      } else {
+        advanceSequence();
+      }
+    }
+
+    function advanceSequence() {
+      seqIndex++;
+      if (seqIndex < sequence.length) {
+        showCurrentSeqItem();
+      } else {
+        document.getElementById('buttonContainer').style.display = 'none';
+        document.getElementById('mainContainer').style.display = 'none';
+
+        const balloons = document.getElementById('balloonContainer');
+        if (balloons) balloons.classList.add('show-balloons');
+
+        const cakeStage = document.getElementById('cakeTableStage');
+        if (cakeStage) cakeStage.style.display = 'flex';
+
+        const blowBtn = document.getElementById('blowCandlesBtn');
+        if (blowBtn) blowBtn.style.display = 'inline-block';
+      }
+    }
+
+    function blowCandles() {
+      const flames = document.querySelectorAll('.flame');
+      flames.forEach(flame => flame.classList.add('extinguished'));
+
+      const smoke1 = document.getElementById('smoke1');
+      const smoke2 = document.getElementById('smoke2');
+      if (smoke1) smoke1.classList.add('active');
+      if (smoke2) smoke2.classList.add('active');
+
+      document.getElementById('blowCandlesBtn').style.display = 'none';
+      document.getElementById('toGiftsBtn').style.display = 'inline-block';
+      document.getElementById('tableSpeechBubble').innerHTML = "Candles blown out! Make a wish ✨ Now time for your gifts!";
+    }
+
+    function toggleRecordAudio() {
+      const audio = document.getElementById('voiceRecordAudio');
+      const disc = document.getElementById('vinylDisc');
+      const bgMusic = document.getElementById('bgMusic');
+
+      if (audio.paused) {
+        if (bgMusic) bgMusic.pause();
+        audio.play().catch(e => console.log("Audio play blocked:", e));
+        disc.classList.add('playing');
+      } else {
+        audio.pause();
+        disc.classList.remove('playing');
+      }
+    }
+
+    function goToGiftsStage() {
+      document.getElementById('cakeTableStage').style.display = 'none';
+      const giftsSection = document.getElementById('giftsSection');
+      giftsSection.style.display = 'block';
+      renderGifts();
+    }
+
+    function renderGifts() {
+      const grid = document.getElementById('giftsGrid');
+      grid.innerHTML = '';
+
+      giftsData.forEach(gift => {
+        const card = document.createElement('div');
+        card.className = `gift-card ${gift.isUnlocked ? 'unlocked' : ''}`;
+        card.onclick = () => openGiftModal(gift.id);
+
+        card.innerHTML = `
+          <div class="gift-icon">${gift.isUnlocked ? '🎁' : '🔒'}</div>
+          <div class="gift-title">${gift.title}</div>
+          <div class="gift-status">${gift.isUnlocked ? 'Unlocked!' : 'Tap to Unlock'}</div>
+          ${gift.isUnlocked ? `<div class="reward-content">${gift.reward}</div>` : ''}
+        `;
+        grid.appendChild(card);
+      });
+
+      checkAllUnlocked();
+    }
+
+    function openGiftModal(id) {
+      const gift = giftsData.find(g => g.id === id);
+      if (!gift || gift.isUnlocked) return;
+
+      currentModalGiftId = id;
+      document.getElementById('modalGiftTitle').innerText = gift.title;
+      document.getElementById('modalQuestionText').innerText = gift.question;
+      document.getElementById('giftAnswerInput').value = '';
+      document.getElementById('modalErrorMsg').style.display = 'none';
+      document.getElementById('modalOverlay').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+      currentModalGiftId = null;
+    }
+
+    function submitGiftAnswer() {
+      if (!currentModalGiftId) return;
+
+      const gift = giftsData.find(g => g.id === currentModalGiftId);
+      const inputVal = document.getElementById('giftAnswerInput').value.trim().toLowerCase();
+
+      if (inputVal === gift.answer.toLowerCase()) {
+        gift.isUnlocked = true;
+        closeModal();
+        renderGifts();
+      } else {
+        document.getElementById('modalErrorMsg').style.display = 'block';
+      }
+    }
+
+    function checkAllUnlocked() {
+      const allUnlocked = giftsData.every(g => g.isUnlocked);
+      if (allUnlocked) {
+        document.getElementById('finalGiftSection').classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>
