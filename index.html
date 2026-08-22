@@ -840,6 +840,15 @@
     let yesScale = 1.0;
     let noScale = 1.0;
 
+    /* ✏️ ADD OR EDIT YOUR EXACT WORDS FOR WHEN "NO" IS CLICKED HERE: */
+    const noResponses = [
+      "Are you sure? Try again! 😜",
+      "Nice try, but you can't say no! 🤐",
+      "Think again cutie... 💖",
+      "Nope! 'No' is not an option! 😂"
+    ];
+    let noCount = 0;
+
     const sequence = [
       { question: "how old is Malak turning today?", answer: "18" },
       { question: "mhmmm, that's easy to guess, iam not sure yet that you are Malak" },
@@ -908,6 +917,7 @@
       seqIndex = 0;
       yesScale = 1.0;
       noScale = 1.0;
+      noCount = 0;
       updateButtonScales();
 
       yesNoBox.style.display = 'flex';
@@ -923,6 +933,7 @@
         document.getElementById('speechBubble').innerHTML = yesNoQuestions[yesNoIndex];
         yesScale = 1.0;
         noScale = 1.0;
+        noCount = 0;
         updateButtonScales();
       } else {
         document.getElementById('yesNoBox').style.display = 'none';
@@ -932,6 +943,12 @@
     }
 
     function dodgeNo() {
+      const bubble = document.getElementById('speechBubble');
+      if (bubble && noResponses.length > 0) {
+        bubble.innerHTML = noResponses[noCount % noResponses.length];
+        noCount++;
+      }
+
       yesScale += 0.25;
       noScale -= 0.2;
       updateButtonScales();
