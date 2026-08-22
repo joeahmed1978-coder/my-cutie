@@ -55,7 +55,7 @@
       position: relative;
       margin-bottom: 20px;
       transition: all 0.2s ease;
-      z-index: 10;
+      z-index: 20;
     }
 
     .speech-bubble::after {
@@ -362,7 +362,7 @@
       display: flex;
       justify-content: center;
       align-items: flex-end;
-      margin: 20px auto 25px auto;
+      margin: 230px auto 25px auto; /* 🌟 Raised margin to place speech bubble cleanly above the cake */
     }
 
     .table-surface {
@@ -645,6 +645,7 @@
       .gifts-grid { grid-template-columns: 1fr; }
       .table-surface { width: 340px; }
       .cake-wrapper { transform: scale(0.72); }
+      .table-scene { margin-top: 170px; }
     }
   </style>
 </head>
@@ -840,7 +841,6 @@
     let yesScale = 1.0;
     let noScale = 1.0;
 
-    /* ✏️ ADD OR EDIT YOUR EXACT WORDS FOR WHEN "NO" IS CLICKED HERE: */
     const noResponses = [
       "Are you sure? Try again! 😜",
       "Nice try, but you can't say no! 🤐",
