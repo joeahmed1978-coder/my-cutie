@@ -641,30 +641,6 @@
       display: none;
     }
 
-    /* --- GIFT 2 LETTER MODAL STYLING (NO BORDERS OR FRAMES) --- */
-    .gift-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0, 0, 0, 0.85);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .center-letter-img {
-      max-width: 85%;
-      max-height: 85vh;
-      object-fit: contain;
-      border: none;
-      outline: none;
-      box-shadow: none;
-      background: transparent;
-    }
-
     /* --- GIFT 1 OPENED VIEW: SPEECH BUBBLE + 2 BIG SIDE-BY-SIDE FRAMES --- */
     #giftOneView {
       display: none;
@@ -934,28 +910,25 @@
 
   <!-- GIFT 1 OPENED VIEW: SPEECH BUBBLE + 2 BIG SIDE-BY-SIDE FRAMES -->
   <div id="giftOneView">
+    <!-- ✍️ Type your sweet words here: -->
     <div class="gift-speech-bubble">
-      I have got you a book. To be honest i didn't read it but that's the point i want you to read it for us. Here are your glasses to make you read better , i know you like to read without them but i'll put my head on your lap and you won't stop reading until i fall asleep so you gonna need those glasses. we will keep playing with each other's hair and i'll keep staring to these beautiful eyes that are reading the book and maybe won't listen to anything of what you are reading because of how stunned iam and wonder how can something be this beautiful!! and maybe after that i'll get you to lay down and lay my head on your chest ,hug you tightly and give you a kiss on your cheek every now and then and you will keep patting my head and give me kisses on my hair until i fall asleep and sleep like a baby between your arms feeling the warmth of you and how safe it is when i am with you.
+      I have got you a book.To be honest i didn't read it but that's the point i want you to read it for us. Here are your glasses to make you read better , i know you like to read without them but i'll put my head on your lap and you won't stop reading until i fall asleep so you gonna need those glasses. we will keep playing with each other's hair and i'll keep staring to these beautiful eyes that are reading the book and maybe won't listen to anything of what you are reading because of how stunned iam and wonder how can something be this beautiful!! and maybe after that i'll get you to lay down and lay my head on your chest ,hug you tightly and give you a kiss on your cheek every now and then and you will keep patting my head and give me kisses on my hair until i fall asleep and sleep like a baby between your arms feeling the warmth of you and how safe it is when i am with you.
     </div>
 
     <div class="big-frames-container">
       <div class="big-photo-frame">
+        <!-- 🖼️ Replace 'photo1.jpg' with your first picture file or URL -->
         <img src="book.jpg" alt="Memory 1">
         <div class="photo-caption"></div>
       </div>
       <div class="big-photo-frame">
+        <!-- 🖼️ Replace 'photo2.jpg' with your second picture file or URL -->
         <img src="glasses.jpg" alt="Memory 2">
         <div class="photo-caption"></div>
       </div>
     </div>
 
     <button class="btn yes-btn" onclick="closeGiftOneView()" style="margin-top: 15px;">⬅️ Back to Gifts</button>
-  </div>
-
-  <!-- GIFT 2 LETTER MODAL -->
-  <div id="gift2Modal" class="gift-container" style="display: none;">
-    <button onclick="closeGift2()" style="position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 28px; cursor: pointer; color: #fff; z-index: 1001;">&times;</button>
-    <img src="letter.png" alt="Love Letter" class="center-letter-img">
   </div>
 
   <div class="modal-overlay" id="modalOverlay">
@@ -972,12 +945,372 @@
   </div>
 
   <script>
-    function openGift2() {
-      document.getElementById('gift2Modal').style.display = 'flex';
+    let isStarted = false;
+    const yesNoQuestions = [
+      "Are you really Malak?",
+      "Are you ready to put that to the test? (don't you dare say no but you can try though)"
+    ];
+    let yesNoIndex = 0;
+    let yesScale = 1.0;
+    let noScale = 1.0;
+
+    const noResponses = [
+      "Are you sure? Try again! 😜",
+      "Nice try, but you can't say no! 🤐",
+      "Think again cutie... 💖",
+      "Nope! 'No' is not an option! 😂"
+    ];
+    let noCount = 0;
+
+    const sequence = [
+      { question: "how old is Malak turning today?", answer: "18" },
+      { question: "mhmmm, that's easy to guess, iam not sure yet that you are Malak" },
+      { question: "what is Malak's fav color", answer: "pink" },
+      { question: "That's easy to guess too😒😒" },
+      { question: "who is Malak's fav artist?", answer: "lana del rey" },
+      { question: "ohhh you know that, you might actually be Malak but let's make sure" },
+      { question: "what is the last thing i say to Malak everyday at the end of our chat?", answer: "goodnight cutie" },
+      { question: "YOU ARE MALAK!! Happy birthday cutie🥳🥳 welcome to my surprise for you❤️" },
+      { question: "but this just the start, be ready for what i prepared for you in this surprise🙃" }
+    ];
+    let seqIndex = 0;
+
+    const giftsData = [
+      {
+        id: 1,
+        title: "Gift 1",
+        question: "what is your favourite book?",
+        answer: "never lie",
+        reward: "Good jooob,open up your first gift, sweetie",
+        isUnlocked: false
+      },
+      {
+        id: 2,
+        title: "Gift 2",
+        question: "What was the first message i sent you on tiktok?",
+        answer: "Hi how is it going?",
+        reward: "A letter for you, open it",
+        isUnlocked: false
+      },
+      {
+        id: 3,
+        title: "Gift 3",
+        question: "What is our favorite activity together?",
+        answer: "chatting",
+        reward: "🎬 Movie night voucher with snacks!",
+        isUnlocked: false
+      },
+      {
+        id: 4,
+        title: "Gift 4",
+        question: "What month is your birthday?",
+        answer: "august",
+        reward: "👑 A custom birthday crown & treat!",
+        isUnlocked: false
+      }
+    ];
+
+    let currentModalGiftId = null;
+
+    function startQuestion() {
+      if (isStarted) return;
+      isStarted = true;
+
+      const bubble = document.getElementById('speechBubble');
+      const container = document.getElementById('buttonContainer');
+      const yesNoBox = document.getElementById('yesNoBox');
+      const textInputBox = document.getElementById('textInputBox');
+      const music = document.getElementById('bgMusic');
+
+      if (music) {
+        music.play().catch(e => console.log("Audio waiting for user interaction.", e));
+      }
+
+      yesNoIndex = 0;
+      seqIndex = 0;
+      yesScale = 1.0;
+      noScale = 1.0;
+      noCount = 0;
+      updateButtonScales();
+
+      yesNoBox.style.display = 'flex';
+      textInputBox.style.display = 'none';
+      container.style.display = 'flex';
+
+      bubble.innerHTML = yesNoQuestions[yesNoIndex];
     }
 
-    function closeGift2() {
-      document.getElementById('gift2Modal').style.display = 'none';
+    function handleYes() {
+      yesNoIndex++;
+      if (yesNoIndex < yesNoQuestions.length) {
+        document.getElementById('speechBubble').innerHTML = yesNoQuestions[yesNoIndex];
+        yesScale = 1.0;
+        noScale = 1.0;
+        noCount = 0;
+        updateButtonScales();
+      } else {
+        document.getElementById('yesNoBox').style.display = 'none';
+        document.getElementById('textInputBox').style.display = 'flex';
+        showCurrentSeqItem();
+      }
+    }
+
+    function dodgeNo() {
+      const bubble = document.getElementById('speechBubble');
+      if (bubble && noResponses.length > 0) {
+        bubble.innerHTML = noResponses[noCount % noResponses.length];
+        noCount++;
+      }
+
+      yesScale += 0.25;
+      noScale -= 0.2;
+      updateButtonScales();
+    }
+
+    function updateButtonScales() {
+      const yesBtn = document.getElementById('yesBtn');
+      const noBtn = document.getElementById('noBtn');
+      
+      if (yesBtn) yesBtn.style.transform = `scale(${yesScale})`;
+      
+      if (noBtn) {
+        if (noScale <= 0.15) {
+          noBtn.style.opacity = '0';
+          noBtn.style.pointerEvents = 'none';
+          noBtn.style.transform = 'scale(0)';
+        } else {
+          noBtn.style.opacity = '1';
+          noBtn.style.pointerEvents = 'auto';
+          noBtn.style.transform = `scale(${noScale})`;
+        }
+      }
+    }
+
+    function showCurrentSeqItem() {
+      const bubble = document.getElementById('speechBubble');
+      const answerInput = document.getElementById('answerInput');
+      const submitBtn = document.getElementById('submitBtn');
+      const errorMsg = document.getElementById('errorMsg');
+      const cakeOverlay = document.getElementById('cakeOverlay');
+
+      errorMsg.style.display = 'none';
+      answerInput.value = '';
+
+      const current = sequence[seqIndex];
+      bubble.innerHTML = current.question;
+
+      if (seqIndex >= 7) {
+        cakeOverlay.classList.add('show-cake');
+      }
+
+      if (current.answer) {
+        answerInput.style.display = 'block';
+        submitBtn.innerHTML = "Submit";
+      } else {
+        answerInput.style.display = 'none';
+        submitBtn.innerHTML = "Next ➡️";
+      }
+    }
+
+    function checkAnswer() {
+      const current = sequence[seqIndex];
+      const answerInput = document.getElementById('answerInput');
+      const errorMsg = document.getElementById('errorMsg');
+
+      if (current.answer) {
+        const userVal = answerInput.value.trim().toLowerCase();
+        if (userVal === current.answer.toLowerCase()) {
+          advanceSequence();
+        } else {
+          errorMsg.innerHTML = "Wrong answer, cutie! Try again 😜";
+          errorMsg.style.display = 'block';
+        }
+      } else {
+        advanceSequence();
+      }
+    }
+
+    function advanceSequence() {
+      seqIndex++;
+      if (seqIndex < sequence.length) {
+        showCurrentSeqItem();
+      } else {
+        startCakeStage();
+      }
+    }
+
+    function startCakeStage() {
+      document.getElementById('mainContainer').style.display = 'none';
+      document.getElementById('cakeTableStage').style.display = 'flex';
+      document.getElementById('balloonContainer').classList.add('show-balloons');
+    }
+
+    function toggleRecordAudio() {
+      const voiceAudio = document.getElementById('voiceRecordAudio');
+      const vinylDisc = document.getElementById('vinylDisc');
+      const recordLabel = document.getElementById('recordLabel');
+      const blowBtn = document.getElementById('blowCandlesBtn');
+      const tableBubble = document.getElementById('tableSpeechBubble');
+
+      if (voiceAudio.paused) {
+        voiceAudio.play();
+        vinylDisc.classList.add('playing');
+        recordLabel.innerText = "Playing... 🎶";
+        if (tableBubble) tableBubble.innerText = "Listening to your special message... 💖";
+
+        voiceAudio.onended = function() {
+          vinylDisc.classList.remove('playing');
+          recordLabel.innerText = "Replay 🔄";
+          if (tableBubble) tableBubble.innerText = "Now blow out your candles, cutie! 🎂";
+          if (blowBtn) blowBtn.style.display = 'inline-block';
+        };
+      } else {
+        voiceAudio.pause();
+        vinylDisc.classList.remove('playing');
+        recordLabel.innerText = "Paused ⏸️";
+      }
+    }
+
+    function blowCandles() {
+      const flames = document.querySelectorAll('.stage-flame');
+      flames.forEach(f => f.classList.add('extinguished'));
+
+      const glow = document.getElementById('stageCandleGlow');
+      if (glow) glow.style.opacity = '0';
+
+      const smoke1 = document.getElementById('smoke1');
+      const smoke2 = document.getElementById('smoke2');
+      if (smoke1) smoke1.classList.add('active');
+      if (smoke2) smoke2.classList.add('active');
+
+      const blowBtn = document.getElementById('blowCandlesBtn');
+      if (blowBtn) blowBtn.style.display = 'none';
+
+      const tableBubble = document.getElementById('tableSpeechBubble');
+      if (tableBubble) tableBubble.innerText = "Make a wish! ✨";
+
+      setTimeout(() => {
+        document.getElementById('darkOverlay').style.display = 'flex';
+      }, 800);
+    }
+
+    function playSwitchClickSound() {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(180, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.05);
+
+        gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.05);
+      } catch (e) {
+        console.log("Audio context prevented or not supported", e);
+      }
+    }
+
+    function turnOnLightsAndGoToGift() {
+      playSwitchClickSound();
+
+      const switchToggle = document.getElementById('switchToggle');
+      switchToggle.style.transform = 'translateY(-8px)';
+      switchToggle.style.background = '#888';
+
+      setTimeout(() => {
+        document.getElementById('darkOverlay').style.display = 'none';
+        goToGiftsStage();
+      }, 350);
+    }
+
+    function goToGiftsStage() {
+      document.getElementById('cakeTableStage').style.display = 'none';
+      document.getElementById('giftOneView').style.display = 'none';
+      document.getElementById('giftsSection').style.display = 'block';
+      renderGifts();
+    }
+
+    function renderGifts() {
+      const grid = document.getElementById('giftsGrid');
+      grid.innerHTML = '';
+
+      giftsData.forEach(gift => {
+        const card = document.createElement('div');
+        card.className = `gift-card ${gift.isUnlocked ? 'unlocked' : ''}`;
+        card.onclick = () => handleCardClick(gift.id);
+
+        card.innerHTML = `
+          <div class="gift-icon">${gift.isUnlocked ? '🎁' : '🔒'}</div>
+          <div class="gift-title">${gift.title}</div>
+          <div class="gift-status">${gift.isUnlocked ? 'Unlocked!' : 'Locked (Click)'}</div>
+          ${gift.isUnlocked ? `<div class="reward-content">${gift.reward}</div>` : ''}
+        `;
+        grid.appendChild(card);
+      });
+
+      checkAllUnlocked();
+    }
+
+    function handleCardClick(id) {
+      const gift = giftsData.find(g => g.id === id);
+      if (gift.isUnlocked) {
+        if (id === 1) {
+          // Open Gift 1 Speech Bubble + Big Side-by-Side Frames View
+          document.getElementById('giftsSection').style.display = 'none';
+          document.getElementById('giftOneView').style.display = 'flex';
+        }
+      } else {
+        openGiftModal(id);
+      }
+    }
+
+    function closeGiftOneView() {
+      document.getElementById('giftOneView').style.display = 'none';
+      document.getElementById('giftsSection').style.display = 'block';
+    }
+
+    function openGiftModal(id) {
+      const gift = giftsData.find(g => g.id === id);
+      if (gift.isUnlocked) return;
+
+      currentModalGiftId = id;
+      document.getElementById('modalGiftTitle').innerText = `${gift.title} Challenge`;
+      document.getElementById('modalQuestionText').innerText = gift.question;
+      document.getElementById('giftAnswerInput').value = '';
+      document.getElementById('modalErrorMsg').style.display = 'none';
+      document.getElementById('modalOverlay').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+      currentModalGiftId = null;
+    }
+
+    function submitGiftAnswer() {
+      const inputVal = document.getElementById('giftAnswerInput').value.trim().toLowerCase();
+      const gift = giftsData.find(g => g.id === currentModalGiftId);
+
+      if (inputVal === gift.answer.toLowerCase()) {
+        gift.isUnlocked = true;
+        closeModal();
+        renderGifts();
+      } else {
+        document.getElementById('modalErrorMsg').style.display = 'block';
+      }
+    }
+
+    function checkAllUnlocked() {
+      const allUnlocked = giftsData.every(g => g.isUnlocked);
+      if (allUnlocked) {
+        document.getElementById('finalGiftSection').classList.add('active');
+      }
     }
   </script>
 </body>
