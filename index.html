@@ -641,102 +641,74 @@
       display: none;
     }
 
-    /* --- GIFT 1 STORYBOOK PAGE STYLING --- */
-    #storyPageSection {
+    /* --- GIFT 1 OPENED VIEW (SPEECH BUBBLE + 2 BIG FRAMES) --- */
+    #giftOneView {
       display: none;
       width: 100%;
-      max-width: 500px;
+      max-width: 440px;
       margin-top: 20px;
       z-index: 10;
       animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      text-align: center;
-    }
-
-    .book-container {
-      background: #fff;
-      border-radius: 25px;
-      padding: 30px 20px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-      position: relative;
-    }
-
-    /* Book Cover Style */
-    .book-cover {
-      background: linear-gradient(135deg, #ff6b81, #ff4757);
-      color: white;
-      padding: 40px 20px;
-      border-radius: 15px;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(255, 71, 87, 0.4);
-      transition: transform 0.2s ease;
-      margin-bottom: 15px;
-    }
-    .book-cover:hover {
-      transform: scale(1.03);
-    }
-    .book-cover h2 {
-      font-size: 1.5rem;
-      margin-bottom: 8px;
-    }
-    .book-cover p {
-      font-size: 0.95rem;
-      opacity: 0.9;
-    }
-
-    /* Book Interior (Hidden by default until opened) */
-    .book-interior {
-      display: none;
       flex-direction: column;
       align-items: center;
       gap: 20px;
     }
 
-    /* Custom Text Speech Bubble inside the Book */
-    .story-bubble {
-      background: #fdf2f4;
-      border: 2px dashed #ff6b81;
-      padding: 20px;
-      border-radius: 20px;
-      color: #4a4a4a;
+    /* Big Custom Text Speech Bubble */
+    .gift-speech-bubble {
+      background: white;
+      padding: 22px 25px;
+      border-radius: 25px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
       font-size: 1.05rem;
       line-height: 1.6;
-      text-align: left;
+      color: #4a4a4a;
+      text-align: center;
       width: 100%;
       position: relative;
-      box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
     }
 
-    /* Photo Gallery Section inside Book */
-    .photo-gallery {
+    .gift-speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 12px 12px 0;
+      border-style: solid;
+      border-color: white transparent;
+    }
+
+    /* Two Big Photo Frames Section */
+    .big-frames-container {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       gap: 15px;
       width: 100%;
     }
 
-    .photo-frame {
-      flex: 1;
-      background: #fcf8f9;
-      border: 3px solid #ffb3bc;
-      border-radius: 15px;
-      padding: 10px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    .big-photo-frame {
+      background: #ffffff;
+      border: 4px solid #ffb3bc;
+      border-radius: 20px;
+      padding: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
       text-align: center;
     }
 
-    .photo-frame img {
+    .big-photo-frame img {
       width: 100%;
-      height: 140px;
+      height: 220px;
       object-fit: cover;
-      border-radius: 10px;
+      border-radius: 14px;
       background: #eee;
     }
 
     .photo-caption {
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       font-weight: 600;
-      color: #777;
-      margin-top: 6px;
+      color: #666;
+      margin-top: 8px;
     }
 
     @media (max-width: 420px) {
@@ -744,7 +716,6 @@
       .table-surface { width: 340px; }
       .cake-wrapper { transform: scale(0.72); }
       .table-scene { margin-top: 170px; }
-      .photo-gallery { flex-direction: column; }
     }
   </style>
 </head>
@@ -919,44 +890,27 @@
     </div>
   </div>
 
-  <!-- GIFT 1 STORYBOOK PAGE WITH TEXT & 2 PHOTOS -->
-  <div id="storyPageSection">
-    <div class="book-container">
-      
-      <!-- Book Cover (Click to Open) -->
-      <div class="book-cover" id="bookCover" onclick="openBook()">
-        <h2>📖 Our Story Begins Here</h2>
-        <p>Tap to open your special book, cutie ✨</p>
-      </div>
-
-      <!-- Book Interior (Appears after clicking cover) -->
-      <div class="book-interior" id="bookInterior">
-        <h3 style="color: #ff4757; margin-bottom: 5px;">Chapter 1: Where We First Met ☕</h3>
-        
-        <!-- Text Bubble for your custom message -->
-        <div class="story-bubble">
-          <!-- ✍️ TYPE WHAT YOU WANT TO SAY TO HER HERE: -->
-          Remember that cozy little cafe? That was the exact moment I knew you were someone extraordinarily special. Every chat, every laugh, and every moment since then has been my absolute favorite part of the day. Happy 18th Birthday, cutie! 💖
-        </div>
-
-        <!-- 🖼️ TWO PHOTOS SECTION -->
-        <div class="photo-gallery">
-          <div class="photo-frame">
-            <!-- Replace photo1.jpg with your image file/URL -->
-            <img src="book.jpg" alt="Our Memory 1">
-            <div class="photo-caption">Our First Meeting 💫</div>
-          </div>
-          <div class="photo-frame">
-            <!-- Replace photo2.jpg with your image file/URL -->
-            <img src="glasses.jpg" alt="Our Memory 2">
-            <div class="photo-caption">Special Moments ✨</div>
-          </div>
-        </div>
-
-        <button class="btn yes-btn" onclick="closeBookToGifts()" style="margin-top: 5px;">⬅️ Back to Gifts</button>
-      </div>
-
+  <!-- GIFT 1 OPENED VIEW: SPEECH BUBBLE + 2 BIG FRAMES -->
+  <div id="giftOneView">
+    <!-- ✍️ Type your sweet words here: -->
+    <div class="gift-speech-bubble">
+      Remember that cozy little cafe? That was the exact moment I knew you were someone extraordinarily special. Every chat, every laugh, and every moment since then has been my absolute favorite part of the day. Happy 18th Birthday, cutie! 💖
     </div>
+
+    <div class="big-frames-container">
+      <div class="big-photo-frame">
+        <!-- 🖼️ Replace 'photo1.jpg' with your first picture file or URL -->
+        <img src="photo1.jpg" alt="Memory 1">
+        <div class="photo-caption">Our First Meeting 💫</div>
+      </div>
+      <div class="big-photo-frame">
+        <!-- 🖼️ Replace 'photo2.jpg' with your second picture file or URL -->
+        <img src="photo2.jpg" alt="Memory 2">
+        <div class="photo-caption">Special Moments ✨</div>
+      </div>
+    </div>
+
+    <button class="btn yes-btn" onclick="closeGiftOneView()" style="margin-top: 10px;">⬅️ Back to Gifts</button>
   </div>
 
   <div class="modal-overlay" id="modalOverlay">
@@ -1009,7 +963,7 @@
         title: "Gift 1",
         question: "Where did we first meet?",
         answer: "cafe",
-        reward: "📖 Open Storybook Chapter 1",
+        reward: "📸 View Your Sweet Memories!",
         isUnlocked: false
       },
       {
@@ -1260,7 +1214,7 @@
 
     function goToGiftsStage() {
       document.getElementById('cakeTableStage').style.display = 'none';
-      document.getElementById('storyPageSection').style.display = 'none';
+      document.getElementById('giftOneView').style.display = 'none';
       document.getElementById('giftsSection').style.display = 'block';
       renderGifts();
     }
@@ -1290,25 +1244,17 @@
       const gift = giftsData.find(g => g.id === id);
       if (gift.isUnlocked) {
         if (id === 1) {
-          // Open Gift 1 Story Page
+          // Open Gift 1 Speech Bubble + Big Frames View
           document.getElementById('giftsSection').style.display = 'none';
-          document.getElementById('storyPageSection').style.display = 'block';
-          // Reset book view to cover state
-          document.getElementById('bookCover').style.display = 'block';
-          document.getElementById('bookInterior').style.display = 'none';
+          document.getElementById('giftOneView').style.display = 'flex';
         }
       } else {
         openGiftModal(id);
       }
     }
 
-    function openBook() {
-      document.getElementById('bookCover').style.display = 'none';
-      document.getElementById('bookInterior').style.display = 'flex';
-    }
-
-    function closeBookToGifts() {
-      document.getElementById('storyPageSection').style.display = 'none';
+    function closeGiftOneView() {
+      document.getElementById('giftOneView').style.display = 'none';
       document.getElementById('giftsSection').style.display = 'block';
     }
 
