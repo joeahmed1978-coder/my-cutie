@@ -485,8 +485,8 @@
 
     .balloon {
       position: absolute;
-      width: 90px;  /* Increased size */
-      height: 180px; /* Increased size */
+      width: 90px;
+      height: 180px;
       opacity: 0;
       transition: opacity 1s ease-in-out;
     }
@@ -1025,45 +1025,41 @@
 
     function toggleRecordAudio() {
       const voiceAudio = document.getElementById('voiceRecordAudio');
-      const bgMusic = document.getElementById('bgMusic');
       const vinylDisc = document.getElementById('vinylDisc');
       const recordLabel = document.getElementById('recordLabel');
+      const blowCandlesBtn = document.getElementById('blowCandlesBtn');
+      const tableBubble = document.getElementById('tableSpeechBubble');
 
       if (voiceAudio.paused) {
-        if (bgMusic) bgMusic.pause();
-        voiceAudio.play();
+        voiceAudio.play().catch(e => console.log("Audio play error", e));
         vinylDisc.classList.add('playing');
-        recordLabel.innerHTML = "Playing... 🔊";
+        recordLabel.innerHTML = "Playing... 🎶";
+        tableBubble.innerHTML = "Listen closely to your special message! ❤️";
+        
+        voiceAudio.onended = function() {
+          vinylDisc.classList.remove('playing');
+          recordLabel.innerHTML = "Replay 🔄";
+          tableBubble.innerHTML = "Now you can blow out your candles, cutie! 🎂✨";
+          blowCandlesBtn.style.display = 'inline-block';
+        };
       } else {
         voiceAudio.pause();
         vinylDisc.classList.remove('playing');
         recordLabel.innerHTML = "Click to Play 🔊";
-        if (bgMusic) bgMusic.play();
       }
-
-      voiceAudio.onended = () => {
-        vinylDisc.classList.remove('playing');
-        recordLabel.innerHTML = "Click to Play 🔊";
-        if (bgMusic) bgMusic.play();
-        document.getElementById('blowCandlesBtn').style.display = 'inline-block';
-      };
-
-      document.getElementById('blowCandlesBtn').style.display = 'inline-block';
     }
 
     function blowCandles() {
-      const stageFlames = document.querySelectorAll('.stage-flame');
-      stageFlames.forEach(flame => flame.classList.add('extinguished'));
-      
-      const glow = document.getElementById('stageCandleGlow');
-      if (glow) glow.style.opacity = '0';
+      const flames = document.querySelectorAll('.stage-flame');
+      flames.forEach(f => f.classList.add('extinguished'));
 
-      const s1 = document.getElementById('smoke1');
-      const s2 = document.getElementById('smoke2');
-      if (s1) s1.classList.add('active');
-      if (s2) s2.classList.add('active');
+      document.getElementById('stageCandleGlow').style.display = 'none';
+      document.getElementById('smoke1').classList.add('active');
+      document.getElementById('smoke2').classList.add('active');
 
-      document.getElementById('tableSpeechBubble').innerHTML = "Make a wish! 💖✨";
+      const tableBubble = document.getElementById('tableSpeechBubble');
+      tableBubble.innerHTML = "Yay! Happy 18th Birthday Malak!! 🎉🥳 Now open your gifts below!";
+
       document.getElementById('blowCandlesBtn').style.display = 'none';
       document.getElementById('toGiftsBtn').style.display = 'inline-block';
     }
@@ -1071,10 +1067,10 @@
     function goToGiftsStage() {
       document.getElementById('cakeTableStage').style.display = 'none';
       document.getElementById('giftsSection').style.display = 'block';
-      renderGifts();
+      renderGiftsGrid();
     }
 
-    function renderGifts() {
+    function renderGiftsGrid() {
       const grid = document.getElementById('giftsGrid');
       grid.innerHTML = '';
 
@@ -1083,58 +1079,50 @@
         card.className = `gift-card ${gift.isUnlocked ? 'unlocked' : ''}`;
         card.onclick = () => openGiftModal(gift.id);
 
-        if (gift.isUnlocked) {
-          card.innerHTML = `
-            <div class="gift-icon">🎁</div>
-            <div class="gift-title">${gift.title}</div>
-            <div class="gift-status">Unlocked 🔓</div>
-            <div class="reward-content">${gift.reward}</div>
-          `;
-        } else {
-          card.innerHTML = `
-            <div class="gift-icon">🔒</div>
-            <div class="gift-title">${gift.title}</div>
-            <div class="gift-status">Tap to Unlock</div>
-          `;
-        }
+        card.innerHTML = `
+          <div class="gift-icon">${gift.isUnlocked ? '🎁' : '🔒'}</div>
+          <div class="gift-title">${gift.title}</div>
+          <div class="gift-status">${gift.isUnlocked ? 'Unlocked!' : 'Tap to Open'}</div>
+          ${gift.isUnlocked ? `<div class="reward-content">${gift.reward}</div>` : ''}
+        `;
         grid.appendChild(card);
       });
-
-      checkAllGiftsUnlocked();
     }
 
-    function openGiftModal(giftId) {
-      const gift = giftsData.find(g => g.id === giftId);
-      if (!gift || gift.isUnlocked) return;
+    function openGiftModal(id) {
+      const gift = giftsData.find(g => g.id === id);
+      if (gift.isUnlocked) return;
 
-      currentModalGiftId = giftId;
-      document.getElementById('modalGiftTitle').innerText = gift.title;
-      document.getElementById('modalQuestionText').innerText = gift.question;
+      currentModalGiftId = id;
+      document.getElementById('modalGiftTitle').innerHTML = `${gift.title} Question`;
+      document.getElementById('modalQuestionText').innerHTML = gift.question;
       document.getElementById('giftAnswerInput').value = '';
       document.getElementById('modalErrorMsg').style.display = 'none';
       document.getElementById('modalOverlay').classList.add('active');
-    }
-
-    function submitGiftAnswer() {
-      const gift = giftsData.find(g => g.id === currentModalGiftId);
-      const userAns = document.getElementById('giftAnswerInput').value.trim().toLowerCase();
-
-      if (userAns === gift.answer.toLowerCase()) {
-        gift.isUnlocked = true;
-        closeModal();
-        renderGifts();
-      } else {
-        document.getElementById('modalErrorMsg').style.display = 'block';
-      }
     }
 
     function closeModal() {
       document.getElementById('modalOverlay').classList.remove('active');
     }
 
+    function submitGiftAnswer() {
+      const gift = giftsData.find(g => g.id === currentModalGiftId);
+      const userVal = document.getElementById('giftAnswerInput').value.trim().toLowerCase();
+      const errorMsg = document.getElementById('modalErrorMsg');
+
+      if (userVal === gift.answer.toLowerCase()) {
+        gift.isUnlocked = true;
+        closeModal();
+        renderGiftsGrid();
+        checkAllGiftsUnlocked();
+      } else {
+        errorMsg.style.display = 'block';
+      }
+    }
+
     function checkAllGiftsUnlocked() {
-      const allDone = giftsData.every(g => g.isUnlocked);
-      if (allDone) {
+      const allUnlocked = giftsData.every(g => g.isUnlocked);
+      if (allUnlocked) {
         document.getElementById('finalGiftSection').classList.add('active');
       }
     }
