@@ -800,20 +800,19 @@
     </div>
   </div>
 
-  <!-- DARK SCREEN OVERLAY WITH SPEECH BUBBLE & LIGHT SWITCH -->
+  <!-- DARK SCREEN OVERLAY WITH SPEECH BUBBLE & BLANK LIGHT SWITCH -->
   <div id="darkOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center;">
     
     <!-- Speech Bubble -->
     <div style="background: white; color: black; padding: 18px 25px; border-radius: 20px; font-size: 22px; font-weight: bold; position: relative; margin-bottom: 40px; box-shadow: 0 4px 15px rgba(255,255,255,0.2);">
-      hey don't blow out this hard , you blew out the sun!! let's get it back up 
+      Who turned off the lights?! 
       <!-- Little arrow pointing down from bubble -->
       <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 10px solid white;"></div>
     </div>
 
-    <!-- Light Switch Graphic / Button -->
+    <!-- Blank Light Switch Graphic / Button -->
     <div onclick="turnOnLightsAndGoToGift()" style="cursor: pointer; background: #333; border: 4px solid #555; padding: 20px 30px; border-radius: 12px; box-shadow: 0 6px 0 #222, 0 10px 20px rgba(0,0,0,0.5); transition: 0.1s;">
-      <div style="font-size: 14px; color: #aaa; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Light Switch</div>
-      <div id="switchToggle" style="background: #cc0000; color: white; padding: 10px 20px; border-radius: 6px; font-weight: bold; font-size: 18px;">OFF</div>
+      <div id="switchToggle" style="background: #cc0000; width: 50px; height: 35px; border-radius: 6px; margin: 0 auto; transition: background 0.2s;"></div>
     </div>
   </div>
 
@@ -1084,7 +1083,7 @@
       const tableBubble = document.getElementById('tableSpeechBubble');
       if (tableBubble) tableBubble.innerText = "Make a wish! ✨";
 
-      // Show the dark overlay with speech bubble and switch
+      // Show the dark overlay with speech bubble and blank switch
       setTimeout(() => {
         document.getElementById('darkOverlay').style.display = 'flex';
       }, 800);
@@ -1093,13 +1092,12 @@
     function turnOnLightsAndGoToGift() {
       const switchToggle = document.getElementById('switchToggle');
       switchToggle.style.background = '#00cc44';
-      switchToggle.innerText = 'ON';
 
       setTimeout(() => {
         // Hide the dark overlay
         document.getElementById('darkOverlay').style.display = 'none';
         
-        // Transition to the untouched gifts stage
+        // Transition to the gifts stage
         goToGiftsStage();
       }, 400);
     }
