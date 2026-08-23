@@ -665,7 +665,7 @@
       color: #4a4a4a;
       text-align: center;
       width: 100%;
-      max-width: 650px;
+      max-width: 750px;
       position: relative;
     }
 
@@ -799,17 +799,44 @@
       border-color: #ffffff transparent;
     }
 
-    /* --- GIFT 4 VIEW: CHAT BUBBLE + SINGLE PHOTO FRAME --- */
+    /* --- GIFT 4 VIEW: CHAT BUBBLE + 5 PHOTO FRAMES BELOW (GRID STYLE) --- */
     #giftFourView {
       display: none;
       width: 100%;
-      max-width: 650px;
+      max-width: 780px;
       margin-top: 20px;
       z-index: 10;
       animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       flex-direction: column;
       align-items: center;
       gap: 20px;
+    }
+
+    .five-frames-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .five-frames-grid .big-photo-frame {
+      max-width: 100%;
+    }
+
+    .five-frames-grid .big-photo-frame img {
+      height: 200px;
+    }
+
+    /* Make the last two frames span nicely or align centered if preferred */
+    .five-frames-grid .big-photo-frame:nth-child(4) {
+      grid-column: 1 / span 1.5;
+    }
+
+    @media (max-width: 700px) {
+      .five-frames-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     @media (max-width: 650px) {
@@ -823,6 +850,9 @@
       }
       .big-photo-frame img {
         height: 260px;
+      }
+      .five-frames-grid {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -1045,15 +1075,33 @@
     <button class="btn yes-btn" onclick="closeGiftThreeView()" style="margin-top: 5px;">⬅️ Back to Gifts</button>
   </div>
 
-  <!-- GIFT 4 CHAT & PHOTO FRAME VIEW -->
+  <!-- GIFT 4 VIEW: CHAT BUBBLE + 5 PHOTO FRAMES BELOW -->
   <div id="giftFourView">
-    <div class="chat-bubble-container">
+    <div class="gift-speech-bubble">
       Here is your special 4th gift message or note goes here! ✨💖
     </div>
 
-    <div class="big-photo-frame" style="max-width: 380px; width: 100%; margin: 0 auto;">
-      <img src="gift4-photo.jpg" alt="Gift 4 Memory">
-      <div class="photo-caption">Happy 18th Birthday, Malak! 🎉</div>
+    <div class="five-frames-grid">
+      <div class="big-photo-frame">
+        <img src="gift4-photo1.jpg" alt="Gift 4 Memory 1">
+        <div class="photo-caption"></div>
+      </div>
+      <div class="big-photo-frame">
+        <img src="gift4-photo2.jpg" alt="Gift 4 Memory 2">
+        <div class="photo-caption"></div>
+      </div>
+      <div class="big-photo-frame">
+        <img src="gift4-photo3.jpg" alt="Gift 4 Memory 3">
+        <div class="photo-caption"></div>
+      </div>
+      <div class="big-photo-frame">
+        <img src="gift4-photo4.jpg" alt="Gift 4 Memory 4">
+        <div class="photo-caption"></div>
+      </div>
+      <div class="big-photo-frame">
+        <img src="gift4-photo5.jpg" alt="Gift 4 Memory 5">
+        <div class="photo-caption"></div>
+      </div>
     </div>
 
     <button class="btn yes-btn" onclick="closeGiftFourView()" style="margin-top: 15px;">⬅️ Back to Gifts</button>
