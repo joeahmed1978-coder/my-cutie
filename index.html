@@ -770,53 +770,33 @@
       border: none;
     }
 
+    /* Speech Bubble positioned above the video */
     .chat-bubble-container {
       background: #ffffff;
-      padding: 20px;
+      padding: 18px 25px;
       border-radius: 25px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #4a4a4a;
       width: 100%;
       max-width: 600px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      border: 2px solid #ffb3bc;
+      text-align: center;
+      position: relative;
+      border: none;
+      line-height: 1.5;
     }
 
-    .chat-messages {
-      max-height: 150px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      padding-right: 5px;
-    }
-
-    .chat-msg {
-      background: #fff0f2;
-      padding: 10px 15px;
-      border-radius: 15px;
-      font-size: 0.95rem;
-      color: #4a4a4a;
-      align-self: flex-start;
-      border-bottom-left-radius: 3px;
-      max-width: 85%;
-      word-break: break-word;
-    }
-
-    .chat-input-row {
-      display: flex;
-      gap: 10px;
-    }
-
-    .chat-input-row input {
-      flex: 1;
-      padding: 10px 15px;
-      border-radius: 20px;
-      border: 2px solid #ff6b81;
-      outline: none;
-      font-size: 0.95rem;
-      font-family: inherit;
+    /* Downward speech bubble pointer */
+    .chat-bubble-container::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 12px 12px 0;
+      border-style: solid;
+      border-color: #ffffff transparent;
     }
 
     @media (max-width: 650px) {
@@ -1041,18 +1021,14 @@
 
   <!-- GIFT 3 YOUTUBE & CHAT VIEW -->
   <div id="giftThreeView">
-    <div class="video-container" id="youtubeVideoContainer">
-      <div id="youtubePlayer"></div>
+    <!-- Speech Bubble placed ABOVE the video -->
+    <div class="chat-bubble-container">
+      Hey cutie! Enjoy watching this video together 💖
     </div>
 
-    <div class="chat-bubble-container">
-      <div class="chat-messages" id="chatMessages">
-        <div class="chat-msg">Hey cutie! Enjoy watching this together 💖 Type anything below!</div>
-      </div>
-      <div class="chat-input-row">
-        <input type="text" id="chatInputText" placeholder="Type a message..." />
-        <button class="btn yes-btn" onclick="sendChatMessage()">Send 💬</button>
-      </div>
+    <!-- YouTube Video Container -->
+    <div class="video-container" id="youtubeVideoContainer">
+      <div id="youtubePlayer"></div>
     </div>
 
     <button class="btn yes-btn" onclick="closeGiftThreeView()" style="margin-top: 5px;">⬅️ Back to Gifts</button>
@@ -1305,7 +1281,6 @@
       const tableBubble = document.getElementById('tableSpeechBubble');
 
       if (voiceAudio.paused) {
-        // Pause background music temporarily while the record plays
         if (bgMusic && !bgMusic.paused) {
           bgMusic.pause();
         }
@@ -1321,7 +1296,6 @@
           if (tableBubble) tableBubble.innerText = "Now blow out your candles, cutie! 🎂";
           if (blowBtn) blowBtn.style.display = 'inline-block';
 
-          // Resume background music automatically after the record finishes playing
           if (bgMusic) {
             bgMusic.play().catch(e => console.log("Background music resume blocked", e));
           }
@@ -1331,7 +1305,6 @@
         vinylDisc.classList.remove('playing');
         recordLabel.innerText = "Paused ⏸️";
         
-        // Resume background music if manually paused
         if (bgMusic) {
           bgMusic.play().catch(e => console.log(e));
         }
@@ -1462,24 +1435,6 @@
 
       document.getElementById('giftThreeView').style.display = 'none';
       document.getElementById('giftsSection').style.display = 'block';
-    }
-
-    function sendChatMessage() {
-      const input = document.getElementById('chatInputText');
-      const text = input.value.trim();
-      if (!text) return;
-
-      const messagesContainer = document.getElementById('chatMessages');
-      const msgDiv = document.createElement('div');
-      msgDiv.className = 'chat-msg';
-      msgDiv.style.alignSelf = 'flex-end';
-      msgDiv.style.background = '#ff6b81';
-      msgDiv.style.color = '#ffffff';
-      msgDiv.innerText = text;
-
-      messagesContainer.appendChild(msgDiv);
-      input.value = '';
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
 
     function openGiftModal(id) {
