@@ -799,6 +799,19 @@
       border-color: #ffffff transparent;
     }
 
+    /* --- GIFT 4 VIEW: CHAT BUBBLE + SINGLE PHOTO FRAME --- */
+    #giftFourView {
+      display: none;
+      width: 100%;
+      max-width: 650px;
+      margin-top: 20px;
+      z-index: 10;
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
     @media (max-width: 650px) {
       .big-frames-container {
         flex-direction: column;
@@ -1021,17 +1034,29 @@
 
   <!-- GIFT 3 YOUTUBE & CHAT VIEW -->
   <div id="giftThreeView">
-    <!-- Speech Bubble placed ABOVE the video -->
     <div class="chat-bubble-container">
       I need you to stay 💖
     </div>
 
-    <!-- YouTube Video Container -->
     <div class="video-container" id="youtubeVideoContainer">
       <div id="youtubePlayer"></div>
     </div>
 
     <button class="btn yes-btn" onclick="closeGiftThreeView()" style="margin-top: 5px;">⬅️ Back to Gifts</button>
+  </div>
+
+  <!-- GIFT 4 CHAT & PHOTO FRAME VIEW -->
+  <div id="giftFourView">
+    <div class="chat-bubble-container">
+      Here is your special 4th gift message or note goes here! ✨💖
+    </div>
+
+    <div class="big-photo-frame" style="max-width: 380px; width: 100%; margin: 0 auto;">
+      <img src="gift4-photo.jpg" alt="Gift 4 Memory">
+      <div class="photo-caption">Happy 18th Birthday, Malak! 🎉</div>
+    </div>
+
+    <button class="btn yes-btn" onclick="closeGiftFourView()" style="margin-top: 15px;">⬅️ Back to Gifts</button>
   </div>
 
   <div class="modal-overlay" id="modalOverlay">
@@ -1375,6 +1400,7 @@
       document.getElementById('giftOneView').style.display = 'none';
       document.getElementById('giftTwoView').style.display = 'none';
       document.getElementById('giftThreeView').style.display = 'none';
+      document.getElementById('giftFourView').style.display = 'none';
       document.getElementById('giftsSection').style.display = 'block';
       renderGifts();
     }
@@ -1412,6 +1438,9 @@
         } else if (id === 3) {
           document.getElementById('giftsSection').style.display = 'none';
           document.getElementById('giftThreeView').style.display = 'flex';
+        } else if (id === 4) {
+          document.getElementById('giftsSection').style.display = 'none';
+          document.getElementById('giftFourView').style.display = 'flex';
         }
       } else {
         openGiftModal(id);
@@ -1434,6 +1463,11 @@
       }
 
       document.getElementById('giftThreeView').style.display = 'none';
+      document.getElementById('giftsSection').style.display = 'block';
+    }
+
+    function closeGiftFourView() {
+      document.getElementById('giftFourView').style.display = 'none';
       document.getElementById('giftsSection').style.display = 'block';
     }
 
