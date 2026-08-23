@@ -715,11 +715,11 @@
       margin-top: 10px;
     }
 
-    /* --- GIFT 2 LETTER VIEW (NO FRAME, NO FLOATING, CENTERED, BIGGER) --- */
+    /* --- GIFT 2 LETTER VIEW (LARGER SIZE ~3.5X) --- */
     #giftTwoView {
       display: none;
       width: 100%;
-      max-width: 650px;
+      max-width: 1450px;
       margin-top: 20px;
       z-index: 10;
       animation: slideUpFade 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
@@ -729,7 +729,8 @@
     }
 
     .letter-photo {
-      width: 420px;
+      width: 1400px;
+      max-width: 95vw;
       height: auto;
       object-fit: contain;
       user-select: none;
@@ -747,9 +748,6 @@
       .big-photo-frame img {
         height: 260px;
       }
-      .letter-photo {
-        width: 320px;
-      }
     }
 
     @media (max-width: 420px) {
@@ -757,7 +755,6 @@
       .table-surface { width: 340px; }
       .cake-wrapper { transform: scale(0.72); }
       .table-scene { margin-top: 170px; }
-      .letter-photo { width: 280px; }
     }
   </style>
 </head>
@@ -952,9 +949,8 @@
     <button class="btn yes-btn" onclick="closeGiftOneView()" style="margin-top: 15px;">⬅️ Back to Gifts</button>
   </div>
 
-  <!-- GIFT 2 LETTER VIEW: LETTER PNG WITH NO FRAME, CENTERED, BIGGER -->
+  <!-- GIFT 2 LETTER VIEW: LARGER LETTER PHOTO -->
   <div id="giftTwoView">
-    <!-- 🖼️ Updated to letter.png -->
     <img src="letter.png" alt="Letter Photo" class="letter-photo">
 
     <button class="btn yes-btn" onclick="closeGiftTwoView()" style="margin-top: 15px;">⬅️ Back to Gifts</button>
