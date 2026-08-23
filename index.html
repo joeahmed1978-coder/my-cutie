@@ -641,6 +641,71 @@
       display: none;
     }
 
+    /* --- GIFT 1 STORYBOOK PAGE STYLING --- */
+    #storyPageSection {
+      display: none;
+      width: 100%;
+      max-width: 500px;
+      margin-top: 20px;
+      z-index: 10;
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      text-align: center;
+    }
+
+    .book-container {
+      background: #fff;
+      border-radius: 25px;
+      padding: 30px 20px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+      position: relative;
+    }
+
+    /* Book Cover Style */
+    .book-cover {
+      background: linear-gradient(135deg, #ff6b81, #ff4757);
+      color: white;
+      padding: 40px 20px;
+      border-radius: 15px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(255, 71, 87, 0.4);
+      transition: transform 0.2s ease;
+      margin-bottom: 15px;
+    }
+    .book-cover:hover {
+      transform: scale(1.03);
+    }
+    .book-cover h2 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+    .book-cover p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    /* Book Interior (Hidden by default until opened) */
+    .book-interior {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Custom Text Speech Bubble inside the Book */
+    .story-bubble {
+      background: #fdf2f4;
+      border: 2px dashed #ff6b81;
+      padding: 20px;
+      border-radius: 20px;
+      color: #4a4a4a;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      text-align: left;
+      width: 100%;
+      position: relative;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+    }
+
     @media (max-width: 420px) {
       .gifts-grid { grid-template-columns: 1fr; }
       .table-surface { width: 340px; }
@@ -805,7 +870,7 @@
     
     <!-- Speech Bubble -->
     <div style="background: white; color: black; padding: 18px 25px; border-radius: 20px; font-size: 22px; font-weight: bold; position: relative; margin-bottom: 40px; box-shadow: 0 4px 15px rgba(255,255,255,0.2);">
-      Hey, don't blow out this hard, you blew out the sun!!!! Turn it back up and let's see your gifts
+      Who turned off the lights?! 
       <!-- Little arrow pointing down from bubble -->
       <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 10px solid white;"></div>
     </div>
@@ -822,6 +887,32 @@
     <div class="final-gift-section" id="finalGiftSection">
       <h2>🎉 All Gifts Unlocked! 🎉</h2>
       <p>You answered all the gift questions correctly! Here is your final surprise grand prize 🎁✨</p>
+    </div>
+  </div>
+
+  <!-- GIFT 1 STORYBOOK PAGE -->
+  <div id="storyPageSection">
+    <div class="book-container">
+      
+      <!-- Book Cover (Click to Open) -->
+      <div class="book-cover" id="bookCover" onclick="openBook()">
+        <h2>📖 Our Story Begins Here</h2>
+        <p>Tap to open your special book, cutie ✨</p>
+      </div>
+
+      <!-- Book Interior (Appears after clicking cover) -->
+      <div class="book-interior" id="bookInterior">
+        <h3 style="color: #ff4757; margin-bottom: 5px;">Chapter 1: Where We First Met ☕</h3>
+        
+        <!-- Text Bubble for your custom message -->
+        <div class="story-bubble">
+          <!-- ✍️ TYPE WHAT YOU WANT TO SAY TO HER HERE: -->
+          Remember that cozy little cafe? That was the exact moment I knew you were someone extraordinarily special. Every chat, every laugh, and every moment since then has been my absolute favorite part of the day. Happy 18th Birthday, cutie! 💖
+        </div>
+
+        <button class="btn yes-btn" onclick="closeBookToGifts()">⬅️ Back to Gifts</button>
+      </div>
+
     </div>
   </div>
 
@@ -875,7 +966,7 @@
         title: "Gift 1",
         question: "Where did we first meet?",
         answer: "cafe",
-        reward: "☕ A cozy coffee date on me!",
+        reward: "📖 Open Storybook Chapter 1",
         isUnlocked: false
       },
       {
@@ -1083,13 +1174,11 @@
       const tableBubble = document.getElementById('tableSpeechBubble');
       if (tableBubble) tableBubble.innerText = "Make a wish! ✨";
 
-      // Show the dark overlay with speech bubble and clean blank switch
       setTimeout(() => {
         document.getElementById('darkOverlay').style.display = 'flex';
       }, 800);
     }
 
-    // Function to play a realistic physical light switch click sound using Web Audio API
     function playSwitchClickSound() {
       try {
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -1114,25 +1203,21 @@
     }
 
     function turnOnLightsAndGoToGift() {
-      // Play the mechanical click sound
       playSwitchClickSound();
 
       const switchToggle = document.getElementById('switchToggle');
-      // Slide the switch up/down to show it was activated
       switchToggle.style.transform = 'translateY(-8px)';
       switchToggle.style.background = '#888';
 
       setTimeout(() => {
-        // Hide the dark overlay
         document.getElementById('darkOverlay').style.display = 'none';
-        
-        // Transition to the gifts stage
         goToGiftsStage();
       }, 350);
     }
 
     function goToGiftsStage() {
       document.getElementById('cakeTableStage').style.display = 'none';
+      document.getElementById('storyPageSection').style.display = 'none';
       document.getElementById('giftsSection').style.display = 'block';
       renderGifts();
     }
@@ -1144,7 +1229,7 @@
       giftsData.forEach(gift => {
         const card = document.createElement('div');
         card.className = `gift-card ${gift.isUnlocked ? 'unlocked' : ''}`;
-        card.onclick = () => openGiftModal(gift.id);
+        card.onclick = () => handleCardClick(gift.id);
 
         card.innerHTML = `
           <div class="gift-icon">${gift.isUnlocked ? '🎁' : '🔒'}</div>
@@ -1156,6 +1241,32 @@
       });
 
       checkAllUnlocked();
+    }
+
+    function handleCardClick(id) {
+      const gift = giftsData.find(g => g.id === id);
+      if (gift.isUnlocked) {
+        if (id === 1) {
+          // Open Gift 1 Story Page
+          document.getElementById('giftsSection').style.display = 'none';
+          document.getElementById('storyPageSection').style.display = 'block';
+          // Reset book view to cover state
+          document.getElementById('bookCover').style.display = 'block';
+          document.getElementById('bookInterior').style.display = 'none';
+        }
+      } else {
+        openGiftModal(id);
+      }
+    }
+
+    function openBook() {
+      document.getElementById('bookCover').style.display = 'none';
+      document.getElementById('bookInterior').style.display = 'flex';
+    }
+
+    function closeBookToGifts() {
+      document.getElementById('storyPageSection').style.display = 'none';
+      document.getElementById('giftsSection').style.display = 'block';
     }
 
     function openGiftModal(id) {
