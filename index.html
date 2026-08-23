@@ -715,6 +715,27 @@
       margin-top: 10px;
     }
 
+    /* --- GIFT 2 LETTER VIEW (LARGER SIZE ~3.5X) --- */
+    #giftTwoView {
+      display: none;
+      width: 100%;
+      max-width: 1450px;
+      margin-top: 20px;
+      z-index: 10;
+      animation: slideUpFade 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .letter-photo {
+      width: 1400px;
+      max-width: 95vw;
+      height: auto;
+      object-fit: contain;
+      user-select: none;
+    }
+
     @media (max-width: 650px) {
       .big-frames-container {
         flex-direction: column;
@@ -910,25 +931,29 @@
 
   <!-- GIFT 1 OPENED VIEW: SPEECH BUBBLE + 2 BIG SIDE-BY-SIDE FRAMES -->
   <div id="giftOneView">
-    <!-- ✍️ Type your sweet words here: -->
     <div class="gift-speech-bubble">
       I have got you a book.To be honest i didn't read it but that's the point i want you to read it for us. Here are your glasses to make you read better , i know you like to read without them but i'll put my head on your lap and you won't stop reading until i fall asleep so you gonna need those glasses. we will keep playing with each other's hair and i'll keep staring to these beautiful eyes that are reading the book and maybe won't listen to anything of what you are reading because of how stunned iam and wonder how can something be this beautiful!! and maybe after that i'll get you to lay down and lay my head on your chest ,hug you tightly and give you a kiss on your cheek every now and then and you will keep patting my head and give me kisses on my hair until i fall asleep and sleep like a baby between your arms feeling the warmth of you and how safe it is when i am with you.
     </div>
 
     <div class="big-frames-container">
       <div class="big-photo-frame">
-        <!-- 🖼️ Replace 'photo1.jpg' with your first picture file or URL -->
         <img src="book.jpg" alt="Memory 1">
         <div class="photo-caption"></div>
       </div>
       <div class="big-photo-frame">
-        <!-- 🖼️ Replace 'photo2.jpg' with your second picture file or URL -->
         <img src="glasses.jpg" alt="Memory 2">
         <div class="photo-caption"></div>
       </div>
     </div>
 
     <button class="btn yes-btn" onclick="closeGiftOneView()" style="margin-top: 15px;">⬅️ Back to Gifts</button>
+  </div>
+
+  <!-- GIFT 2 LETTER VIEW: LARGER LETTER PHOTO -->
+  <div id="giftTwoView">
+    <img src="letter.png" alt="Letter Photo" class="letter-photo">
+
+    <button class="btn yes-btn" onclick="closeGiftTwoView()" style="margin-top: 15px;">⬅️ Back to Gifts</button>
   </div>
 
   <div class="modal-overlay" id="modalOverlay">
@@ -1233,6 +1258,7 @@
     function goToGiftsStage() {
       document.getElementById('cakeTableStage').style.display = 'none';
       document.getElementById('giftOneView').style.display = 'none';
+      document.getElementById('giftTwoView').style.display = 'none';
       document.getElementById('giftsSection').style.display = 'block';
       renderGifts();
     }
@@ -1262,9 +1288,11 @@
       const gift = giftsData.find(g => g.id === id);
       if (gift.isUnlocked) {
         if (id === 1) {
-          // Open Gift 1 Speech Bubble + Big Side-by-Side Frames View
           document.getElementById('giftsSection').style.display = 'none';
           document.getElementById('giftOneView').style.display = 'flex';
+        } else if (id === 2) {
+          document.getElementById('giftsSection').style.display = 'none';
+          document.getElementById('giftTwoView').style.display = 'flex';
         }
       } else {
         openGiftModal(id);
@@ -1273,6 +1301,11 @@
 
     function closeGiftOneView() {
       document.getElementById('giftOneView').style.display = 'none';
+      document.getElementById('giftsSection').style.display = 'block';
+    }
+
+    function closeGiftTwoView() {
+      document.getElementById('giftTwoView').style.display = 'none';
       document.getElementById('giftsSection').style.display = 'block';
     }
 
