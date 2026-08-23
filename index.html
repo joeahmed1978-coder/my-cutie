@@ -574,9 +574,9 @@
       animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .final-gift-section.active { display: block; }
+    .final-gift-section.active { display: flex; flex-direction: column; align-items: center; }
     .final-gift-section h2 { color: #ff4757; font-size: 1.4rem; margin-bottom: 8px; }
-    .final-gift-section p { color: #4a4a4a; font-size: 0.95rem; line-height: 1.5; }
+    .final-gift-section p { color: #4a4a4a; font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px; }
 
     @keyframes popIn {
       0% { transform: scale(0.8); opacity: 0; }
@@ -828,9 +828,21 @@
       height: 200px;
     }
 
-    /* Make the last two frames span nicely or align centered if preferred */
     .five-frames-grid .big-photo-frame:nth-child(4) {
       grid-column: 1 / span 1.5;
+    }
+
+    /* --- FINAL CELEBRATION PAGE VIEW --- */
+    #finalPageView {
+      display: none;
+      width: 100%;
+      max-width: 500px;
+      margin-top: 20px;
+      z-index: 10;
+      animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
     }
 
     @media (max-width: 700px) {
@@ -1033,6 +1045,7 @@
     <div class="final-gift-section" id="finalGiftSection">
       <h2>🎉 All Gifts Unlocked! 🎉</h2>
       <p>You answered all the gift questions correctly! Here is your final surprise grand prize 🎁✨</p>
+      <button class="btn yes-btn" onclick="goToFinalPage()">Go to Final Celebration Page 🚀✨</button>
     </div>
   </div>
 
@@ -1107,6 +1120,17 @@
     <button class="btn yes-btn" onclick="closeGiftFourView()" style="margin-top: 15px;">⬅️ Back to Gifts</button>
   </div>
 
+  <!-- FINAL CELEBRATION PAGE -->
+  <div id="finalPageView">
+    <div class="speech-bubble">
+      I love you so much Malak, Happy 18th Birthday again! You mean the absolute world to me. ❤️✨
+    </div>
+    <div class="character-wrapper">
+      <img src="cartoon-you.png" alt="Cartoon Me" class="character">
+    </div>
+    <button class="btn yes-btn" onclick="backFromFinalPage()" style="margin-top: 15px;">⬅️ Back to Gifts</button>
+  </div>
+
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
       <h3 id="modalGiftTitle">Gift #1 Question</h3>
@@ -1114,7 +1138,7 @@
       <input type="text" id="giftAnswerInput" placeholder="Type your answer..." />
       <div class="modal-error-msg" id="modalErrorMsg">Incorrect answer! Try again 😜</div>
       <div class="modal-buttons">
-        <button class="btn yes-btn" onclick="submitGiftAnswer()">Unlock 🔓</button>
+        <button class="btn yes-btn" id="modalUnlockBtn" onclick="submitGiftAnswer()">Unlock 🔓</button>
         <button class="btn no-btn" onclick="closeModal()">Cancel</button>
       </div>
     </div>
@@ -1212,6 +1236,27 @@
 
     let currentModalGiftId = null;
 
+    // --- GLOBAL ENTER KEY LISTENER SUPPORT ---
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        // 1. Check if Modal is active
+        const modalOverlay = document.getElementById('modalOverlay');
+        if (modalOverlay.classList.contains('active')) {
+          event.preventDefault();
+          submitGiftAnswer();
+          return;
+        }
+
+        // 2. Check if main sequence text input is visible
+        const textInputBox = document.getElementById('textInputBox');
+        if (textInputBox && textInputBox.style.display !== 'none') {
+          event.preventDefault();
+          checkAnswer();
+          return;
+        }
+      }
+    });
+
     function startQuestion() {
       if (isStarted) return;
       isStarted = true;
@@ -1306,6 +1351,7 @@
       if (current.answer) {
         answerInput.style.display = 'block';
         submitBtn.innerHTML = "Submit";
+        setTimeout(() => answerInput.focus(), 50);
       } else {
         answerInput.style.display = 'none';
         submitBtn.innerHTML = "Next ➡️";
@@ -1449,6 +1495,7 @@
       document.getElementById('giftTwoView').style.display = 'none';
       document.getElementById('giftThreeView').style.display = 'none';
       document.getElementById('giftFourView').style.display = 'none';
+      document.getElementById('finalPageView').style.display = 'none';
       document.getElementById('giftsSection').style.display = 'block';
       renderGifts();
     }
@@ -1519,6 +1566,16 @@
       document.getElementById('giftsSection').style.display = 'block';
     }
 
+    function goToFinalPage() {
+      document.getElementById('giftsSection').style.display = 'none';
+      document.getElementById('finalPageView').style.display = 'flex';
+    }
+
+    function backFromFinalPage() {
+      document.getElementById('finalPageView').style.display = 'none';
+      document.getElementById('giftsSection').style.display = 'block';
+    }
+
     function openGiftModal(id) {
       const gift = giftsData.find(g => g.id === id);
       if (gift.isUnlocked) return;
@@ -1526,9 +1583,11 @@
       currentModalGiftId = id;
       document.getElementById('modalGiftTitle').innerText = `${gift.title} Challenge`;
       document.getElementById('modalQuestionText').innerText = gift.question;
-      document.getElementById('giftAnswerInput').value = '';
+      const modalInput = document.getElementById('giftAnswerInput');
+      modalInput.value = '';
       document.getElementById('modalErrorMsg').style.display = 'none';
       document.getElementById('modalOverlay').classList.add('active');
+      setTimeout(() => modalInput.focus(), 50);
     }
 
     function closeModal() {
