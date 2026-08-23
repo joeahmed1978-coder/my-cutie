@@ -800,6 +800,23 @@
     </div>
   </div>
 
+  <!-- DARK SCREEN OVERLAY WITH SPEECH BUBBLE & LIGHT SWITCH -->
+  <div id="darkOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center;">
+    
+    <!-- Speech Bubble -->
+    <div style="background: white; color: black; padding: 18px 25px; border-radius: 20px; font-size: 22px; font-weight: bold; position: relative; margin-bottom: 40px; box-shadow: 0 4px 15px rgba(255,255,255,0.2);">
+      Who turned off the lights?! 
+      <!-- Little arrow pointing down from bubble -->
+      <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 10px solid white;"></div>
+    </div>
+
+    <!-- Light Switch Graphic / Button -->
+    <div onclick="turnOnLightsAndGoToGift()" style="cursor: pointer; background: #333; border: 4px solid #555; padding: 20px 30px; border-radius: 12px; box-shadow: 0 6px 0 #222, 0 10px 20px rgba(0,0,0,0.5); transition: 0.1s;">
+      <div style="font-size: 14px; color: #aaa; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Light Switch</div>
+      <div id="switchToggle" style="background: #cc0000; color: white; padding: 10px 20px; border-radius: 6px; font-weight: bold; font-size: 18px;">OFF</div>
+    </div>
+  </div>
+
   <div class="gifts-section" id="giftsSection">
     <div class="gifts-grid" id="giftsGrid"></div>
 
@@ -1027,25 +1044,25 @@
       const voiceAudio = document.getElementById('voiceRecordAudio');
       const vinylDisc = document.getElementById('vinylDisc');
       const recordLabel = document.getElementById('recordLabel');
-      const blowCandlesBtn = document.getElementById('blowCandlesBtn');
+      const blowBtn = document.getElementById('blowCandlesBtn');
       const tableBubble = document.getElementById('tableSpeechBubble');
 
       if (voiceAudio.paused) {
-        voiceAudio.play().catch(e => console.log("Audio play error", e));
+        voiceAudio.play();
         vinylDisc.classList.add('playing');
-        recordLabel.innerHTML = "Playing... 🎶";
-        tableBubble.innerHTML = "Listen closely to your special message! ❤️";
-        
+        recordLabel.innerText = "Playing... 🎶";
+        if (tableBubble) tableBubble.innerText = "Listening to your special message... 💖";
+
         voiceAudio.onended = function() {
           vinylDisc.classList.remove('playing');
-          recordLabel.innerHTML = "Replay 🔄";
-          tableBubble.innerHTML = "Now you can blow out your candles, cutie! 🎂✨";
-          blowCandlesBtn.style.display = 'inline-block';
+          recordLabel.innerText = "Replay 🔄";
+          if (tableBubble) tableBubble.innerText = "Now blow out your candles, cutie! 🎂";
+          if (blowBtn) blowBtn.style.display = 'inline-block';
         };
       } else {
         voiceAudio.pause();
         vinylDisc.classList.remove('playing');
-        recordLabel.innerHTML = "Click to Play 🔊";
+        recordLabel.innerText = "Paused ⏸️";
       }
     }
 
@@ -1053,24 +1070,47 @@
       const flames = document.querySelectorAll('.stage-flame');
       flames.forEach(f => f.classList.add('extinguished'));
 
-      document.getElementById('stageCandleGlow').style.display = 'none';
-      document.getElementById('smoke1').classList.add('active');
-      document.getElementById('smoke2').classList.add('active');
+      const glow = document.getElementById('stageCandleGlow');
+      if (glow) glow.style.opacity = '0';
+
+      const smoke1 = document.getElementById('smoke1');
+      const smoke2 = document.getElementById('smoke2');
+      if (smoke1) smoke1.classList.add('active');
+      if (smoke2) smoke2.classList.add('active');
+
+      const blowBtn = document.getElementById('blowCandlesBtn');
+      if (blowBtn) blowBtn.style.display = 'none';
 
       const tableBubble = document.getElementById('tableSpeechBubble');
-      tableBubble.innerHTML = "Yay! Happy 18th Birthday Malak!! 🎉🥳 Now open your gifts below!";
+      if (tableBubble) tableBubble.innerText = "Make a wish! ✨";
 
-      document.getElementById('blowCandlesBtn').style.display = 'none';
-      document.getElementById('toGiftsBtn').style.display = 'inline-block';
+      // Show the dark overlay with speech bubble and switch
+      setTimeout(() => {
+        document.getElementById('darkOverlay').style.display = 'flex';
+      }, 800);
+    }
+
+    function turnOnLightsAndGoToGift() {
+      const switchToggle = document.getElementById('switchToggle');
+      switchToggle.style.background = '#00cc44';
+      switchToggle.innerText = 'ON';
+
+      setTimeout(() => {
+        // Hide the dark overlay
+        document.getElementById('darkOverlay').style.display = 'none';
+        
+        // Transition to the untouched gifts stage
+        goToGiftsStage();
+      }, 400);
     }
 
     function goToGiftsStage() {
       document.getElementById('cakeTableStage').style.display = 'none';
       document.getElementById('giftsSection').style.display = 'block';
-      renderGiftsGrid();
+      renderGifts();
     }
 
-    function renderGiftsGrid() {
+    function renderGifts() {
       const grid = document.getElementById('giftsGrid');
       grid.innerHTML = '';
 
@@ -1082,11 +1122,13 @@
         card.innerHTML = `
           <div class="gift-icon">${gift.isUnlocked ? '🎁' : '🔒'}</div>
           <div class="gift-title">${gift.title}</div>
-          <div class="gift-status">${gift.isUnlocked ? 'Unlocked!' : 'Tap to Open'}</div>
+          <div class="gift-status">${gift.isUnlocked ? 'Unlocked!' : 'Locked (Click)'}</div>
           ${gift.isUnlocked ? `<div class="reward-content">${gift.reward}</div>` : ''}
         `;
         grid.appendChild(card);
       });
+
+      checkAllUnlocked();
     }
 
     function openGiftModal(id) {
@@ -1094,8 +1136,8 @@
       if (gift.isUnlocked) return;
 
       currentModalGiftId = id;
-      document.getElementById('modalGiftTitle').innerHTML = `${gift.title} Question`;
-      document.getElementById('modalQuestionText').innerHTML = gift.question;
+      document.getElementById('modalGiftTitle').innerText = `${gift.title} Challenge`;
+      document.getElementById('modalQuestionText').innerText = gift.question;
       document.getElementById('giftAnswerInput').value = '';
       document.getElementById('modalErrorMsg').style.display = 'none';
       document.getElementById('modalOverlay').classList.add('active');
@@ -1103,24 +1145,23 @@
 
     function closeModal() {
       document.getElementById('modalOverlay').classList.remove('active');
+      currentModalGiftId = null;
     }
 
     function submitGiftAnswer() {
+      const inputVal = document.getElementById('giftAnswerInput').value.trim().toLowerCase();
       const gift = giftsData.find(g => g.id === currentModalGiftId);
-      const userVal = document.getElementById('giftAnswerInput').value.trim().toLowerCase();
-      const errorMsg = document.getElementById('modalErrorMsg');
 
-      if (userVal === gift.answer.toLowerCase()) {
+      if (inputVal === gift.answer.toLowerCase()) {
         gift.isUnlocked = true;
         closeModal();
-        renderGiftsGrid();
-        checkAllGiftsUnlocked();
+        renderGifts();
       } else {
-        errorMsg.style.display = 'block';
+        document.getElementById('modalErrorMsg').style.display = 'block';
       }
     }
 
-    function checkAllGiftsUnlocked() {
+    function checkAllUnlocked() {
       const allUnlocked = giftsData.every(g => g.isUnlocked);
       if (allUnlocked) {
         document.getElementById('finalGiftSection').classList.add('active');
