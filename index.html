@@ -6,16 +6,15 @@
   <title>Happy Birthday 🎉</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* --- RETRO PIXEL SUNSET & BASE STYLING (NO SCROLL) --- */
+    /* --- RETRO PIXEL SUNSET & BASE STYLING --- */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    body, html {
-      width: 100vw;
-      height: 100vh;
+    body {
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -26,8 +25,10 @@
       background-repeat: no-repeat;
       image-rendering: pixelated;
       font-family: 'Poppins', sans-serif;
-      overflow: hidden; /* Prevents any scrolling */
+      overflow-x: hidden;
+      overflow-y: auto;
       position: relative;
+      padding: 30px 15px;
       background-color: #120a08;
     }
 
@@ -37,24 +38,22 @@
       align-items: center;
       position: relative;
       z-index: 10;
-      max-height: 100vh;
-      justify-content: center;
     }
 
     /* 1. Speech Bubble Style */
     .speech-bubble {
       background: white;
-      padding: 14px 22px;
-      border-radius: 20px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-      font-size: 1.05rem;
+      padding: 18px 25px;
+      border-radius: 25px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      font-size: 1.15rem;
       font-weight: 600;
       color: #4a4a4a;
-      max-width: 320px;
+      max-width: 340px;
       text-align: center;
       cursor: pointer;
       position: relative;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       transition: all 0.2s ease;
       z-index: 20;
     }
@@ -62,10 +61,10 @@
     .speech-bubble::after {
       content: '';
       position: absolute;
-      bottom: -10px;
+      bottom: -12px;
       left: 50%;
       transform: translateX(-50%);
-      border-width: 10px 10px 0;
+      border-width: 12px 12px 0;
       border-style: solid;
       border-color: white transparent;
     }
@@ -85,7 +84,7 @@
     }
 
     .character {
-      width: 200px;
+      width: 230px;
       height: auto;
       object-fit: contain;
       user-select: none;
@@ -101,15 +100,15 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 25px;
-      transform: scale(0.75);
+      padding-top: 30px;
+      transform: scale(0.85);
     }
 
     .candle-glow {
       position: absolute;
       top: -10px;
-      width: 250px;
-      height: 250px;
+      width: 300px;
+      height: 300px;
       background: radial-gradient(circle, rgba(255, 185, 60, 0.35) 0%, rgba(255, 120, 0, 0.12) 50%, transparent 75%);
       pointer-events: none;
       border-radius: 50%;
@@ -118,8 +117,8 @@
 
     .top-decorations {
       position: relative;
-      width: 160px;
-      height: 65px;
+      width: 180px;
+      height: 75px;
       z-index: 10;
     }
 
@@ -129,13 +128,13 @@
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 10px;
+      gap: 12px;
       z-index: 12;
     }
 
     .number-candle {
       position: relative;
-      font-size: 40px;
+      font-size: 44px;
       font-weight: 900;
       background: linear-gradient(180deg, #fff4b8 0%, #ffd700 50%, #b8860b 100%);
       -webkit-background-clip: text;
@@ -149,18 +148,18 @@
 
     .wick {
       width: 3px;
-      height: 7px;
+      height: 8px;
       background: #2b2b2b;
       margin-bottom: 2px;
       border-radius: 1px;
     }
 
     .flame {
-      width: 12px;
-      height: 20px;
+      width: 14px;
+      height: 24px;
       background: radial-gradient(ellipse at bottom, #ffffff 0%, #ffeb3b 25%, #ff9800 60%, rgba(255,87,34,0) 100%);
       border-radius: 50% 50% 35% 35%;
-      box-shadow: 0 0 12px #ff9800, 0 0 24px #ff5722;
+      box-shadow: 0 0 14px #ff9800, 0 0 28px #ff5722;
       animation: flameFlicker 0.15s infinite alternate ease-in-out;
       transform-origin: center bottom;
       transition: opacity 0.6s ease, transform 0.6s ease;
@@ -173,29 +172,29 @@
 
     .berry {
       position: absolute;
-      width: 18px;
-      height: 18px;
+      width: 22px;
+      height: 22px;
       background: radial-gradient(circle at 35% 35%, #ff3b5c, #b7094c 65%, #4a081a 100%);
       border-radius: 50%;
       box-shadow: inset -2px -2px 4px rgba(0,0,0,0.6), 0 3px 6px rgba(0,0,0,0.5);
     }
 
-    .berry-1 { bottom: 6px; left: 8px; width: 22px; height: 22px; }
-    .berry-2 { bottom: 8px; right: 10px; width: 20px; height: 20px; }
-    .berry-3 { bottom: 24px; left: 25px; width: 15px; height: 15px; }
-    .berry-4 { bottom: 26px; right: 28px; width: 16px; height: 16px; }
+    .berry-1 { bottom: 6px; left: 10px; width: 26px; height: 26px; }
+    .berry-2 { bottom: 10px; right: 12px; width: 24px; height: 24px; }
+    .berry-3 { bottom: 28px; left: 30px; width: 18px; height: 18px; }
+    .berry-4 { bottom: 30px; right: 32px; width: 20px; height: 20px; }
 
     .curl {
       position: absolute;
-      width: 18px;
-      height: 12px;
+      width: 22px;
+      height: 14px;
       border: 3px solid #231108;
       border-bottom: none;
-      border-radius: 10px 10px 0 0;
+      border-radius: 12px 12px 0 0;
       box-shadow: 1px 2px 4px rgba(0,0,0,0.6);
     }
-    .curl-1 { bottom: 10px; left: 38px; transform: rotate(-25deg); }
-    .curl-2 { bottom: 12px; right: 40px; transform: rotate(30deg); }
+    .curl-1 { bottom: 12px; left: 44px; transform: rotate(-25deg); }
+    .curl-2 { bottom: 14px; right: 46px; transform: rotate(30deg); }
 
     .tier {
       position: relative;
@@ -204,16 +203,16 @@
       box-shadow: inset 0 2px 3px rgba(255,255,255,0.08), 0 8px 16px rgba(0,0,0,0.7);
     }
 
-    .tier-top { width: 160px; height: 75px; z-index: 5; }
-    .tier-bottom { width: 210px; height: 85px; z-index: 3; }
+    .tier-top { width: 180px; height: 85px; z-index: 5; }
+    .tier-bottom { width: 240px; height: 100px; z-index: 3; }
 
     .divider {
-      width: 216px;
-      height: 12px;
+      width: 246px;
+      height: 14px;
       background: linear-gradient(90deg, #180904 0%, #d90429 25%, #7209b7 50%, #d90429 75%, #180904 100%);
       margin: -4px 0;
       z-index: 4;
-      border-radius: 6px;
+      border-radius: 7px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.8);
     }
 
@@ -222,7 +221,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 15px;
+      height: 18px;
       background: #140703;
       border-radius: 8px 8px 0 0;
       box-shadow: inset 0 2px 4px rgba(255,255,255,0.15);
@@ -230,7 +229,7 @@
 
     .drip-container {
       position: absolute;
-      top: 14px;
+      top: 16px;
       width: 100%;
       display: flex;
       justify-content: space-around;
@@ -238,35 +237,35 @@
 
     .drip {
       background: #140703;
-      border-radius: 0 0 8px 8px;
+      border-radius: 0 0 10px 10px;
       box-shadow: 2px 3px 5px rgba(0,0,0,0.6);
     }
 
-    .tier-top .drip:nth-child(1) { width: 14px; height: 24px; }
-    .tier-top .drip:nth-child(2) { width: 12px; height: 18px; }
-    .tier-top .drip:nth-child(3) { width: 15px; height: 30px; }
-    .tier-top .drip:nth-child(4) { width: 13px; height: 20px; }
-    .tier-top .drip:nth-child(5) { width: 14px; height: 26px; }
+    .tier-top .drip:nth-child(1) { width: 16px; height: 30px; }
+    .tier-top .drip:nth-child(2) { width: 14px; height: 20px; }
+    .tier-top .drip:nth-child(3) { width: 18px; height: 38px; }
+    .tier-top .drip:nth-child(4) { width: 15px; height: 24px; }
+    .tier-top .drip:nth-child(5) { width: 17px; height: 34px; }
 
-    .tier-bottom .drip:nth-child(1) { width: 18px; height: 34px; }
-    .tier-bottom .drip:nth-child(2) { width: 14px; height: 20px; }
-    .tier-bottom .drip:nth-child(3) { width: 18px; height: 38px; }
-    .tier-bottom .drip:nth-child(4) { width: 15px; height: 24px; }
-    .tier-bottom .drip:nth-child(5) { width: 16px; height: 30px; }
-    .tier-bottom .drip:nth-child(6) { width: 13px; height: 18px; }
+    .tier-bottom .drip:nth-child(1) { width: 20px; height: 42px; }
+    .tier-bottom .drip:nth-child(2) { width: 16px; height: 24px; }
+    .tier-bottom .drip:nth-child(3) { width: 22px; height: 48px; }
+    .tier-bottom .drip:nth-child(4) { width: 18px; height: 28px; }
+    .tier-bottom .drip:nth-child(5) { width: 20px; height: 38px; }
+    .tier-bottom .drip:nth-child(6) { width: 15px; height: 22px; }
 
     .plate {
-      width: 250px;
-      height: 14px;
+      width: 290px;
+      height: 16px;
       background: linear-gradient(90deg, #777 0%, #ececec 50%, #888 100%);
       border-radius: 50%;
-      margin-top: -5px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.9);
+      margin-top: -6px;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.9);
       z-index: 1;
     }
 
     .cake-overlay {
-      margin-top: -8px;
+      margin-top: -10px;
       opacity: 0;
       transition: transform 0.6s ease, opacity 0.5s ease;
       z-index: 15;
@@ -294,22 +293,22 @@
 
     @keyframes riseAndFade {
       0% { opacity: 0.85; transform: translateY(0) scale(0.6); }
-      50% { opacity: 0.5; transform: translateY(-25px) scale(1.4) translateX(4px); }
-      100% { opacity: 0; transform: translateY(-50px) scale(2.4) translateX(-6px); }
+      50% { opacity: 0.5; transform: translateY(-30px) scale(1.6) translateX(4px); }
+      100% { opacity: 0; transform: translateY(-60px) scale(2.8) translateX(-8px); }
     }
 
     /* 3. Button Styling */
     .button-container {
-      margin-top: 12px;
+      margin-top: 15px;
       z-index: 10;
     }
 
     .btn, .action-btn {
-      padding: 9px 22px;
-      font-size: 0.95rem;
+      padding: 10px 24px;
+      font-size: 1rem;
       font-weight: 600;
       border: none;
-      border-radius: 18px;
+      border-radius: 20px;
       cursor: pointer;
       transition: transform 0.25s ease, opacity 0.25s ease, background-color 0.2s ease, box-shadow 0.2s ease;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
@@ -329,15 +328,15 @@
     .blow-btn {
       background: linear-gradient(135deg, #ff9f43, #ff5252);
       color: white;
-      font-size: 1rem;
-      padding: 10px 24px;
-      border-radius: 20px;
+      font-size: 1.05rem;
+      padding: 12px 28px;
+      border-radius: 25px;
       animation: pulseGlow 1.5s infinite alternate;
     }
 
     @keyframes pulseGlow {
       0% { box-shadow: 0 0 10px rgba(255, 159, 67, 0.5); transform: scale(1); }
-      100% { box-shadow: 0 0 20px rgba(255, 82, 82, 0.85); transform: scale(1.05); }
+      100% { box-shadow: 0 0 25px rgba(255, 82, 82, 0.85); transform: scale(1.05); }
     }
 
     .no-btn {
@@ -354,8 +353,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
+      margin-top: 10px;
       z-index: 10;
       animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
@@ -364,16 +362,16 @@
       display: flex;
       justify-content: center;
       align-items: flex-end;
-      margin: 10px auto;
+      margin: 230px auto 25px auto;
     }
 
     .table-surface {
       position: relative;
-      width: 380px;
-      height: 80px;
+      width: 420px;
+      height: 90px;
       background: linear-gradient(180deg, #9b6233 0%, #6e401b 100%);
-      border-radius: 14px 14px 6px 6px;
-      box-shadow: inset 0 6px 0 #b3743f, 0 12px 25px rgba(0,0,0,0.35);
+      border-radius: 16px 16px 6px 6px;
+      box-shadow: inset 0 8px 0 #b3743f, 0 15px 30px rgba(0,0,0,0.35);
       display: flex;
       justify-content: space-around;
       align-items: flex-start;
@@ -381,15 +379,15 @@
 
     .table-cake {
       position: absolute;
-      top: -180px;
-      left: 10px;
+      top: -210px;
+      left: -10px;
       user-select: none;
     }
 
     .record-player {
       position: absolute;
-      top: -45px;
-      right: 20px;
+      top: -55px;
+      right: 25px;
       text-align: center;
       cursor: pointer;
       transition: transform 0.2s ease;
@@ -401,17 +399,17 @@
     }
 
     .vinyl-disc {
-      width: 62px;
-      height: 62px;
+      width: 72px;
+      height: 72px;
       background: radial-gradient(circle, #333 20%, #111 21%, #222 40%, #111 41%, #222 70%, #000 100%);
       border: 3px solid #444;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
+      font-size: 26px;
       color: #fff;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.4);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.4);
       margin: 0 auto;
     }
 
@@ -426,20 +424,20 @@
 
     .record-label {
       display: block;
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 700;
       color: #333;
-      margin-top: 4px;
+      margin-top: 6px;
       background: rgba(255, 255, 255, 0.95);
-      padding: 3px 8px;
-      border-radius: 10px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 4px 10px;
+      border-radius: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
     .stage-actions {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
       align-items: center;
       margin-top: 15px;
     }
@@ -456,13 +454,13 @@
     }
 
     @keyframes slideUpFade {
-      0% { transform: translateY(100px) scale(0.8); opacity: 0; }
+      0% { transform: translateY(150px) scale(0.8); opacity: 0; }
       100% { transform: translateY(0) scale(1); opacity: 1; }
     }
 
     @keyframes floatingAction {
       0% { transform: translateY(0px); }
-      50% { transform: translateY(-12px) rotate(1deg); }
+      50% { transform: translateY(-18px) rotate(1deg); }
       100% { transform: translateY(0px); }
     }
 
@@ -487,8 +485,8 @@
 
     .balloon {
       position: absolute;
-      width: 70px;
-      height: 140px;
+      width: 90px;
+      height: 180px;
       opacity: 0;
       transition: opacity 1s ease-in-out;
     }
@@ -499,9 +497,9 @@
     }
 
     @keyframes floatUp {
-      0% { transform: translateY(105vh) rotate(-3deg); }
+      0% { transform: translateY(100vh) rotate(-3deg); }
       50% { transform: translateY(50vh) rotate(3deg); }
-      100% { transform: translateY(-150px) rotate(-3deg); }
+      100% { transform: translateY(-200px) rotate(-3deg); }
     }
 
     .l-1  { left: 2%;  animation-duration: 5.0s !important; animation-delay: 0.1s !important; }
@@ -514,12 +512,8 @@
     .gifts-section {
       display: none;
       width: 100%;
-      max-width: 460px;
-      height: 100vh;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
+      max-width: 500px;
+      margin-top: 25px;
       z-index: 10;
       animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
@@ -527,62 +521,62 @@
     .gifts-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      gap: 15px;
       width: 100%;
     }
 
     .gift-card {
       background: rgba(255, 255, 255, 0.92);
-      border-radius: 16px;
-      padding: 15px 10px;
+      border-radius: 20px;
+      padding: 20px 15px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
       cursor: pointer;
       transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
       text-align: center;
-      min-height: 130px;
+      min-height: 160px;
       backdrop-filter: blur(4px);
     }
 
     .gift-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.18);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.18);
     }
 
-    .gift-icon { font-size: 2.4rem; margin-bottom: 6px; }
-    .gift-title { font-weight: 700; color: #4a4a4a; font-size: 0.95rem; }
-    .gift-status { font-size: 0.8rem; color: #ff4757; font-weight: 600; margin-top: 3px; }
+    .gift-icon { font-size: 3rem; margin-bottom: 8px; }
+    .gift-title { font-weight: 700; color: #4a4a4a; font-size: 1rem; }
+    .gift-status { font-size: 0.85rem; color: #ff4757; font-weight: 600; margin-top: 4px; }
 
     .gift-card.unlocked { background: #ffffff; border: 2px solid #ff6b81; }
     .gift-card.unlocked .gift-status { color: #2ed573; }
 
     .reward-content {
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       color: #333;
-      margin-top: 6px;
+      margin-top: 8px;
       font-weight: 600;
       word-break: break-word;
     }
 
     .final-gift-section {
       display: none;
-      margin-top: 15px;
+      margin-top: 25px;
       width: 100%;
       background: #ffffff;
-      border-radius: 20px;
-      padding: 18px 15px;
+      border-radius: 25px;
+      padding: 25px 20px;
       text-align: center;
-      box-shadow: 0 12px 30px rgba(255, 71, 87, 0.25);
+      box-shadow: 0 15px 35px rgba(255, 71, 87, 0.25);
       border: 3px dashed #ff4757;
       animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .final-gift-section.active { display: block; }
-    .final-gift-section h2 { color: #ff4757; font-size: 1.2rem; margin-bottom: 6px; }
-    .final-gift-section p { color: #4a4a4a; font-size: 0.85rem; line-height: 1.4; }
+    .final-gift-section h2 { color: #ff4757; font-size: 1.4rem; margin-bottom: 8px; }
+    .final-gift-section p { color: #4a4a4a; font-size: 0.95rem; line-height: 1.5; }
 
     @keyframes popIn {
       0% { transform: scale(0.8); opacity: 0; }
@@ -594,8 +588,8 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
       background: rgba(0, 0, 0, 0.45);
       display: flex;
       justify-content: center;
@@ -604,155 +598,142 @@
       pointer-events: none;
       transition: opacity 0.3s ease;
       z-index: 100;
-      padding: 15px;
+      padding: 20px;
     }
 
     .modal-overlay.active { opacity: 1; pointer-events: auto; }
 
     .modal {
       background: white;
-      padding: 22px 18px;
-      border-radius: 20px;
-      max-width: 330px;
+      padding: 25px 20px;
+      border-radius: 25px;
+      max-width: 360px;
       width: 100%;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
       text-align: center;
       transform: scale(0.8);
       transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .modal-overlay.active .modal { transform: scale(1); }
-    .modal h3 { color: #ff4757; margin-bottom: 8px; font-size: 1.1rem; }
-    .modal p { color: #555; font-size: 0.9rem; margin-bottom: 14px; line-height: 1.3; }
+    .modal h3 { color: #ff4757; margin-bottom: 10px; font-size: 1.2rem; }
+    .modal p { color: #555; font-size: 0.95rem; margin-bottom: 18px; line-height: 1.4; }
 
     .modal input {
       width: 100%;
-      padding: 9px 12px;
-      border-radius: 16px;
+      padding: 10px 15px;
+      border-radius: 20px;
       border: 2px solid #ff6b81;
       outline: none;
-      font-size: 14px;
+      font-size: 15px;
       text-align: center;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       font-family: inherit;
     }
 
-    .modal-buttons { display: flex; gap: 8px; justify-content: center; }
+    .modal-buttons { display: flex; gap: 10px; justify-content: center; }
     .modal-error-msg {
       color: #ff4757;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 600;
-      margin-top: -4px;
-      margin-bottom: 8px;
+      margin-top: -5px;
+      margin-bottom: 10px;
       display: none;
     }
 
-    /* --- GIFT 1 OPENED VIEW (FITS SCREEN WITHOUT SCROLLING) --- */
+    /* --- GIFT 1 OPENED VIEW: SPEECH BUBBLE + 2 BIG SIDE-BY-SIDE FRAMES --- */
     #giftOneView {
       display: none;
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      max-width: 720px;
+      margin-top: 20px;
       z-index: 10;
       animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 15px;
-      gap: 12px;
+      gap: 20px;
     }
 
+    /* Big Custom Text Speech Bubble */
     .gift-speech-bubble {
       background: white;
-      padding: 14px 20px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      font-size: 0.85rem;
-      line-height: 1.45;
+      padding: 22px 30px;
+      border-radius: 25px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      font-size: 1.1rem;
+      line-height: 1.6;
       color: #4a4a4a;
       text-align: center;
       width: 100%;
-      max-width: 600px;
+      max-width: 650px;
       position: relative;
-      max-height: 38vh;
-      overflow-y: auto; /* Internal scroll only if text is long */
     }
 
     .gift-speech-bubble::after {
       content: '';
       position: absolute;
-      bottom: -10px;
+      bottom: -12px;
       left: 50%;
       transform: translateX(-50%);
-      border-width: 10px 10px 0;
+      border-width: 12px 12px 0;
       border-style: solid;
       border-color: white transparent;
     }
 
+    /* Two Big Side-by-Side Photo Frames Section */
     .big-frames-container {
       display: flex;
       flex-direction: row;
-      gap: 15px;
+      gap: 20px;
       width: 100%;
-      max-width: 600px;
       justify-content: center;
     }
 
     .big-photo-frame {
       background: #ffffff;
-      border: 3px solid #ffb3bc;
-      border-radius: 16px;
-      padding: 10px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      border: 4px solid #ffb3bc;
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
       text-align: center;
       flex: 1;
+      max-width: 330px;
     }
 
     .big-photo-frame img {
       width: 100%;
-      height: 180px;
+      height: 310px;
       object-fit: cover;
-      border-radius: 10px;
+      border-radius: 14px;
       background: #eee;
     }
 
     .photo-caption {
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       font-weight: 600;
       color: #555;
-      margin-top: 6px;
-    }
-
-    /* --- GIFT 2 LETTER VIEW (FITS SCREEN WITHOUT SCROLLING) --- */
-    #giftTwoView {
-      display: none;
-      width: 100vw;
-      height: 100vh;
-      z-index: 10;
-      animation: slideUpFade 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 15px;
-      gap: 12px;
-    }
-
-    .letter-photo {
-      width: auto;
-      max-width: 90vw;
-      max-height: 75vh;
-      object-fit: contain;
-      user-select: none;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      margin-top: 10px;
     }
 
     @media (max-width: 650px) {
       .big-frames-container {
-        flex-direction: row;
+        flex-direction: column;
+        align-items: center;
+      }
+      .big-photo-frame {
+        width: 100%;
+        max-width: 380px;
       }
       .big-photo-frame img {
-        height: 140px;
+        height: 260px;
       }
+    }
+
+    @media (max-width: 420px) {
+      .gifts-grid { grid-template-columns: 1fr; }
+      .table-surface { width: 340px; }
+      .cake-wrapper { transform: scale(0.72); }
+      .table-scene { margin-top: 170px; }
     }
   </style>
 </head>
@@ -817,16 +798,16 @@
       </div>
     </div>
 
-    <div class="button-container" id="buttonContainer" style="display: none; flex-direction: column; align-items: center; gap: 12px;">
-      <div id="yesNoBox" style="display: flex; gap: 15px; align-items: center;">
+    <div class="button-container" id="buttonContainer" style="display: none; flex-direction: column; align-items: center; gap: 15px;">
+      <div id="yesNoBox" style="display: flex; gap: 20px; align-items: center;">
         <button class="btn yes-btn" id="yesBtn" onclick="handleYes()">Yes</button>
         <button class="btn no-btn" id="noBtn" onclick="dodgeNo()">No</button>
       </div>
 
-      <div id="textInputBox" style="display: none; flex-direction: column; align-items: center; gap: 8px;">
-        <input type="text" id="answerInput" placeholder="Type your answer..." style="padding: 8px 12px; font-size: 15px; border-radius: 16px; border: 2px solid #ff6b81; outline: none; text-align: center; width: 200px;">
+      <div id="textInputBox" style="display: none; flex-direction: column; align-items: center; gap: 10px;">
+        <input type="text" id="answerInput" placeholder="Type your answer..." style="padding: 10px 15px; font-size: 16px; border-radius: 20px; border: 2px solid #ff6b81; outline: none; text-align: center; width: 220px;">
         <button class="btn yes-btn" id="submitBtn" onclick="checkAnswer()">Submit</button>
-        <p id="errorMsg" style="color: #ff4757; font-weight: bold; margin: 3px 0 0 0; font-size: 13px; display: none;"></p>
+        <p id="errorMsg" style="color: #ff4757; font-weight: bold; margin: 5px 0 0 0; font-size: 14px; display: none;"></p>
       </div>
     </div>
   </div>
@@ -907,14 +888,14 @@
     </div>
   </div>
 
-  <div id="darkOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.95); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center;">
-    <div style="background: white; color: black; padding: 14px 20px; border-radius: 16px; font-size: 18px; font-weight: bold; position: relative; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(255,255,255,0.2);">
+  <div id="darkOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center;">
+    <div style="background: white; color: black; padding: 18px 25px; border-radius: 20px; font-size: 22px; font-weight: bold; position: relative; margin-bottom: 40px; box-shadow: 0 4px 15px rgba(255,255,255,0.2);">
       Who turned off the lights?! 
-      <div style="position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid white;"></div>
+      <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 10px solid white;"></div>
     </div>
 
-    <div onclick="turnOnLightsAndGoToGift()" style="cursor: pointer; background: #2a2a2a; border: 4px solid #444; padding: 16px 24px; border-radius: 12px; box-shadow: 0 5px 0 #111, 0 8px 16px rgba(0,0,0,0.5); transition: 0.1s;">
-      <div id="switchToggle" style="background: #555; width: 40px; height: 30px; border-radius: 6px; margin: 0 auto; transition: transform 0.2s, background 0.2s;"></div>
+    <div onclick="turnOnLightsAndGoToGift()" style="cursor: pointer; background: #2a2a2a; border: 4px solid #444; padding: 20px 30px; border-radius: 12px; box-shadow: 0 6px 0 #111, 0 10px 20px rgba(0,0,0,0.5); transition: 0.1s;">
+      <div id="switchToggle" style="background: #555; width: 50px; height: 35px; border-radius: 6px; margin: 0 auto; transition: transform 0.2s, background 0.2s;"></div>
     </div>
   </div>
 
@@ -927,31 +908,27 @@
     </div>
   </div>
 
-  <!-- GIFT 1 OPENED VIEW -->
+  <!-- GIFT 1 OPENED VIEW: SPEECH BUBBLE + 2 BIG SIDE-BY-SIDE FRAMES -->
   <div id="giftOneView">
+    <!-- ✍️ Type your sweet words here: -->
     <div class="gift-speech-bubble">
       I have got you a book.To be honest i didn't read it but that's the point i want you to read it for us. Here are your glasses to make you read better , i know you like to read without them but i'll put my head on your lap and you won't stop reading until i fall asleep so you gonna need those glasses. we will keep playing with each other's hair and i'll keep staring to these beautiful eyes that are reading the book and maybe won't listen to anything of what you are reading because of how stunned iam and wonder how can something be this beautiful!! and maybe after that i'll get you to lay down and lay my head on your chest ,hug you tightly and give you a kiss on your cheek every now and then and you will keep patting my head and give me kisses on my hair until i fall asleep and sleep like a baby between your arms feeling the warmth of you and how safe it is when i am with you.
     </div>
 
     <div class="big-frames-container">
       <div class="big-photo-frame">
+        <!-- 🖼️ Replace 'photo1.jpg' with your first picture file or URL -->
         <img src="book.jpg" alt="Memory 1">
         <div class="photo-caption"></div>
       </div>
       <div class="big-photo-frame">
+        <!-- 🖼️ Replace 'photo2.jpg' with your second picture file or URL -->
         <img src="glasses.jpg" alt="Memory 2">
         <div class="photo-caption"></div>
       </div>
     </div>
 
-    <button class="btn yes-btn" onclick="closeGiftOneView()">⬅️ Back to Gifts</button>
-  </div>
-
-  <!-- GIFT 2 LETTER VIEW -->
-  <div id="giftTwoView">
-    <img src="letter.png" alt="Letter Photo" class="letter-photo">
-
-    <button class="btn yes-btn" onclick="closeGiftTwoView()">⬅️ Back to Gifts</button>
+    <button class="btn yes-btn" onclick="closeGiftOneView()" style="margin-top: 15px;">⬅️ Back to Gifts</button>
   </div>
 
   <div class="modal-overlay" id="modalOverlay">
@@ -1244,7 +1221,7 @@
       playSwitchClickSound();
 
       const switchToggle = document.getElementById('switchToggle');
-      switchToggle.style.transform = 'translateY(-6px)';
+      switchToggle.style.transform = 'translateY(-8px)';
       switchToggle.style.background = '#888';
 
       setTimeout(() => {
@@ -1256,8 +1233,7 @@
     function goToGiftsStage() {
       document.getElementById('cakeTableStage').style.display = 'none';
       document.getElementById('giftOneView').style.display = 'none';
-      document.getElementById('giftTwoView').style.display = 'none';
-      document.getElementById('giftsSection').style.display = 'flex';
+      document.getElementById('giftsSection').style.display = 'block';
       renderGifts();
     }
 
@@ -1286,11 +1262,9 @@
       const gift = giftsData.find(g => g.id === id);
       if (gift.isUnlocked) {
         if (id === 1) {
+          // Open Gift 1 Speech Bubble + Big Side-by-Side Frames View
           document.getElementById('giftsSection').style.display = 'none';
           document.getElementById('giftOneView').style.display = 'flex';
-        } else if (id === 2) {
-          document.getElementById('giftsSection').style.display = 'none';
-          document.getElementById('giftTwoView').style.display = 'flex';
         }
       } else {
         openGiftModal(id);
@@ -1299,12 +1273,7 @@
 
     function closeGiftOneView() {
       document.getElementById('giftOneView').style.display = 'none';
-      document.getElementById('giftsSection').style.display = 'flex';
-    }
-
-    function closeGiftTwoView() {
-      document.getElementById('giftTwoView').style.display = 'none';
-      document.getElementById('giftsSection').style.display = 'flex';
+      document.getElementById('giftsSection').style.display = 'block';
     }
 
     function openGiftModal(id) {
