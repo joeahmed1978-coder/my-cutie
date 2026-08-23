@@ -641,92 +641,28 @@
       display: none;
     }
 
-    /* --- GIFT 1 OPENED VIEW: SPEECH BUBBLE + 2 BIG SIDE-BY-SIDE FRAMES --- */
-    #giftOneView {
+    /* --- CENTERED LETTER VIEW (NO FRAMES, JUST LIKE CHARACTER) --- */
+    #giftTwoView {
       display: none;
       width: 100%;
-      max-width: 720px;
-      margin-top: 20px;
+      max-width: 500px;
+      margin-top: 15px;
       z-index: 10;
-      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       flex-direction: column;
       align-items: center;
-      gap: 20px;
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    /* Big Custom Text Speech Bubble */
-    .gift-speech-bubble {
-      background: white;
-      padding: 22px 30px;
-      border-radius: 25px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-      font-size: 1.1rem;
-      line-height: 1.6;
-      color: #4a4a4a;
-      text-align: center;
+    .center-letter-img {
       width: 100%;
-      max-width: 650px;
-      position: relative;
-    }
-
-    .gift-speech-bubble::after {
-      content: '';
-      position: absolute;
-      bottom: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-width: 12px 12px 0;
-      border-style: solid;
-      border-color: white transparent;
-    }
-
-    /* Two Big Side-by-Side Photo Frames Section */
-    .big-frames-container {
-      display: flex;
-      flex-direction: row;
-      gap: 20px;
-      width: 100%;
-      justify-content: center;
-    }
-
-    .big-photo-frame {
-      background: #ffffff;
-      border: 4px solid #ffb3bc;
-      border-radius: 20px;
-      padding: 15px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-      text-align: center;
-      flex: 1;
-      max-width: 330px;
-    }
-
-    .big-photo-frame img {
-      width: 100%;
-      height: 310px;
-      object-fit: cover;
-      border-radius: 14px;
-      background: #eee;
-    }
-
-    .photo-caption {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: #555;
-      margin-top: 10px;
-    }
-
-    @media (max-width: 650px) {
-      .big-frames-container {
-        flex-direction: column;
-        align-items: center;
-      }
-      .big-photo-frame {
-        width: 100%;
-        max-width: 380px;
-      }
-      .big-photo-frame img {
-        height: 260px;
-      }
+      max-width: 380px;
+      height: auto;
+      object-fit: contain;
+      user-select: none;
+      filter: drop-shadow(0 10px 25px rgba(0,0,0,0.3));
+      animation:
+        slideUpFade 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+        floatingAction 3.5s ease-in-out infinite 1.2s;
     }
 
     @media (max-width: 420px) {
@@ -908,32 +844,15 @@
     </div>
   </div>
 
-  <!-- GIFT 1 OPENED VIEW: SPEECH BUBBLE + 2 BIG SIDE-BY-SIDE FRAMES -->
-  <div id="giftOneView">
-    <!-- ✍️ Type your sweet words here: -->
-    <div class="gift-speech-bubble">
-      I have got you a book.To be honest i didn't read it but that's the point i want you to read it for us. Here are your glasses to make you read better , i know you like to read without them but i'll put my head on your lap and you won't stop reading until i fall asleep so you gonna need those glasses. we will keep playing with each other's hair and i'll keep staring to these beautiful eyes that are reading the book and maybe won't listen to anything of what you are reading because of how stunned iam and wonder how can something be this beautiful!! and maybe after that i'll get you to lay down and lay my head on your chest ,hug you tightly and give you a kiss on your cheek every now and then and you will keep patting my head and give me kisses on my hair until i fall asleep and sleep like a baby between your arms feeling the warmth of you and how safe it is when i am with you.
-    </div>
-
-    <div class="big-frames-container">
-      <div class="big-photo-frame">
-        <!-- 🖼️ Replace 'photo1.jpg' with your first picture file or URL -->
-        <img src="book.jpg" alt="Memory 1">
-        <div class="photo-caption"></div>
-      </div>
-      <div class="big-photo-frame">
-        <!-- 🖼️ Replace 'photo2.jpg' with your second picture file or URL -->
-        <img src="glasses.jpg" alt="Memory 2">
-        <div class="photo-caption"></div>
-      </div>
-    </div>
-
-    <button class="btn yes-btn" onclick="closeGiftOneView()" style="margin-top: 15px;">⬅️ Back to Gifts</button>
+  <!-- CENTERED LETTER VIEW (NO FRAMES) FOR GIFT 2 -->
+  <div id="giftTwoView">
+    <img src="letter.png" alt="Special Letter" class="center-letter-img">
+    <button class="btn yes-btn" onclick="closeGiftTwoView()" style="margin-top: 20px;">⬅️ Back to Gifts</button>
   </div>
 
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
-      <h3 id="modalGiftTitle">Gift #1 Question</h3>
+      <h3 id="modalGiftTitle">Gift Question</h3>
       <p id="modalQuestionText">Question text goes here?</p>
       <input type="text" id="giftAnswerInput" placeholder="Type your answer..." />
       <div class="modal-error-msg" id="modalErrorMsg">Incorrect answer! Try again 😜</div>
@@ -981,7 +900,7 @@
         title: "Gift 1",
         question: "what is your favourite book?",
         answer: "never lie",
-        reward: "Good jooob,open up your first gift, sweetie",
+        reward: "📖 Secret book voucher unlocked!",
         isUnlocked: false
       },
       {
@@ -989,7 +908,7 @@
         title: "Gift 2",
         question: "What was the first message i sent you on tiktok?",
         answer: "Hi how is it going?",
-        reward: "A letter for you, open it",
+        reward: "A heartfelt letter for you, open it 💌",
         isUnlocked: false
       },
       {
@@ -1232,7 +1151,7 @@
 
     function goToGiftsStage() {
       document.getElementById('cakeTableStage').style.display = 'none';
-      document.getElementById('giftOneView').style.display = 'none';
+      document.getElementById('giftTwoView').style.display = 'none';
       document.getElementById('giftsSection').style.display = 'block';
       renderGifts();
     }
@@ -1261,18 +1180,18 @@
     function handleCardClick(id) {
       const gift = giftsData.find(g => g.id === id);
       if (gift.isUnlocked) {
-        if (id === 1) {
-          // Open Gift 1 Speech Bubble + Big Side-by-Side Frames View
+        if (id === 2) {
+          // Open Gift 2 Center Floating Letter View
           document.getElementById('giftsSection').style.display = 'none';
-          document.getElementById('giftOneView').style.display = 'flex';
+          document.getElementById('giftTwoView').style.display = 'flex';
         }
       } else {
         openGiftModal(id);
       }
     }
 
-    function closeGiftOneView() {
-      document.getElementById('giftOneView').style.display = 'none';
+    function closeGiftTwoView() {
+      document.getElementById('giftTwoView').style.display = 'none';
       document.getElementById('giftsSection').style.display = 'block';
     }
 
